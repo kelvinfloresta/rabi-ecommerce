@@ -4,16 +4,25 @@
   "description": "",
   "main": "main.ts",
   "scripts": {
-    "test": "jest",
+    "test": "cross-env NODE_PATH=. jest",
     "lint": "eslint .",
-    "lint:fix": "npm run lint -- --ext .ts --fix"
+    "lint:fix": "npm run lint -- --ext .ts --fix",
+    "migration": "knex --knexfile src/frameworks/database/knex/knexfile.ts",
+    "migration:make": "npm run migration migrate:make --",
+    "migration:latest": "npm run migration migrate:latest --",
+    "migration:down": "npm run migration migrate:down --",
+    "migration:list": "npm run migration migrate:list --",
+    "migration:rollback:all": "npm run migration migrate:rollback --all --"
   },
   "author": "Kelvin Floresta de Andrade",
   "license": "ISC",
   "devDependencies": {
     "@types/jest": "^26.0.4",
+    "@types/knex": "^0.16.1",
+    "@types/pg": "^7.14.3",
     "@typescript-eslint/eslint-plugin": "^3.6.0",
     "@typescript-eslint/parser": "^3.6.0",
+    "cross-env": "^7.0.2",
     "eslint": "^7.4.0",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-config-airbnb-typescript": "^8.0.2",
@@ -23,6 +32,11 @@
     "jest": "^26.1.0",
     "lint-staged": "^10.2.11",
     "ts-jest": "^26.1.1",
+    "ts-node": "^8.10.2",
     "typescript": "^3.9.6"
+  },
+  "dependencies": {
+    "knex": "^0.21.1",
+    "pg": "^8.2.1"
   }
 }
