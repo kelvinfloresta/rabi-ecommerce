@@ -8,5 +8,7 @@
   },
   "author": "Kelvin Floresta de Andrade",
   "license": "ISC",
-  "devDependencies": {}
+  "devDependencies": {
+    "typescript": "^3.9.6"
+  }
 }
