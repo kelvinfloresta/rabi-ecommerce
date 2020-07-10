@@ -76,6 +76,14 @@ describe('Product Case', () => {
   });
 
   describe('delete', () => {
+    it('Should be logical delete', async () => {
+      const sut = ProductCaseFactory();
+      const { id } = await createProductFixture({ name: 'cake' }, sut);
+      await sut.delete(id);
+      const deletedProduct = await sut.get(id);
+      expect(deletedProduct.deletedAt).toBeInstanceOf(Date);
+    });
+
     it('Should return false if not found', async () => {
       const sut = ProductCaseFactory();
       const NOT_EXISTENT_ID = uuidv4();

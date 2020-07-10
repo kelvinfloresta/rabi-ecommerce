@@ -8,4 +8,6 @@ export default class Product {
   public description?: string;
 
   public disabled: boolean;
+
+  public deletedAt: Date;
 }
