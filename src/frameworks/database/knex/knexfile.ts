@@ -1,10 +1,25 @@
-import Knex = require('knex');
+interface IConnection {
+  client: string,
+  connection: {
+    host: string
+    user: string
+    password: string
+    database: string
+    charset: string
+    debug: boolean,
+  },
+  pool: { min: number, max: number },
+  migrations: {
+    tableName: string
+    extension: string
+  },
+}
 
 interface IConfig {
-  development: Knex.Config
-  test: Knex.Config
-  staging: Knex.Config
-  production: Knex.Config
+  development: IConnection
+  test: IConnection
+  staging: IConnection
+  production: IConnection
 }
 
 const config: IConfig = {
@@ -15,7 +30,7 @@ const config: IConfig = {
       host: '127.0.0.1',
       user: 'postgres',
       password: 'root',
-      database: 'rabi_ecommerce_dev',
+      database: 'rabi_ecommerce_development',
       charset: 'utf8',
       debug: true,
     },
@@ -63,10 +78,10 @@ const config: IConfig = {
   production: {
     client: 'pg',
     connection: {
-      host: process.env.DB_HOST,
-      user: process.env.DB_USER,
-      password: process.env.DB_PASSWORD,
-      database: process.env.DB_DATABASE,
+      host: process.env.DB_HOST as any,
+      user: process.env.DB_USER as any,
+      password: process.env.DB_PASSWORD as any,
+      database: process.env.DB_DATABASE as any,
       charset: 'utf8',
       debug: false,
     },
