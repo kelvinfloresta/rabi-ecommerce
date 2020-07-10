@@ -1,4 +1,13 @@
-const config = {
+import Knex = require('knex');
+
+interface IConfig {
+  development: Knex.Config
+  test: Knex.Config
+  staging: Knex.Config
+  production: Knex.Config
+}
+
+const config: IConfig = {
 
   development: {
     client: 'pg',
@@ -70,6 +79,4 @@ const config = {
 
 };
 
-module.exports = config;
-
-export default config;
+export = config;

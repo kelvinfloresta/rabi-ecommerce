@@ -1,11 +1,11 @@
-import * as Knex from 'knex';
-import env from 'src/config';
+import Knex from 'knex';
+import config from 'src/config';
 import * as pg from 'pg';
 
-import knexFile = require('./knexfile');
+import knexFile from './knexfile';
 
 export default class KnexFactory {
-  private config;
+  private config: Knex.Config;
 
   constructor() {
     KnexFactory.fixDecimalString();
@@ -18,11 +18,11 @@ export default class KnexFactory {
   }
 
   private static getConfig() {
-    const config = knexFile[env.envName];
-    if (!config) {
+    const databaseConfig = knexFile[config.envName];
+    if (!databaseConfig) {
       throw new Error('Missing database config');
     }
-    return config;
+    return databaseConfig;
   }
 
   connect() {
