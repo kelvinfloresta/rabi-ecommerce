@@ -1,6 +1,6 @@
-export default class Product {
-  public id: string;
+import { ILogicDelete, ITimeStamp } from './IEntity';
 
+export default class Product implements ILogicDelete, ITimeStamp {
   public name: string;
 
   public price: number;
@@ -9,5 +9,9 @@ export default class Product {
 
   public disabled: boolean;
 
-  public deletedAt: Date;
+  public createdAt: Date;
+
+  public updatedAt: Date;
+
+  public deletedAt: Date | null;
 }
