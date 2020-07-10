@@ -1,5 +1,6 @@
 import { closeDatabase } from 'src/adapters/database/Database.adapter';
 import { buildProductFixture, createProductFixture } from 'src/__fixtures__/product.fixture';
+import { uuidv4 } from 'src/__fixtures__/utils/uuid.fixture';
 import ProductCaseFactory from './ProductFactory.usecase';
 
 afterAll(async () => {
@@ -64,6 +65,22 @@ describe('Product Case', () => {
       const product = await createProductFixture({ name: 'cake' }, sut);
       const productFound = await sut.get(product.id);
       expect(productFound).toMatchObject(product);
+    });
+  });
+
+  describe('delete', () => {
+    it('Should return false if not found', async () => {
+      const sut = ProductCaseFactory();
+      const NOT_EXISTENT_ID = uuidv4();
+      const deleted = await sut.delete(NOT_EXISTENT_ID);
+      expect(deleted).toBeFalsy();
+    });
+
+    it('Should return true if deleted', async () => {
+      const sut = ProductCaseFactory();
+      const product = await createProductFixture({ name: 'cake' }, sut);
+      const deleted = await sut.delete(product.id);
+      expect(deleted).toBeTruthy();
     });
   });
 });
