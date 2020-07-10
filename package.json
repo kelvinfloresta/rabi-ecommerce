@@ -12,7 +12,8 @@
     "migration:latest": "npm run migration migrate:latest --",
     "migration:down": "npm run migration migrate:down --",
     "migration:list": "npm run migration migrate:list --",
-    "migration:rollback:all": "npm run migration migrate:rollback --all --"
+    "migration:rollback:all": "npm run migration migrate:rollback --all --",
+    "migration:rebuild": "./src/frameworks/database/knex/rebuild-script.sh"
   },
   "author": "Kelvin Floresta de Andrade",
   "license": "ISC",
