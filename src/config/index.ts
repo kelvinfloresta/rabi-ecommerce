@@ -4,18 +4,20 @@ export function assertIsNotProduction(): void {
   }
 }
 
-function getConfig(configName: string) {
+function getConfig<T extends string>(configName: string): T {
   const config = process.env[configName];
   if (config === undefined) {
     throw new Error(`Missing config ${configName}`);
   }
 
-  return config;
+  return config as T;
 }
+
+type IEnvironmentName = 'development' | 'production';
 
 const config = {
   secretKey: 'secret',
-  envName: getConfig('NODE_ENV'),
+  envName: getConfig<IEnvironmentName>('NODE_ENV'),
 };
 
 export default config;
