@@ -66,6 +66,13 @@ describe('Product Case', () => {
       const productFound = await sut.get(product.id);
       expect(productFound).toMatchObject(product);
     });
+
+    it('Should return undefined if not found', async () => {
+      const sut = ProductCaseFactory();
+      const NOT_EXISTENT_ID = uuidv4();
+      const productFound = await sut.get(NOT_EXISTENT_ID);
+      expect(productFound).toBeUndefined();
+    });
   });
 
   describe('delete', () => {
