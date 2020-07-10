@@ -12,7 +12,7 @@ export default class ProductGatewayKnexAdapter extends KnexInstance implements I
   }
 
   async save(input: Product): Promise<Product> {
-    const [result] = await this.instance.insert(input).returning(['id', 'name', 'description', 'price', 'disabled']);
+    const [result] = await this.instance.insert(input).returning('*');
     return result;
   }
 
