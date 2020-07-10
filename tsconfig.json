@@ -10,6 +10,7 @@
         "moduleResolution": "Node",
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
+        "esModuleInterop": true,
         "target": "ES2019",
         "typeRoots": [
             "node_modules/@types"
