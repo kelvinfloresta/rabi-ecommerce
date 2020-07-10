@@ -1,5 +1,5 @@
 import Product from 'src/entities/Product.entity';
-import { uuidv4 } from 'src/utils/uuid.util';
+import { uuidv4 } from 'src/__fixtures__/utils/uuid.fixture';
 import ProductCase from 'src/usecases/Product/Product.usecase';
 
 export function buildProductFixture(params: Partial<Product>): Product {
