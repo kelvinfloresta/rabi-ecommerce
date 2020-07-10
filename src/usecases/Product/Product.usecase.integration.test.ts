@@ -1,21 +1,18 @@
 import { closeDatabase } from 'src/adapters/database/Database.adapter';
-import ProductGatewayKnexAdapter from '../../adapters/gateways/Product/ProductKnexAdapter.gateway';
-import ProductCase from './Product.usecase';
-
-function makeSut() {
-  const productGateway = new ProductGatewayKnexAdapter();
-  return new ProductCase(productGateway);
-}
+import { buildProductFixture } from 'src/__fixtures__/product.fixture';
+import ProductCaseFactory from './ProductFactory.usecase';
 
 afterAll(async () => {
   await closeDatabase();
 });
 
 describe('Product Case', () => {
-  it('Should return product saved', async () => {
-    const productInput = { name: 'cake', price: 1 };
-    const sut = makeSut();
-    const result = await sut.save(productInput);
-    expect(result).toMatchObject(productInput);
+  describe('Save', () => {
+    it('Should return the saved product', async () => {
+      const product = buildProductFixture({ name: 'cake' });
+      const sut = ProductCaseFactory();
+      const result = await sut.save(product);
+      expect(result).toMatchObject(product);
+    });
   });
 });
