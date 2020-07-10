@@ -57,4 +57,13 @@ describe('Product Case', () => {
       expect(fieldsNotChanged).toMatchObject(fieldsNotpatchd);
     });
   });
+
+  describe('get', () => {
+    it('Should return all fields', async () => {
+      const sut = ProductCaseFactory();
+      const product = await createProductFixture({ name: 'cake' }, sut);
+      const productFound = await sut.get(product.id);
+      expect(productFound).toMatchObject(product);
+    });
+  });
 });

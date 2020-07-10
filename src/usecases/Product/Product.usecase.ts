@@ -4,8 +4,12 @@ import IProductGateway from 'src/adapters/gateways/Product/IProduct.gateway';
 export default class ProductCase {
   constructor(private productGateway: IProductGateway) {}
 
-  async save(input: Product) {
+  async save(input: Product): Promise<Product> {
     return this.productGateway.save(input);
+  }
+
+  async get(id: string): Promise<Product> {
+    return this.productGateway.get(id);
   }
 
   async patch(id: string, input: Partial<Omit<Product, 'id'>>) {
