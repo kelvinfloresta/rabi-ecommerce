@@ -8,6 +8,9 @@ export function buildProductFixture(params: Partial<Product>): Product {
     name: params.name || 'The amazing product',
     price: params.price ?? 1,
     disabled: params.disabled || false,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    deletedAt: null,
   };
   return product;
 }
