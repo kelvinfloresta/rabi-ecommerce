@@ -1,6 +1,6 @@
 import * as Knex from 'knex';
 import ProductGatewayKnexAdapter from 'src/adapters/gateways/Product/ProductKnexAdapter.gateway';
-import { PostgresUUIDV4, addSoftDelete } from '../knex-helper.framework';
+import { PostgresUUIDV4, addSoftDelete, addTimestamp } from '../knex-helper.framework';
 
 const { tableName } = ProductGatewayKnexAdapter;
 
@@ -10,6 +10,7 @@ export async function up(knex: Knex): Promise<any> {
       table.uuid('id').primary().defaultTo(PostgresUUIDV4(knex));
       table.string('name').notNullable();
       addSoftDelete(table);
+      addTimestamp(table, knex, tableName);
       table.decimal('price').notNullable();
       table.boolean('disabled').defaultTo(false).notNullable();
       table.text('description').nullable();
