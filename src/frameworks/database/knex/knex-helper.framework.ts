@@ -1,4 +1,4 @@
-import Knex = require('knex');
+import Knex from 'knex';
 
 export function PostgresUUIDV4(knex: Knex): Knex.Raw {
   return knex.raw('uuid_generate_v4()');
@@ -17,4 +17,8 @@ export async function addTimestamp(
     FOR EACH ROW
     EXECUTE PROCEDURE on_update_timestamp();
   `);
+}
+
+export function addSoftDelete(table: Knex.CreateTableBuilder): void {
+  table.timestamp('deletedAt', { useTz: false }).nullable().defaultTo(null);
 }
