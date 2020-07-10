@@ -1,6 +1,6 @@
-// eslint-disable-next-line no-unused-vars
 import Product from 'src/entities/Product.entity';
+import { IDeleteGateway, IPatchGateway, ISaveGateway } from '../IGateway';
 
-export default interface IProductGateway {
-  save(input: Pick<Product, 'description'| 'name'| 'price'>): Promise<Product>
+export default interface IProductGateway extends
+  IDeleteGateway, IPatchGateway<Product>, ISaveGateway<Product> {
 }
