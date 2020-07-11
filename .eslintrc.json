@@ -4,7 +4,8 @@
         "es2020": true
     },
     "extends": [
-      "airbnb-typescript/base"
+      "airbnb-typescript/base",
+      "plugin:prettier/recommended"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
