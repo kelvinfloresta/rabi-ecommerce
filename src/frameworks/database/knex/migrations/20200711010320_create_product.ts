@@ -1,6 +1,6 @@
 import * as Knex from 'knex';
 import ProductGatewayKnexAdapter from 'src/adapters/gateways/Product/ProductKnexAdapter.gateway';
-import { PostgresUUIDV4, addSoftDelete, addTimestamp } from '../knex-helper.framework';
+import { PostgresUUIDV4, addSoftDelete, addTimestamp } from '../knex-migration.framework';
 
 const { tableName } = ProductGatewayKnexAdapter;
 
