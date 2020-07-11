@@ -7,8 +7,8 @@ export function buildCompanyFixture(params: Partial<Company>): Company {
   const company:Company = {
     id: params.id || uuidv4(),
     name: params.name || 'The amazing Company',
-    documentNumber: '14066245781',
-    documentType: DocumentType.CPF,
+    documentNumber: params.documentNumber || '54813491081',
+    documentType: params.documentType || DocumentType.CPF,
     createdAt: new Date(),
     updatedAt: new Date(),
   };
