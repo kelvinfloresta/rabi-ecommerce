@@ -1,31 +1,28 @@
 import Product from 'src/entities/Product.entity';
-import { uuidv4 } from 'src/__fixtures__/utils/uuid.fixture';
 import ProductCaseFactory from 'src/usecases/Product/ProductFactory.usecase';
+import { ISaveProductCaseInput } from 'src/usecases/Product/IProduct,usecase';
 
-type IPartialProduct = Partial<Product> & { companyId: string };
+type IPartialSaveProductCase = Partial<ISaveProductCaseInput> & { companyId: string };
 
-export function buildProductFixture(params: IPartialProduct): Product {
+export function buildProductFixture(params: IPartialSaveProductCase): ISaveProductCaseInput {
   const product = {
-    id: params.id || uuidv4(),
     name: params.name || 'The amazing product',
     price: params.price ?? 1,
     disabled: params.disabled || false,
     companyId: params.companyId,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    deletedAt: null,
   };
   return product;
 }
 
-export async function createProductFixture(params: IPartialProduct): Promise<Product> {
+export async function createProductFixture(params: IPartialSaveProductCase): Promise<Product> {
   const productCase = ProductCaseFactory();
   const product = buildProductFixture(params);
-  return productCase.save(product);
+  const productId = await productCase.save(product);
+  return productCase.get(productId);
 }
 
-export async function expectTohaveProduct(product: Partial<Product> & { id: string }) {
+export async function expectTohaveProduct(id: string, product: Partial<Product>) {
   const productCase = ProductCaseFactory();
-  const result = await productCase.get(product?.id);
+  const result = await productCase.get(id);
   return expect(result).toMatchObject(product);
 }
