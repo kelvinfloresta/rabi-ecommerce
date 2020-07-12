@@ -1,10 +1,11 @@
 import ICompanyGateway from 'src/adapters/gateways/Company/ICompany.gateway';
 import Company from 'src/entities/Company.entity';
+import { ISaveCompanyCaseInput } from './ICompany,usecase';
 
 export default class CompanyCase {
   constructor(private companyGateway: ICompanyGateway) {}
 
-  async save(input: Company): Promise<Company> {
+  async save(input: ISaveCompanyCaseInput): Promise<string> {
     return this.companyGateway.save(input);
   }
 

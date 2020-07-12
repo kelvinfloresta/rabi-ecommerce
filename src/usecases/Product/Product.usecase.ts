@@ -1,10 +1,11 @@
 import Product from 'src/entities/Product.entity';
 import IProductGateway from 'src/adapters/gateways/Product/IProduct.gateway';
+import { ISaveProductCaseInput, IPatchProductCaseInput } from './IProduct,usecase';
 
 export default class ProductCase {
   constructor(private productGateway: IProductGateway) {}
 
-  async save(input: Product): Promise<Product> {
+  async save(input: ISaveProductCaseInput): Promise<string> {
     return this.productGateway.save(input);
   }
 
@@ -12,11 +13,11 @@ export default class ProductCase {
     return this.productGateway.get(id);
   }
 
-  async patch(id: string, input: Partial<Omit<Product, 'id'>>) {
-    return this.productGateway.patch(id, input);
+  async patch(input: IPatchProductCaseInput) {
+    await this.productGateway.patch(input);
   }
 
   async delete(id: string) {
-    return this.productGateway.delete(id);
+    return this.productGateway.logicDelete(id);
   }
 }
