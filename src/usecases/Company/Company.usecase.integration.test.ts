@@ -21,7 +21,7 @@ describe('company Case', () => {
   describe('get', () => {
     it('Should return all fields', async () => {
       const sut = CompanyCaseFactory();
-      const company = await createCompanyFixture({ name: 'My super ecommerce' }, sut);
+      const company = await createCompanyFixture({ name: 'My super ecommerce' });
       const companyFound = await sut.get(company.id);
       expect(companyFound).toMatchObject(company);
     });
