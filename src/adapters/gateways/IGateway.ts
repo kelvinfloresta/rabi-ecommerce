@@ -10,6 +10,10 @@ export interface IDeleteGateway<Id = string> {
   delete(id: Id): Promise<boolean>;
 }
 
+export interface ILogicDeleteGateway<Id = string> {
+  logicDelete(id: Id): Promise<boolean>;
+}
+
 export interface IGetGateway<Entity, Id = string> {
   get(id: Id): Promise<Entity>;
 }
