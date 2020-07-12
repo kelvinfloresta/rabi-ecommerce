@@ -1,5 +1,5 @@
 export interface ILogicDelete {
-  deletedAt: Date | null
+  deletedAt: Date | null;
 }
 
 export interface ITimeStamp {

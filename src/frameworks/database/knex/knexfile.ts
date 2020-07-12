@@ -1,29 +1,28 @@
 interface IConnection {
-  client: string,
+  client: string;
   connection: {
-    host: string
-    user: string
-    password: string
-    database: string
-    charset: string
-    debug: boolean,
-  },
-  pool: { min: number, max: number },
+    host: string;
+    user: string;
+    password: string;
+    database: string;
+    charset: string;
+    debug: boolean;
+  };
+  pool: { min: number; max: number };
   migrations: {
-    tableName: string
-    extension: string
-  },
+    tableName: string;
+    extension: string;
+  };
 }
 
 interface IConfig {
-  development: IConnection
-  test: IConnection
-  staging: IConnection
-  production: IConnection
+  development: IConnection;
+  test: IConnection;
+  staging: IConnection;
+  production: IConnection;
 }
 
 const config: IConfig = {
-
   development: {
     client: 'pg',
     connection: {
@@ -91,7 +90,6 @@ const config: IConfig = {
       extension: 'ts',
     },
   },
-
 };
 
 export = config;

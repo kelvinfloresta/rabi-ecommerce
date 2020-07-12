@@ -9,10 +9,16 @@ export function PostgresUUIDV4(knex: Knex): Knex.Raw {
 export async function addTimestamp(
   table: Knex.CreateTableBuilder,
   knex: Knex,
-  tableName: string,
+  tableName: string
 ): Promise<void> {
-  table.timestamp('createdAt', { useTz: false }).notNullable().defaultTo(knex.raw('CURRENT_TIMESTAMP'));
-  table.timestamp('updatedAt', { useTz: false }).notNullable().defaultTo(knex.raw('CURRENT_TIMESTAMP'));
+  table
+    .timestamp('createdAt', { useTz: false })
+    .notNullable()
+    .defaultTo(knex.raw('CURRENT_TIMESTAMP'));
+  table
+    .timestamp('updatedAt', { useTz: false })
+    .notNullable()
+    .defaultTo(knex.raw('CURRENT_TIMESTAMP'));
   await knex.raw(`
     CREATE TRIGGER ${tableName}_updated_at
     BEFORE UPDATE ON ${tableName}
