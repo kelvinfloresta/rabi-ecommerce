@@ -1,19 +1,19 @@
-export interface IPatchGateway<Entity, Id = string> {
-  patch(id: Id, input: Partial<Omit<Entity, 'id'>>): Promise<void>;
+export interface IPatchGateway<Input, Output = void> {
+  patch(input: Input): Promise<Output>;
 }
 
-export interface ISaveGateway<Entity> {
-  save(input: Entity): Promise<void>;
+export interface ISaveGateway<Input, Output = string> {
+  save(input: Input): Promise<Output>;
 }
 
-export interface IDeleteGateway<Id = string> {
-  delete(id: Id): Promise<boolean>;
+export interface IDeleteGateway<Filter = string> {
+  delete(filter: Filter): Promise<boolean>;
 }
 
-export interface ILogicDeleteGateway<Id = string> {
-  logicDelete(id: Id): Promise<boolean>;
+export interface ILogicDeleteGateway<Filter = string> {
+  logicDelete(filter: Filter): Promise<boolean>;
 }
 
-export interface IGetGateway<Entity, Id = string> {
-  get(id: Id): Promise<Entity>;
+export interface IGetGateway<Output, Filter = string> {
+  get(filter: Filter): Promise<Output>;
 }

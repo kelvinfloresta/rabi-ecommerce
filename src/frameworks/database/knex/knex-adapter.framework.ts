@@ -1,6 +1,6 @@
 import db from 'src/adapters/database/Database.adapter';
 
-export default abstract class KnexBaseGateway<T> {
+export default abstract class KnexBaseGateway<T extends { id: string }> {
   private db = db;
 
   abstract tableName: string;
@@ -13,12 +13,13 @@ export default abstract class KnexBaseGateway<T> {
     return this.instance.where({ id }).first();
   }
 
-  async save(input: T): Promise<void> {
-    await this.instance.insert(input);
+  async save(input: T): Promise<string> {
+    const [result] = await this.instance.insert(input).returning('id');
+    return result;
   }
 
-  async patch(id: string, input: Partial<Omit<T, 'id'>>): Promise<void> {
-    await this.instance.update(input).where({ id });
+  async patch(input: Partial<T>): Promise<void> {
+    await this.instance.update(input).where({ id: input.id });
   }
 
   async logicDelete(id: string): Promise<boolean> {

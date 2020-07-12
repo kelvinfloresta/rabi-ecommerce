@@ -1,4 +1,7 @@
 import Company from 'src/entities/Company.entity';
+import { ISaveCompanyCaseInput } from 'src/usecases/Company/ICompany,usecase';
 import { ISaveGateway, IGetGateway } from '../IGateway';
 
-export default interface ICompanyGateway extends ISaveGateway<Company>, IGetGateway<Company> {}
+export default interface ICompanyGateway
+  extends ISaveGateway<ISaveCompanyCaseInput>,
+    IGetGateway<Company> {}
