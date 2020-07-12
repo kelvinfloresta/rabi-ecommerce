@@ -1,13 +1,16 @@
 import Product from 'src/entities/Product.entity';
 import { uuidv4 } from 'src/__fixtures__/utils/uuid.fixture';
-import ProductCase from 'src/usecases/Product/Product.usecase';
+import ProductCaseFactory from 'src/usecases/Product/ProductFactory.usecase';
 
-export function buildProductFixture(params: Partial<Product>): Product {
+type IPartialProduct = Partial<Product> & { companyId: string };
+
+export function buildProductFixture(params: IPartialProduct): Product {
   const product = {
     id: params.id || uuidv4(),
     name: params.name || 'The amazing product',
     price: params.price ?? 1,
     disabled: params.disabled || false,
+    companyId: params.companyId,
     createdAt: new Date(),
     updatedAt: new Date(),
     deletedAt: null,
@@ -15,10 +18,8 @@ export function buildProductFixture(params: Partial<Product>): Product {
   return product;
 }
 
-export async function createProductFixture(
-  params: Partial<Product>,
-  productCase: ProductCase,
-): Promise<Product> {
+export async function createProductFixture(params: IPartialProduct): Promise<Product> {
+  const productCase = ProductCaseFactory();
   const product = buildProductFixture(params);
   return productCase.save(product);
 }
