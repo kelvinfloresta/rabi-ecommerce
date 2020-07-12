@@ -23,3 +23,9 @@ export async function createProductFixture(params: IPartialProduct): Promise<Pro
   const product = buildProductFixture(params);
   return productCase.save(product);
 }
+
+export async function expectTohaveProduct(product: Partial<Product> & { id: string }) {
+  const productCase = ProductCaseFactory();
+  const result = await productCase.get(product?.id);
+  return expect(result).toMatchObject(product);
+}
