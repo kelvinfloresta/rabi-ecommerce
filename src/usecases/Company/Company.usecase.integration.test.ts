@@ -25,7 +25,7 @@ describe('company Case', () => {
   });
 
   describe('get', () => {
-    it.skip('Should return all fields');
+    it.todo('Should return all fields');
 
     it('Should return undefined if not found', async () => {
       const sut = CompanyCaseFactory();
