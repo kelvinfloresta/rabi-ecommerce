@@ -9,4 +9,4 @@ export default interface IProductGateway
   extends ILogicDeleteGateway,
     IPatchGateway<IPatchProductCaseInput>,
     ISaveGateway<ISaveProductCaseInput>,
-    IGetGateway<Product> {}
+    IGetGateway<string, Product> {}

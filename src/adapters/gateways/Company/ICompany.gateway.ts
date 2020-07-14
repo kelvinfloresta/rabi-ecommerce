@@ -4,4 +4,4 @@ import { ISaveGateway, IGetGateway } from '../IGateway';
 
 export default interface ICompanyGateway
   extends ISaveGateway<ISaveCompanyCaseInput>,
-    IGetGateway<Company> {}
+    IGetGateway<string, Company> {}

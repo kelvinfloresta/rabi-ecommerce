@@ -14,6 +14,6 @@ export interface ILogicDeleteGateway<Filter = string> {
   logicDelete(filter: Filter): Promise<boolean>;
 }
 
-export interface IGetGateway<Output, Filter = string> {
-  get(filter: Filter): Promise<Output>;
+export interface IGetGateway<Input, Output> {
+  get(input: Input): Promise<Output>;
 }
