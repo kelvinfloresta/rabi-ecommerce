@@ -1,28 +1,40 @@
 import db from 'src/adapters/database/Database.adapter';
 
-export default abstract class KnexBaseGateway<T extends { id: string }> {
-  private db = db;
+export default class KnexRepositoryHelper<Entity, Id extends string | number = string> {
+  private knex = db;
 
-  abstract tableName: string;
+  constructor(private tableName: string) {}
 
   get instance() {
-    return this.db(this.tableName);
+    return this.knex(this.tableName);
   }
 
-  async get(id: string): Promise<T> {
+  async getById(id: Id): Promise<Entity> {
     return this.instance.where({ id }).first();
   }
 
-  async save(input: T): Promise<string> {
+  async getByFilter(filter: Partial<Entity>): Promise<Entity> {
+    return this.instance.where(filter).first();
+  }
+
+  async listByfilter(input: Partial<Entity>): Promise<Entity[]> {
+    return this.instance.where(input);
+  }
+
+  async save<Input extends Partial<Entity>>(input: Input): Promise<string> {
     const [result] = await this.instance.insert(input).returning('id');
     return result;
   }
 
-  async patch(input: Partial<T>): Promise<void> {
-    await this.instance.update(input).where({ id: input.id });
+  async updateById(id: Id, input: Partial<Entity>): Promise<void> {
+    await this.instance.update(input).where({ id });
   }
 
-  async logicDelete(id: string): Promise<boolean> {
+  async updateByFilter(filter: Partial<Entity>, input: Partial<Entity>): Promise<void> {
+    await this.instance.update(input).where(filter);
+  }
+
+  async logicDelete(id: Id): Promise<boolean> {
     const result = await this.instance.where({ id }).update({ deletedAt: new Date() });
     return result > 0;
   }

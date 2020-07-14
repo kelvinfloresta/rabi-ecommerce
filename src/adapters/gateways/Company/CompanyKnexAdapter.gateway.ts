@@ -1,10 +1,18 @@
 import Company from 'src/entities/Company.entity';
-import KnexBaseGateway from 'src/frameworks/database/knex/knex-adapter.framework';
+import KnexRepositoryHelper from 'src/frameworks/database/knex/knex-adapter.framework';
+import { ISaveCompanyCaseInput } from 'src/usecases/Company/ICompany,usecase';
 import ICompanyGateway from './ICompany.gateway';
 
-export default class CompanyGatewayKnexAdapter extends KnexBaseGateway<Company>
-  implements ICompanyGateway {
-  public tableName = 'companies';
+export default class CompanyGatewayKnexAdapter implements ICompanyGateway {
+  public static readonly tableName = 'companies';
 
-  public static tableName = 'companies';
+  constructor(private repository: KnexRepositoryHelper<Company>) {}
+
+  async save(input: ISaveCompanyCaseInput): Promise<string> {
+    return this.repository.save(input);
+  }
+
+  async get(id: string): Promise<Company> {
+    return this.repository.getById(id);
+  }
 }
