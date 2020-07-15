@@ -2,7 +2,7 @@ import Product from 'src/entities/Product.entity';
 import {
   ISaveProductCaseInput,
   IPatchProductCaseInput,
-} from 'src/usecases/Product/IProduct,usecase';
+} from 'src/usecases/Product/IProduct.usecase';
 import KnexRepositoryHelper from 'src/frameworks/database/knex/knex-adapter.framework';
 import IProductGateway from './IProduct.gateway';
 

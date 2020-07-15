@@ -1,5 +1,5 @@
-import ICompanyGateway from 'src/adapters/gateways/Company/ICompany.gateway';
 import Company from 'src/entities/Company.entity';
+import ICompanyGateway from 'src/adapters/gateways/Company/ICompany.gateway';
 import { ISaveCompanyCaseInput } from './ICompany,usecase';
 
 export default class CompanyCase {

@@ -1,6 +1,6 @@
 import Product from 'src/entities/Product.entity';
 import IProductGateway from 'src/adapters/gateways/Product/IProduct.gateway';
-import { ISaveProductCaseInput, IPatchProductCaseInput } from './IProduct,usecase';
+import { ISaveProductCaseInput, IPatchProductCaseInput } from './IProduct.usecase';
 
 export default class ProductCase {
   constructor(private productGateway: IProductGateway) {}

@@ -1,6 +1,6 @@
 import Product from 'src/entities/Product.entity';
 import ProductCaseFactory from 'src/usecases/Product/ProductFactory.usecase';
-import { ISaveProductCaseInput } from 'src/usecases/Product/IProduct,usecase';
+import { ISaveProductCaseInput } from 'src/usecases/Product/IProduct.usecase';
 
 type IPartialSaveProductCase = Partial<ISaveProductCaseInput> & { companyId: string };
 

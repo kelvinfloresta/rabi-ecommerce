@@ -26,12 +26,12 @@ export default class KnexRepositoryHelper<Entity, Id extends string | number = s
     return result;
   }
 
-  async updateById(id: Id, input: Partial<Entity>): Promise<void> {
-    await this.instance.update(input).where({ id });
+  async updateById(id: Id, input: Partial<Entity>): Promise<number> {
+    return this.instance.update(input).where({ id });
   }
 
-  async updateByFilter(filter: Partial<Entity>, input: Partial<Entity>): Promise<void> {
-    await this.instance.update(input).where(filter);
+  async updateByFilter(filter: Partial<Entity>, input: Partial<Entity>): Promise<number> {
+    return this.instance.update(input).where(filter);
   }
 
   async logicDelete(id: Id): Promise<boolean> {
