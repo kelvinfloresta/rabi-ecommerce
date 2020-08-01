@@ -15,8 +15,9 @@ export default class ProductGatewayKnexAdapter implements IProductGateway {
     return this.repository.logicDelete(id);
   }
 
-  async patch(input: IPatchProductCaseInput): Promise<void> {
-    return this.repository.updateById(input.id, input);
+  async patch(input: IPatchProductCaseInput) {
+    const result = await this.repository.updateById(input.id, input);
+    return result > 0;
   }
 
   async get(id: string): Promise<Product> {
