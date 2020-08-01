@@ -1,10 +1,10 @@
-import ICartGateway from 'src/adapters/gateways/Company/ICart.gateway';
+import ICartGateway from 'src/adapters/gateways/Cart/ICart.gateway';
 import { IChangeQuantityCartCaseInput } from './ICart.usecase';
 
 export default class CartCase {
   constructor(private CartGateway: ICartGateway) {}
 
-  async add(input: IChangeQuantityCartCaseInput): Promise<boolean> {
-    return this.CartGateway.save(input);
+  async changeQuantity(input: IChangeQuantityCartCaseInput): Promise<boolean> {
+    return this.CartGateway.changeQuantity(input);
   }
 }
