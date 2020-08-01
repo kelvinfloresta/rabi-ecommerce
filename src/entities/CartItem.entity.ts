@@ -3,5 +3,5 @@ export default class CartItem {
 
   public readonly userId: string;
 
-  public quantity: number;
+  public readonly quantity: number;
 }
