@@ -1,5 +1,5 @@
 import Knex from 'knex';
-import CompanyGatewayKnexAdapter from 'src/adapters/gateways/Cart/CartKnexAdapter.gateway';
+import CompanyGatewayKnexAdapter from 'src/adapters/gateways/Company/CompanyKnexAdapter.gateway';
 import DocumentType from 'src/entities/enums/DocumentType.enum';
 import { PostgresUUIDV4, addTimestamp } from '../knex-migration.framework';
 
