@@ -21,7 +21,7 @@ export default class KnexRepositoryHelper<Entity, Id extends string | number = s
     return this.instance.where(input);
   }
 
-  async save<Input extends Partial<Entity>>(input: Input): Promise<string> {
+  async save<Input extends Partial<Entity>>(input: Input): Promise<Id> {
     const [result] = await this.instance.insert(input).returning('id');
     return result;
   }
