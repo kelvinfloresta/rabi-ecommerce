@@ -1,4 +1,4 @@
-export interface IPatchGateway<Input, Output = void> {
+export interface IPatchGateway<Input, Output = boolean> {
   patch(input: Input): Promise<Output>;
 }
 
