@@ -45,6 +45,7 @@
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^8.5.1",
     "knex": "^0.21.1",
     "pg": "^8.2.1"
   }
