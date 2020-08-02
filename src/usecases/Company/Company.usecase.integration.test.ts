@@ -1,10 +1,15 @@
-import { closeDatabase } from 'src/adapters/database/Database.adapter';
+import { closeDatabase, truncateTable } from 'src/adapters/database/Database.adapter';
 import { expectTohaveCompany } from 'src/__fixtures__/company.fixture';
 import { uuidv4 } from 'src/__fixtures__/utils/uuid.fixture';
 
 import DocumentType from 'src/entities/enums/DocumentType.enum';
+import CompanyGatewayKnexAdapter from 'src/adapters/gateways/Company/CompanyKnexAdapter.gateway';
 import CompanyCaseFactory from './CompanyFactory.usecase';
 import { ISaveCompanyCaseInput } from './ICompany,usecase';
+
+beforeEach(async () => {
+  await truncateTable(CompanyGatewayKnexAdapter.tableName);
+});
 
 afterAll(async () => {
   await closeDatabase();
