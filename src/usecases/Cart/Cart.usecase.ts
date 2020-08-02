@@ -4,7 +4,7 @@ import CartItem from 'src/entities/CartItem.entity';
 export default class CartCase {
   constructor(private CartGateway: ICartGateway) {}
 
-  async changeQuantity(input: CartItem): Promise<boolean> {
-    return this.CartGateway.changeQuantity(input);
+  async add(input: CartItem): Promise<boolean> {
+    return this.CartGateway.add(input);
   }
 }
