@@ -1,12 +1,14 @@
 import IUserGateway from 'src/adapters/gateways/User/IUser.gateway';
 import User from 'src/entities/User.entity';
+import Encrypt from 'src/utils/Encrypt.util';
 import { ISaveUserCaseInput } from './IUser.usecase';
 
 export default class UserCase {
-  constructor(private userGateway: IUserGateway) {}
+  constructor(private userGateway: IUserGateway, private encrypt: typeof Encrypt) {}
 
   async save(input: ISaveUserCaseInput): Promise<string> {
-    return this.userGateway.save(input);
+    const encryptedPassword = this.encrypt.encrypt(input.password);
+    return this.userGateway.save({ ...input, password: encryptedPassword });
   }
 
   async get(id: string): Promise<User> {
