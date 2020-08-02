@@ -8,6 +8,8 @@ export default class User implements ITimeStamp, ILogicDelete {
 
   public readonly name: string;
 
+  public readonly password: string;
+
   public readonly email: string;
 
   public readonly documentNumber: string;

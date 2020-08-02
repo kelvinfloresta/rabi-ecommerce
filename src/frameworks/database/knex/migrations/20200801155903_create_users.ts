@@ -12,6 +12,7 @@ export async function up(knex: Knex) {
     table.uuid('id').primary().defaultTo(PostgresUUIDV4(knex));
     table.string('name').notNullable();
     table.string('email').unique().notNullable();
+    table.string('password').notNullable();
     addSoftDelete(table);
     addTimestamp(table, knex, tableName);
     table.string('documentNumber').notNullable();

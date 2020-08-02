@@ -12,6 +12,7 @@ export function buildUserFixture(params: IPartialSaveUserCase): ISaveUserCaseInp
     documentNumber: params.documentNumber || '39990784051',
     email: params.email || 'rabi@rabi.com',
     companyId: params.companyId,
+    password: params.password || 'my secret password',
   };
   return user;
 }
