@@ -13,7 +13,7 @@ function getConfig<T extends string>(configName: string): T {
   return config as T;
 }
 
-type IEnvironmentName = 'development' | 'production';
+type IEnvironmentName = 'development' | 'production' | 'test';
 
 const config = {
   secretKey: 'secret',
