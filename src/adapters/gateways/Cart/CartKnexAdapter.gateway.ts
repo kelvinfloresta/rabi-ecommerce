@@ -1,5 +1,6 @@
 import KnexRepositoryHelper from 'src/frameworks/database/knex/knex-adapter.framework';
 import CartItem from 'src/entities/CartItem.entity';
+import { IGetCartCaseInput } from 'src/usecases/Cart/ICart.usecase';
 import ICartGateway from './ICart.gateway';
 
 export default class CartGatewayKnexAdapter implements ICartGateway {
@@ -28,5 +29,9 @@ export default class CartGatewayKnexAdapter implements ICartGateway {
       .where({ userId: input.userId, productId: input.productId });
 
     return result > 0;
+  }
+
+  async get(input: IGetCartCaseInput): Promise<CartItem> {
+    return this.repository.getByFilter(input);
   }
 }
