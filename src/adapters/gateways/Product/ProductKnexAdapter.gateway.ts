@@ -7,7 +7,7 @@ import KnexRepositoryHelper from 'src/frameworks/database/knex/knex-adapter.fram
 import IProductGateway from './IProduct.gateway';
 
 export default class ProductGatewayKnexAdapter implements IProductGateway {
-  public static readonly tableName = 'product';
+  public static readonly tableName = 'products';
 
   constructor(private repository: KnexRepositoryHelper<Product>) {}
 
