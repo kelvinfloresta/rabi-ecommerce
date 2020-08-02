@@ -4,4 +4,6 @@ import { ISaveGateway, IGetGateway } from '../IGateway';
 
 export default interface IUserGateway
   extends ISaveGateway<ISaveUserCaseInput>,
-    IGetGateway<string, User> {}
+    IGetGateway<string, User> {
+  getByFilter(filter: Partial<User>): Promise<User | undefined>;
+}

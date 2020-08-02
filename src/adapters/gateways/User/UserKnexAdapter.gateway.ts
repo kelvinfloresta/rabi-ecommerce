@@ -15,4 +15,8 @@ export default class UserGatewayKnexAdapter implements IUserGateway {
   save(input: ISaveUserCaseInput): Promise<string> {
     return this.repository.save(input);
   }
+
+  getByFilter(filter: Partial<User>) {
+    return this.repository.getByFilter(filter);
+  }
 }
