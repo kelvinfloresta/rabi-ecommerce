@@ -2,6 +2,7 @@ import User from 'src/entities/User.entity';
 import UserCaseFactory from 'src/usecases/User/UserFactory.usecase';
 import { ISaveUserCaseInput } from 'src/usecases/User/IUser.usecase';
 import DocumentType from 'src/entities/enums/DocumentType.enum';
+import Encrypt from 'src/utils/Encrypt.util';
 
 type IPartialSaveUserCase = Partial<ISaveUserCaseInput> & { companyId: string };
 
@@ -23,7 +24,11 @@ export async function createUserFixture(params: IPartialSaveUserCase): Promise<s
   return userId;
 }
 
-export async function expectTohaveUser(id: string, user: Partial<User>) {
-  const result = await UserCaseFactory.singleton.get(id);
-  return expect(result).toMatchObject(user);
+export async function expectTohaveUser(id: string, expectedUser: Partial<User>) {
+  const foundUser = await UserCaseFactory.singleton.get(id);
+  if (expectedUser.password) {
+    const isValid = Encrypt.compare(foundUser.password, expectedUser.password);
+    expect(isValid).toBe(true);
+  }
+  expect({ ...foundUser, password: null }).toMatchObject({ ...expectedUser, password: null });
 }
