@@ -14,4 +14,8 @@ export default class UserCase {
   async get(id: string): Promise<User> {
     return this.userGateway.get(id);
   }
+
+  async findByEmail(email: string): Promise<User | undefined> {
+    return this.userGateway.getByFilter({ email });
+  }
 }
