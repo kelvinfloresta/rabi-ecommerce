@@ -1,3 +1,5 @@
+import { IPaginationParams, IWithPagination } from 'src/usecases/IPaginate';
+
 export interface IPatchGateway<Input, Output = boolean> {
   patch(input: Input): Promise<Output>;
 }
@@ -16,4 +18,8 @@ export interface ILogicDeleteGateway<Filter = string> {
 
 export interface IGetGateway<Input, Output> {
   get(input: Input): Promise<Output>;
+}
+
+export interface IPaginateGateway<Filter, Output> {
+  paginate(filter: Filter, paginate: IPaginationParams): Promise<IWithPagination<Output>>;
 }

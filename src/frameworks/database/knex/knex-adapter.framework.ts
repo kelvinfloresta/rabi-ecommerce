@@ -1,4 +1,5 @@
 import db from 'src/adapters/database/Database.adapter';
+import { IPaginationParams } from 'src/usecases/IPaginate';
 
 export default class KnexRepositoryHelper<Entity, Id extends string | number = string> {
   private knex = db;
@@ -15,6 +16,10 @@ export default class KnexRepositoryHelper<Entity, Id extends string | number = s
 
   async getByFilter(filter: Partial<Entity>): Promise<Entity> {
     return this.instance.where(filter).first();
+  }
+
+  async paginateByFilter(filter: Partial<Entity>, paginate: IPaginationParams) {
+    return this.instance.where(filter).paginate<Entity[]>(paginate);
   }
 
   async listByfilter(input: Partial<Entity>): Promise<Entity[]> {

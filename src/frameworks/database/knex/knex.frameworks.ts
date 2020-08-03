@@ -2,6 +2,7 @@ import Knex from 'knex';
 import config from 'src/config';
 import * as pg from 'pg';
 
+import { attachPaginate } from 'knex-paginate';
 import knexFile from './knexfile';
 
 export default class KnexFactory {
@@ -9,6 +10,7 @@ export default class KnexFactory {
 
   constructor() {
     KnexFactory.fixDecimalString();
+    attachPaginate();
     this.config = KnexFactory.getConfig();
   }
 
