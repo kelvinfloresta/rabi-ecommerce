@@ -8,3 +8,5 @@ export interface IPatchProductCaseInput
   extends Omit<Partial<Product>, 'companyId' | keyof ITimeStamp | keyof ILogicDelete> {
   id: string;
 }
+
+export type IPaginateProductCaseInput = Pick<Product, 'companyId'>;

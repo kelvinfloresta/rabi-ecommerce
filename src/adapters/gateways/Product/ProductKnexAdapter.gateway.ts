@@ -2,8 +2,10 @@ import Product from 'src/entities/Product.entity';
 import {
   ISaveProductCaseInput,
   IPatchProductCaseInput,
+  IPaginateProductCaseInput,
 } from 'src/usecases/Product/IProduct.usecase';
 import KnexRepositoryHelper from 'src/frameworks/database/knex/knex-adapter.framework';
+import { IPaginationParams } from 'src/usecases/IPaginate';
 import IProductGateway from './IProduct.gateway';
 
 export default class ProductGatewayKnexAdapter implements IProductGateway {
@@ -26,5 +28,9 @@ export default class ProductGatewayKnexAdapter implements IProductGateway {
 
   async save(input: ISaveProductCaseInput) {
     return this.repository.save(input);
+  }
+
+  async paginate(filter: IPaginateProductCaseInput, paginate: IPaginationParams) {
+    return this.repository.paginateByFilter(filter, paginate);
   }
 }

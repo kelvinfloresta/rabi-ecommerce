@@ -30,6 +30,22 @@ describe('Product Case', () => {
     });
   });
 
+  describe('Paginate', () => {
+    it('Should not return products of other companies', async () => {
+      const { id: firstCompany } = await createCompanyFixture({ name: 'My great company' });
+      const { id: secondCompany } = await createCompanyFixture({ name: 'Another great company' });
+      const expectedProduct = buildProductFixture({ name: 'green apple', companyId: firstCompany });
+      await createProductFixture(expectedProduct);
+      await createProductFixture({ name: 'banana', companyId: secondCompany });
+
+      const sut = ProductCaseFactory();
+      const page = await sut.paginate({ companyId: firstCompany }, { currentPage: 1, perPage: 10 });
+
+      expect(page.data.length).toBe(1);
+      expect(page.data[0]).toMatchObject(expectedProduct);
+    });
+  });
+
   describe('patch', () => {
     it('Should patch name', async () => {
       const sut = ProductCaseFactory();
