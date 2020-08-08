@@ -1,7 +1,11 @@
-import { ISaveCategoryCaseInput } from 'src/usecases/Category/ICategory.usecase';
+import {
+  ISaveCategoryCaseInput,
+  IListCategoryCaseInput,
+} from 'src/usecases/Category/ICategory.usecase';
 import Category from 'src/entities/Category.entity';
-import { ISaveGateway, IGetGateway } from '../IGateway';
+import { ISaveGateway, IGetGateway, IListGateway } from '../IGateway';
 
 export default interface ICategoryGateway
   extends ISaveGateway<ISaveCategoryCaseInput>,
-    IGetGateway<string, Category> {}
+    IGetGateway<string, Category>,
+    IListGateway<IListCategoryCaseInput, Category> {}

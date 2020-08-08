@@ -8,6 +8,7 @@ import {
   createCategoryFixture,
   buildCategoryFixture,
 } from 'src/__fixtures__/category.fixture';
+import { uuidv4 } from 'src/__fixtures__/utils/uuid.fixture';
 import CategoryCaseFactory from './CategoryFactory.usecase';
 import { ISaveCategoryCaseInput } from './ICategory.usecase';
 
@@ -49,6 +50,34 @@ describe('Category Case', () => {
       expect(
         createCategoryFixture({ companyId: companyId2, name: sameName })
       ).resolves.toBeTruthy();
+    });
+  });
+
+  describe('List', () => {
+    it('Should list categories from company', async () => {
+      const { id: companyId } = await createCompanyFixture();
+      await createCategoryFixture({ name: 'Category 1', companyId });
+      await createCategoryFixture({ name: 'Category 2', companyId });
+
+      const result = await CategoryCaseFactory.singleton.list({ companyId });
+      expect(result).toHaveLength(2);
+    });
+
+    it('Should return an empty array if not found', async () => {
+      const companyIdNotExists = uuidv4();
+      const result = await CategoryCaseFactory.singleton.list({
+        companyId: companyIdNotExists,
+      });
+      expect(result).toHaveLength(0);
+    });
+
+    it('Should not return categories from other companies', async () => {
+      const { id: companyId } = await createCompanyFixture();
+      const { id: anotherCompanyId } = await createCompanyFixture();
+      await createCategoryFixture({ companyId });
+
+      const result = await CategoryCaseFactory.singleton.list({ companyId: anotherCompanyId });
+      expect(result).toHaveLength(0);
     });
   });
 });

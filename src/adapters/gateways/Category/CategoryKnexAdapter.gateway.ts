@@ -1,6 +1,9 @@
 import Category from 'src/entities/Category.entity';
 import KnexRepositoryHelper from 'src/frameworks/database/knex/knex-adapter.framework';
-import { ISaveCategoryCaseInput } from 'src/usecases/Category/ICategory.usecase';
+import {
+  ISaveCategoryCaseInput,
+  IListCategoryCaseInput,
+} from 'src/usecases/Category/ICategory.usecase';
 import ICategoryGateway from './ICategory.gateway';
 
 export default class CategoryGatewayKnexAdapter implements ICategoryGateway {
@@ -14,5 +17,9 @@ export default class CategoryGatewayKnexAdapter implements ICategoryGateway {
 
   public async save(input: ISaveCategoryCaseInput): Promise<string> {
     return this.repository.save(input);
+  }
+
+  public async list(filter: IListCategoryCaseInput): Promise<Category[]> {
+    return this.repository.listByfilter(filter);
   }
 }
