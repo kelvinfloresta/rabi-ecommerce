@@ -14,14 +14,12 @@ export function buildCategoryFixture(params: IPartialSaveCategoryCase): ISaveCat
 }
 
 export async function createCategoryFixture(params: IPartialSaveCategoryCase): Promise<string> {
-  const categoryCase = CategoryCaseFactory();
   const category = buildCategoryFixture(params);
-  const categoryId = await categoryCase.save(category);
+  const categoryId = await CategoryCaseFactory.singleton.save(category);
   return categoryId;
 }
 
 export async function expectTohaveCategory(id: string, category: Partial<Category>) {
-  const categoryCase = CategoryCaseFactory();
-  const result = await categoryCase.getById(id);
+  const result = await CategoryCaseFactory.singleton.getById(id);
   return expect(result).toMatchObject(category);
 }

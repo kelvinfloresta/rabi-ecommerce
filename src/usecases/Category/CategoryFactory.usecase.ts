@@ -3,8 +3,12 @@ import KnexRepositoryHelper from 'src/frameworks/database/knex/knex-adapter.fram
 import Category from 'src/entities/Category.entity';
 import CategoryCase from './Category.usecase';
 
-export default function CategoryCaseFactory() {
-  const repository = new KnexRepositoryHelper<Category>(CategoryGatewayKnexAdapter.tableName);
-  const productGateway = new CategoryGatewayKnexAdapter(repository);
-  return new CategoryCase(productGateway);
+export default class CategoryCaseFactory {
+  public static readonly singleton = CategoryCaseFactory.build();
+
+  public static build() {
+    const repository = new KnexRepositoryHelper<Category>(CategoryGatewayKnexAdapter.tableName);
+    const productGateway = new CategoryGatewayKnexAdapter(repository);
+    return new CategoryCase(productGateway);
+  }
 }

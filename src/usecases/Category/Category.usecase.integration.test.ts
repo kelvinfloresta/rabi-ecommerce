@@ -3,13 +3,13 @@ import { closeDatabase, truncateTable } from 'src/adapters/database/Database.ada
 import { createCompanyFixture } from 'src/__fixtures__/company.fixture';
 import CategoryGatewayKnexAdapter from 'src/adapters/gateways/Category/CategoryKnexAdapter.gateway';
 import CompanyGatewayKnexAdapter from 'src/adapters/gateways/Company/CompanyKnexAdapter.gateway';
-import Category from 'src/entities/Category.entity';
 import {
   expectTohaveCategory,
   createCategoryFixture,
   buildCategoryFixture,
 } from 'src/__fixtures__/category.fixture';
 import CategoryCaseFactory from './CategoryFactory.usecase';
+import { ISaveCategoryCaseInput } from './ICategory.usecase';
 
 beforeEach(async () => {
   await truncateTable(CategoryGatewayKnexAdapter.tableName);
@@ -23,14 +23,13 @@ afterAll(async () => {
 describe('Category Case', () => {
   describe('Save', () => {
     it('Should save category', async () => {
-      const sut = CategoryCaseFactory();
       const { id: companyId } = await createCompanyFixture({ name: 'My great company' });
-      const category: Category = {
+      const category: ISaveCategoryCaseInput = {
         companyId,
         name: 'Minor Prophets',
         description: 'The Twelve Old Testament prophetic Books are known as Minor Prophets.',
       };
-      const categoryId = await sut.save(category);
+      const categoryId = await CategoryCaseFactory.singleton.save(category);
       return expectTohaveCategory(categoryId, category);
     });
 
