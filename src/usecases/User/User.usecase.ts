@@ -11,7 +11,7 @@ export default class UserCase {
     return this.userGateway.save({ ...input, password: encryptedPassword });
   }
 
-  async get(id: string): Promise<User> {
+  async get(id: string): Promise<User | undefined> {
     return this.userGateway.get(id);
   }
 

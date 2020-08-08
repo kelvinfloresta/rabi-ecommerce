@@ -32,7 +32,7 @@ describe('Cart Case', () => {
       });
 
       const cartItem = await CartCaseFactory.singleton.get({ productId, userId });
-      expect(cartItem.quantity).toBe(quantity);
+      expect(cartItem?.quantity).toBe(quantity);
     });
 
     it('Should increment when cart item already exists', async () => {
@@ -53,7 +53,7 @@ describe('Cart Case', () => {
       });
 
       const cartItem = await CartCaseFactory.singleton.get({ productId, userId });
-      expect(cartItem.quantity).toBe(2);
+      expect(cartItem?.quantity).toBe(2);
     });
   });
 });

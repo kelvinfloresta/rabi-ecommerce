@@ -21,7 +21,7 @@ export interface ILogicDeleteGateway<Filter = string> {
 }
 
 export interface IGetGateway<Input, Output> {
-  get(input: Input): Promise<Output>;
+  get(input: Input): Promise<Output | undefined>;
 }
 
 export interface IPaginateGateway<Filter, Output> {

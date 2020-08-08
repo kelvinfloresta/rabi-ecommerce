@@ -9,7 +9,7 @@ export default class CompanyCase {
     return this.companyGateway.save(input);
   }
 
-  async get(id: string): Promise<Company> {
+  async get(id: string): Promise<Company | undefined> {
     return this.companyGateway.get(id);
   }
 }

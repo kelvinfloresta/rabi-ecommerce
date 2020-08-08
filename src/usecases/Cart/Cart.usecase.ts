@@ -9,7 +9,7 @@ export default class CartCase {
     return this.CartGateway.add(input);
   }
 
-  async get(input: IGetCartCaseInput): Promise<CartItem> {
+  async get(input: IGetCartCaseInput): Promise<CartItem | undefined> {
     return this.CartGateway.get(input);
   }
 }

@@ -18,7 +18,7 @@ export default class ProductCase {
     return this.productGateway.paginate(filter, paginate);
   }
 
-  async get(id: string): Promise<Product> {
+  async get(id: string): Promise<Product | undefined> {
     return this.productGateway.get(id);
   }
 

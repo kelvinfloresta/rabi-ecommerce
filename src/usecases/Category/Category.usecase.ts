@@ -9,7 +9,7 @@ export default class CategoryCase {
     return this.categoryGateway.save(input);
   }
 
-  async getById(id: string): Promise<Category> {
+  async getById(id: string): Promise<Category | undefined> {
     return this.categoryGateway.get(id);
   }
 

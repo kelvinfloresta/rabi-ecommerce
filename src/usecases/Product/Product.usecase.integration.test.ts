@@ -54,7 +54,7 @@ describe('Product Case', () => {
       const newName = 'cupcake';
       await sut.patch({ name: newName, id: product.id });
       const result = await sut.get(product.id);
-      expect(result.name).toBe(newName);
+      expect(result?.name).toBe(newName);
     });
 
     it('Should patch description', async () => {
@@ -64,7 +64,7 @@ describe('Product Case', () => {
       const newDescription = 'A lovely product';
       await sut.patch({ description: newDescription, id: product.id });
       const result = await sut.get(product.id);
-      expect(result.description).toBe(newDescription);
+      expect(result?.description).toBe(newDescription);
     });
 
     it('Should patch price', async () => {
@@ -74,7 +74,7 @@ describe('Product Case', () => {
       const newPrice = 10.99;
       await sut.patch({ price: newPrice, id: product.id });
       const result = await sut.get(product.id);
-      expect(result.price).toBe(newPrice);
+      expect(result?.price).toBe(newPrice);
     });
 
     it('Should patch disabled', async () => {
@@ -83,7 +83,7 @@ describe('Product Case', () => {
       const product = await createProductFixture({ disabled: true, companyId });
       await sut.patch({ disabled: false, id: product.id });
       const result = await sut.get(product.id);
-      expect(result.disabled).toBeFalsy();
+      expect(result?.disabled).toBeFalsy();
     });
 
     it('Should not patch the other product values', async () => {
@@ -93,7 +93,7 @@ describe('Product Case', () => {
       await sut.patch({ id: product.id, name: 'A rare banana', price: 999 });
       const result = await sut.get(product.id);
       const fieldsNotChanged = { description: product.description, disabled: product.disabled };
-      const fieldsNotpatchd = { description: result.description, disabled: result.disabled };
+      const fieldsNotpatchd = { description: result?.description, disabled: result?.disabled };
       expect(fieldsNotChanged).toMatchObject(fieldsNotpatchd);
     });
   });
@@ -122,7 +122,7 @@ describe('Product Case', () => {
       const { id } = await createProductFixture({ name: 'cake', companyId });
       await sut.delete(id);
       const deletedProduct = await sut.get(id);
-      expect(deletedProduct.deletedAt).toBeInstanceOf(Date);
+      expect(deletedProduct?.deletedAt).toBeInstanceOf(Date);
     });
 
     it('Should return false if not found', async () => {
