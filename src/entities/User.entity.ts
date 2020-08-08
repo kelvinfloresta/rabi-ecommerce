@@ -1,20 +1,21 @@
+/* eslint-disable max-classes-per-file */
 import { ITimeStamp, ILogicDelete } from './IEntity';
 import DocumentType from './enums/DocumentType.enum';
 
 export default class User implements ITimeStamp, ILogicDelete {
   public readonly id: string;
 
-  public readonly companyId: string;
-
-  public readonly name: string;
+  public readonly email: string;
 
   public readonly password: string;
 
-  public readonly email: string;
+  public readonly companyId: string | null;
 
-  public readonly documentNumber: string;
+  public readonly name: string | null;
 
-  public readonly documentType: DocumentType;
+  public readonly documentNumber: string | null;
+
+  public readonly documentType: DocumentType | null;
 
   public readonly createdAt: Date;
 

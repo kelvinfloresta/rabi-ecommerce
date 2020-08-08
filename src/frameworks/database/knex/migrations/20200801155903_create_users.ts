@@ -10,15 +10,15 @@ const { tableName: companyTable } = CompanyGatewayKnexAdapter;
 export async function up(knex: Knex) {
   return knex.schema.createTable(tableName, (table) => {
     table.uuid('id').primary().defaultTo(PostgresUUIDV4(knex));
-    table.string('name').notNullable();
+    table.string('name').nullable();
     table.string('email').unique().notNullable();
     table.string('password').notNullable();
     addSoftDelete(table);
     addTimestamp(table, knex, tableName);
-    table.string('documentNumber').notNullable();
-    table.enum('documentType', [DocumentType.CPF, DocumentType.CNPJ]);
+    table.string('documentNumber').nullable();
+    table.enum('documentType', [DocumentType.CPF, DocumentType.CNPJ]).nullable();
 
-    table.uuid('companyId').notNullable();
+    table.uuid('companyId').nullable();
 
     table.foreign('companyId').references('id').inTable(companyTable);
   });
