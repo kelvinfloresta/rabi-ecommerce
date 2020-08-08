@@ -8,7 +8,7 @@ export interface ISaveGateway<Input, Output = string> {
   save(input: Input): Promise<Output>;
 }
 
-export interface IListGateway<Filter, Output> {
+export interface IListGateway<Filter, T, Output extends Iterable<T> = Array<T>> {
   list(filter: Filter): Promise<Output>;
 }
 
