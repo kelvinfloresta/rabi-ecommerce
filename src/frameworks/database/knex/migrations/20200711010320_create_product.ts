@@ -1,9 +1,11 @@
 import * as Knex from 'knex';
 import ProductGatewayKnexAdapter from 'src/adapters/gateways/Product/ProductKnexAdapter.gateway';
+import CategoryGatewayKnexAdapter from 'src/adapters/gateways/Category/CategoryKnexAdapter.gateway';
 import CompanyGatewayKnexAdapter from 'src/adapters/gateways/Company/CompanyKnexAdapter.gateway';
 import { PostgresUUIDV4, addSoftDelete, addTimestamp } from '../knex-migration.framework';
 
 const { tableName } = ProductGatewayKnexAdapter;
+const { tableName: categoryTable } = CategoryGatewayKnexAdapter;
 const { tableName: companyTable } = CompanyGatewayKnexAdapter;
 
 export async function up(knex: Knex): Promise<any> {
@@ -15,8 +17,11 @@ export async function up(knex: Knex): Promise<any> {
     table.decimal('price').notNullable();
     table.boolean('disabled').defaultTo(false).notNullable();
     table.text('description').nullable();
-    table.uuid('companyId').notNullable();
 
+    table.uuid('categoryId').nullable();
+    table.foreign('categoryId').references('id').inTable(categoryTable);
+
+    table.uuid('companyId').notNullable();
     table.foreign('companyId').references('id').inTable(companyTable);
   });
 }

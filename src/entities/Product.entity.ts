@@ -11,6 +11,8 @@ export default class Product implements ILogicDelete, ITimeStamp {
 
   public disabled: boolean;
 
+  public categoryId?: string;
+
   public companyId: string;
 
   public createdAt: Date;
