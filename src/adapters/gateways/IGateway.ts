@@ -8,6 +8,10 @@ export interface ISaveGateway<Input, Output = string> {
   save(input: Input): Promise<Output>;
 }
 
+export interface IListGateway<Filter, Output> {
+  list(filter: Filter): Promise<Output>;
+}
+
 export interface IDeleteGateway<Filter = string> {
   delete(filter: Filter): Promise<boolean>;
 }
