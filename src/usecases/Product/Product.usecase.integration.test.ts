@@ -4,7 +4,7 @@ import {
   createProductFixture,
   expectTohaveProduct,
 } from 'src/__fixtures__/product.fixture';
-import { uuidv4 } from 'src/__fixtures__/utils/uuid.fixture';
+import { uuidv4 } from 'src/utils/uuid.utils';
 import { createCompanyFixture } from 'src/__fixtures__/company.fixture';
 import ProductGatewayKnexAdapter from 'src/adapters/gateways/Product/ProductKnexAdapter.gateway';
 import CompanyGatewayKnexAdapter from 'src/adapters/gateways/Company/CompanyKnexAdapter.gateway';

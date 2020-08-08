@@ -8,7 +8,7 @@ import {
   createCategoryFixture,
   buildCategoryFixture,
 } from 'src/__fixtures__/category.fixture';
-import { uuidv4 } from 'src/__fixtures__/utils/uuid.fixture';
+import { uuidv4 } from 'src/utils/uuid.utils';
 import CategoryCaseFactory from './CategoryFactory.usecase';
 import { ISaveCategoryCaseInput } from './ICategory.usecase';
 
