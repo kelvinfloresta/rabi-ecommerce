@@ -4,6 +4,7 @@
   "description": "",
   "main": "main.ts",
   "scripts": {
+    "start": "cross-env NODE_PATH=. NODE_ENV=development ts-node src/main.ts",
     "test": "cross-env NODE_PATH=. jest",
     "test:integration": "npm test -- --runInBand --watch -c jest-integration.config.js ",
     "lint": "eslint .",
@@ -44,6 +45,7 @@
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "fastify": "^3.2.0",
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.21.1",
     "knex-paginate": "^1.2.3",
