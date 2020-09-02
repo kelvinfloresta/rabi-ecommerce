@@ -26,9 +26,9 @@ const config: IConfig = {
   development: {
     client: 'pg',
     connection: {
-      host: '127.0.0.1',
+      host: process.env.DB_HOST as any,
       user: 'postgres',
-      password: 'root',
+      password: 'postgres',
       database: 'rabi_ecommerce_development',
       charset: 'utf8',
       debug: true,
@@ -43,9 +43,9 @@ const config: IConfig = {
   test: {
     client: 'pg',
     connection: {
-      host: '127.0.0.1',
+      host: process.env.DB_HOST as any,
       user: 'postgres',
-      password: 'root',
+      password: 'postgres',
       database: 'rabi_ecommerce_test',
       charset: 'utf8',
       debug: true,
@@ -60,9 +60,9 @@ const config: IConfig = {
   staging: {
     client: 'pg',
     connection: {
-      host: '127.0.0.1',
+      host: 'localhost',
       user: 'postgres',
-      password: 'root',
+      password: 'postgres',
       database: 'rabi_ecommerce_staging',
       charset: 'utf8',
       debug: true,

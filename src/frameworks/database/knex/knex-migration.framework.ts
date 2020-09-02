@@ -31,7 +31,7 @@ export function addSoftDelete(table: Knex.CreateTableBuilder): void {
   table.timestamp('deletedAt', { useTz: false }).nullable().defaultTo(null);
 }
 
-export async function rebuildDatabase() {
+function getConnection() {
   const { envName } = config;
   const databaseConfig = knexFile[envName];
   const params = {
@@ -45,8 +45,24 @@ export async function rebuildDatabase() {
   };
 
   const knex = Knex(params);
+  return { knex, databaseConfig };
+}
+
+export async function rebuildDatabase() {
+  const { knex, databaseConfig } = getConnection();
 
   await knex.raw(`DROP DATABASE IF EXISTS ${databaseConfig.connection.database}`);
   await knex.raw(`CREATE DATABASE ${databaseConfig.connection.database}`);
+  await knex.destroy();
+}
+
+export async function createDatabase() {
+  const { knex, databaseConfig } = getConnection();
+  const result = await knex.raw(
+    `SELECT 1 from pg_database WHERE datname='${databaseConfig.connection.database}';`
+  );
+  if (result.rowCount === 0) {
+    await knex.raw(`CREATE DATABASE ${databaseConfig.connection.database}`);
+  }
   await knex.destroy();
 }
