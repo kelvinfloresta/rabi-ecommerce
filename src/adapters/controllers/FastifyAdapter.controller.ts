@@ -1,22 +1,23 @@
 import { FastifyInstance } from 'fastify';
-import { IRoutes } from './IController';
-import BaseController from './Base.controller';
+import RouteConfig, { IRouteAdaptParams } from './RouteConfig';
 
-export default class FastifyAdapter implements IRoutes {
-  constructor(private fastify: FastifyInstance) {}
+export default class FastifyAdapter extends RouteConfig {
+  constructor(private fastify: FastifyInstance) {
+    super();
+  }
 
-  public appendController(controllerInstance: BaseController) {
+  protected adapt(params: IRouteAdaptParams) {
     this.fastify.register(
       (fastify, _opts, done) => {
-        controllerInstance.routes.forEach((route) => {
-          fastify[route.method](route.url, async (request, reply) => {
-            const [statusCode, response] = await controllerInstance[route.methodName](request);
+        params.routes.forEach((route) => {
+          fastify[route.requestMethod](route.url, async (request, reply) => {
+            const [statusCode, response] = await route.requestHandler(request);
             reply.status(statusCode).send(response);
           });
         });
         done();
       },
-      { prefix: controllerInstance.prefix }
+      { prefix: params.prefix }
     );
   }
 }

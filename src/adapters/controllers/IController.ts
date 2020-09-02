@@ -22,14 +22,21 @@ export interface IRequest<Query = any, Body = any, Params = any> {
   body: Body;
 }
 
-export interface IRoute {
+export interface IRouteConfig {
   url: string;
   method: RequestMethod;
   methodName: string;
 }
 
-export interface IRouteConfig {}
-
-export interface IRoutes {
-  appendController(controllerInstance: any): void;
+export interface IRoute<T = any> {
+  url: string;
+  requestMethod: RequestMethod;
+  requestHandler: T;
 }
+
+export type IRoutes = {
+  [controllerName: string]: {
+    routes: IRouteConfig[];
+    prefix: string;
+  };
+};
