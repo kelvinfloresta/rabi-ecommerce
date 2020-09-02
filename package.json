@@ -4,18 +4,18 @@
   "description": "",
   "main": "main.ts",
   "scripts": {
-    "start": "cross-env NODE_PATH=. NODE_ENV=development ts-node src/main.ts",
-    "test": "cross-env NODE_PATH=. jest",
+    "start": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/main.ts",
+    "test": "jest",
     "test:integration": "npm test -- --runInBand --watch -c jest-integration.config.js ",
     "lint": "eslint .",
     "lint:fix": "npm run lint -- --ext .ts --fix",
-    "migration": "cross-env NODE_PATH=../../../.. knex --knexfile src/frameworks/database/knex/knexfile.ts",
+    "migration": "knex --knexfile src/frameworks/database/knex/knexfile.ts",
     "migration:make": "npm run migration migrate:make --",
     "migration:latest": "npm run migration migrate:latest --",
     "migration:down": "npm run migration migrate:down --",
     "migration:list": "npm run migration migrate:list --",
     "migration:rollback:all": "npm run migration migrate:rollback --all --",
-    "migration:rebuild": "./src/frameworks/database/knex/rebuild-script.sh"
+    "migration:build": "./src/frameworks/database/knex/build-database.sh"
   },
   "author": "Kelvin Floresta de Andrade",
   "license": "ISC",
@@ -49,6 +49,7 @@
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.21.1",
     "knex-paginate": "^1.2.3",
+    "nodemon": "^2.0.4",
     "pg": "^8.2.1",
     "uuid": "^8.3.0"
   }
