@@ -1,4 +1,3 @@
-/* eslint-disable max-classes-per-file */
 import UserCase from 'src/usecases/User/User.usecase';
 import { ISaveUserCaseInput } from 'src/usecases/User/IUser.usecase';
 import { StatusCode, IResponse, IRequest } from 'src/adapters/controllers/IController';
