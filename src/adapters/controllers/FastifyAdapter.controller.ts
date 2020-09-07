@@ -1,9 +1,30 @@
-import { FastifyInstance } from 'fastify';
+import { FastifyInstance, FastifyReply, FastifyRequest, FastifyError } from 'fastify';
 import RouteConfig, { IRouteAdaptParams } from './RouteConfig';
 
 export default class FastifyAdapter extends RouteConfig {
   constructor(private fastify: FastifyInstance) {
     super();
+    fastify.setErrorHandler(FastifyAdapter.customErrorHandler);
+  }
+
+  private static customErrorHandler(
+    error: FastifyError,
+    _request: FastifyRequest,
+    reply: FastifyReply
+  ) {
+    if (error.name === 'ValidatorError') {
+      reply.status(400).send({
+        statusCode: 400,
+        error: 'Validation',
+        message: error.message,
+      });
+      return;
+    }
+
+    reply.status(500).send({
+      statusCode: 500,
+      error: 'Internal Server Error',
+    });
   }
 
   protected adapt(params: IRouteAdaptParams) {
