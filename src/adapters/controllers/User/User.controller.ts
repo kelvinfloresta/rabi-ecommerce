@@ -5,7 +5,7 @@ import { StatusCode, IResponse, IRequest } from 'src/adapters/controllers/IContr
 
 import Validate from 'src/adapters/Validator/Validate.decorator';
 import { Controller, Post } from '../Route.decorator';
-import { UserSaveSchema } from './UserValidator.controller';
+import { UserSaveSchema } from './UserSchema.validator';
 
 @Controller('/user')
 export default class UserController {
