@@ -28,6 +28,7 @@ export const UserSaveSchema: JSONSchema7 = {
       required: ['email', 'password'],
     },
   },
+  required: ['body'],
 };
 
 export const getSchema: JSONSchema7 = {
