@@ -31,7 +31,7 @@ export interface IRouteConfig {
 export interface IRoute<T = any> {
   url: string;
   requestMethod: RequestMethod;
-  requestHandler: T;
+  requestHandler: (request: any) => IResponse<T>;
 }
 
 export type IRoutes = {
