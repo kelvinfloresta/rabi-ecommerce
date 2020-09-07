@@ -2,13 +2,13 @@ import { fastify } from 'fastify';
 import UserCaseFactory from './usecases/User/UserFactory.usecase';
 import FastifyAdapter from './adapters/controllers/FastifyAdapter.controller';
 import UserController from './adapters/controllers/User/User.controller';
-import RouteConfig from './adapters/controllers/RouteConfig';
+import RouteFactory from './adapters/controllers/RouteFactory';
 
 const app = fastify({
   logger: true,
 });
 
-const routes: RouteConfig = new FastifyAdapter(app);
+const routes: RouteFactory = new FastifyAdapter(app);
 const userController = new UserController(UserCaseFactory.singleton);
 routes.appendController(userController);
 

@@ -1,7 +1,7 @@
 import { FastifyInstance, FastifyReply, FastifyRequest, FastifyError } from 'fastify';
-import RouteConfig, { IRouteAdaptParams } from './RouteConfig';
+import RouteFactory, { IRouteAdaptParams } from './RouteFactory';
 
-export default class FastifyAdapter extends RouteConfig {
+export default class FastifyAdapter extends RouteFactory {
   constructor(private fastify: FastifyInstance) {
     super();
     fastify.setErrorHandler(FastifyAdapter.customErrorHandler);

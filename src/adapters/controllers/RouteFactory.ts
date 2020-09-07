@@ -6,7 +6,7 @@ export interface IRouteAdaptParams {
   prefix: string;
 }
 
-export default abstract class RouteConfig {
+export default abstract class RouteFactory {
   public routesConfig = routesConfig;
 
   public appendController(controllerInstance: any) {
