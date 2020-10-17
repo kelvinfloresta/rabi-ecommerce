@@ -16,22 +16,22 @@ export const enum StatusCode {
 export type IResponse<T> = Promise<[StatusCode, T]>;
 
 export interface IRequest<Query = any, Body = any, Params = any> {
-  headers: any;
-  params: Params;
-  query: Query;
-  body: Body;
+  readonly headers: any;
+  readonly params: Params;
+  readonly query: Query;
+  readonly body: Body;
 }
 
 export interface IRouteConfig {
-  url: string;
-  method: RequestMethod;
-  methodName: string;
+  readonly url: string;
+  readonly method: RequestMethod;
+  readonly methodName: string;
 }
 
 export interface IRoute<T = any> {
-  url: string;
-  requestMethod: RequestMethod;
-  requestHandler: (request: any) => IResponse<T>;
+  readonly url: string;
+  readonly requestMethod: RequestMethod;
+  readonly requestHandler: (request: any) => IResponse<T>;
 }
 
 export type IRoutes = {
