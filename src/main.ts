@@ -1,16 +1,16 @@
 import { fastify } from 'fastify';
 import UserCaseFactory from './usecases/User/UserFactory.usecase';
-import FastifyAdapter from './adapters/controllers/FastifyAdapter.controller';
 import UserController from './adapters/controllers/User/User.controller';
-import RouteFactory from './adapters/controllers/RouteFactory';
+import RouteFactory from './adapters/controllers/routes/RouteFactory.route';
+import FastifyRouterFactoryAdapter from './adapters/controllers/routes/FastifyRouterFactoryAdapter.route';
 
 const app = fastify({
   logger: true,
 });
 
-const routes: RouteFactory = new FastifyAdapter(app);
+const routes: RouteFactory = new FastifyRouterFactoryAdapter(app);
 const userController = new UserController(UserCaseFactory.singleton);
-routes.appendController(userController);
+routes.addController(userController);
 
 app.listen(3000, '0.0.0.0', (err, address) => {
   if (err) throw err;

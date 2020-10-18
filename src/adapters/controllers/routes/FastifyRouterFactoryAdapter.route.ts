@@ -1,10 +1,11 @@
 import { FastifyInstance, FastifyReply, FastifyRequest, FastifyError } from 'fastify';
-import RouteFactory, { IRouteAdaptParams } from './RouteFactory';
+import { IBindedRoute, IBindedRouteConfig } from './IRoute';
+import RouteFactory from './RouteFactory.route';
 
-export default class FastifyAdapter extends RouteFactory {
+export default class FastifyRouterFactoryAdapter extends RouteFactory {
   constructor(private fastify: FastifyInstance) {
     super();
-    fastify.setErrorHandler(FastifyAdapter.customErrorHandler);
+    fastify.setErrorHandler(FastifyRouterFactoryAdapter.customErrorHandler);
   }
 
   private static customErrorHandler(
@@ -27,18 +28,20 @@ export default class FastifyAdapter extends RouteFactory {
     });
   }
 
-  protected adapt(params: IRouteAdaptParams) {
+  protected adapt(params: IBindedRouteConfig) {
     this.fastify.register(
-      (fastify, _opts, done) => {
-        params.routes.forEach((route) => {
-          fastify[route.requestMethod](route.url, async (request, reply) => {
-            const [statusCode, response] = await route.requestHandler(request);
-            reply.status(statusCode).send(response);
-          });
-        });
+      (_, _opts, done) => {
+        params.routes.forEach(this.adaptOne);
         done();
       },
       { prefix: params.prefix }
     );
+  }
+
+  private adaptOne(route: IBindedRoute) {
+    this.fastify[route.requestMethod](route.url, async (request, reply) => {
+      const { statusCode, response } = await route.requestHandler(request);
+      reply.status(statusCode).send(response);
+    });
   }
 }
