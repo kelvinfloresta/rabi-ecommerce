@@ -13,30 +13,17 @@ export const enum StatusCode {
   noContent = 204,
 }
 
-export type IResponse<T> = Promise<[StatusCode, T]>;
-
-export interface IRequest<Query = any, Body = any, Params = any> {
-  headers: any;
-  params: Params;
-  query: Query;
-  body: Body;
+export interface IResponse<TResponse, THeader = any> {
+  readonly statusCode: StatusCode;
+  readonly response: TResponse;
+  readonly headers?: THeader;
 }
 
-export interface IRouteConfig {
-  url: string;
-  method: RequestMethod;
-  methodName: string;
-}
+export type IResponseAsync<TResponse, THeader = any> = Promise<IResponse<TResponse, THeader>>;
 
-export interface IRoute<T = any> {
-  url: string;
-  requestMethod: RequestMethod;
-  requestHandler: (request: any) => IResponse<T>;
+export interface IRequest<Query = any, Body = any, Params = any, Header = any> {
+  readonly headers: Header;
+  readonly params: Params;
+  readonly query: Query;
+  readonly body: Body;
 }
-
-export type IRoutes = {
-  [controllerName: string]: {
-    routes: IRouteConfig[];
-    prefix: string;
-  };
-};
