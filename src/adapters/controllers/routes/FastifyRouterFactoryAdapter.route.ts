@@ -6,6 +6,7 @@ export default class FastifyRouterFactoryAdapter extends RouteFactory {
   constructor(private fastify: FastifyInstance) {
     super();
     fastify.setErrorHandler(FastifyRouterFactoryAdapter.customErrorHandler);
+    this.adaptOne = this.adaptOne.bind(this);
   }
 
   private static customErrorHandler(
