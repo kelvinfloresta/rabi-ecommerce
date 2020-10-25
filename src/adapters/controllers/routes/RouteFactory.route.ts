@@ -28,4 +28,6 @@ export default abstract class RouteFactory {
   }
 
   protected abstract adapt(params: IBindedRouteConfig): void;
+
+  public abstract start(): Promise<void>;
 }

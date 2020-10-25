@@ -6,7 +6,6 @@ export default class FastifyRouterFactoryAdapter extends RouteFactory {
   constructor(private fastify: FastifyInstance) {
     super();
     fastify.setErrorHandler(FastifyRouterFactoryAdapter.customErrorHandler);
-    this.adaptOne = this.adaptOne.bind(this);
   }
 
   private static customErrorHandler(
@@ -31,18 +30,25 @@ export default class FastifyRouterFactoryAdapter extends RouteFactory {
 
   protected adapt(params: IBindedRouteConfig) {
     this.fastify.register(
-      (_, _opts, done) => {
-        params.routes.forEach(this.adaptOne);
+      (fastify, _opts, done) => {
+        params.routes.forEach(FastifyRouterFactoryAdapter.adaptOne(fastify));
         done();
       },
       { prefix: params.prefix }
     );
   }
 
-  private adaptOne(route: IBindedRoute) {
-    this.fastify[route.requestMethod](route.url, async (request, reply) => {
+  private static adaptOne = (fastify: FastifyInstance) => (route: IBindedRoute) => {
+    fastify[route.requestMethod](route.url, async (request, reply) => {
       const { statusCode, response } = await route.requestHandler(request);
       reply.status(statusCode).send(response);
+    });
+  };
+
+  public async start(): Promise<void> {
+    this.fastify.listen(3000, '0.0.0.0', (err, address) => {
+      if (err) throw err;
+      this.fastify.log.info(`server listening on ${address}`);
     });
   }
 }
