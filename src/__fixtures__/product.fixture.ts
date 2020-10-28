@@ -2,7 +2,9 @@ import Product from 'src/entities/Product.entity';
 import ProductCaseFactory from 'src/usecases/Product/ProductFactory.usecase';
 import { ISaveProductCaseInput } from 'src/usecases/Product/IProduct.usecase';
 
-type IPartialSaveProductCase = Partial<ISaveProductCaseInput> & { companyId: string };
+type IPartialSaveProductCase = Partial<ISaveProductCaseInput> & {
+  companyId: string;
+};
 
 export function buildProductFixture(params: IPartialSaveProductCase): ISaveProductCaseInput {
   const product = {
@@ -10,6 +12,7 @@ export function buildProductFixture(params: IPartialSaveProductCase): ISaveProdu
     price: params.price ?? 1,
     disabled: params.disabled || false,
     companyId: params.companyId,
+    categoryId: params.categoryId || null,
   };
   return product;
 }
