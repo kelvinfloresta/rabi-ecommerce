@@ -1,3 +1,5 @@
+import { getConfig } from 'src/config/Config';
+
 interface IConnection {
   client: string;
   connection: {
@@ -26,10 +28,10 @@ const config: IConfig = {
   development: {
     client: 'pg',
     connection: {
-      host: process.env.DB_HOST as any,
-      user: 'postgres',
-      password: 'postgres',
-      database: 'rabi_ecommerce_development',
+      host: getConfig('DB_HOST'),
+      user: getConfig('DB_USER'),
+      password: getConfig('DB_PASSWORD'),
+      database: getConfig('DB_NAME'),
       charset: 'utf8',
       debug: true,
     },
@@ -43,10 +45,10 @@ const config: IConfig = {
   test: {
     client: 'pg',
     connection: {
-      host: process.env.DB_HOST as any,
-      user: 'postgres',
-      password: 'postgres',
-      database: 'rabi_ecommerce_test',
+      host: getConfig('DB_HOST'),
+      user: getConfig('DB_USER'),
+      password: getConfig('DB_PASSWORD'),
+      database: getConfig('DB_NAME'),
       charset: 'utf8',
       debug: true,
     },
@@ -60,10 +62,10 @@ const config: IConfig = {
   staging: {
     client: 'pg',
     connection: {
-      host: 'localhost',
-      user: 'postgres',
-      password: 'postgres',
-      database: 'rabi_ecommerce_staging',
+      host: getConfig('DB_HOST'),
+      user: getConfig('DB_USER'),
+      password: getConfig('DB_PASSWORD'),
+      database: getConfig('DB_NAME'),
       charset: 'utf8',
       debug: true,
     },
@@ -77,10 +79,10 @@ const config: IConfig = {
   production: {
     client: 'pg',
     connection: {
-      host: process.env.DB_HOST as any,
-      user: process.env.DB_USER as any,
-      password: process.env.DB_PASSWORD as any,
-      database: process.env.DB_DATABASE as any,
+      host: getConfig('DB_HOST'),
+      user: getConfig('DB_USER'),
+      password: getConfig('DB_PASSWORD'),
+      database: getConfig('DB_NAME'),
       charset: 'utf8',
       debug: false,
     },
