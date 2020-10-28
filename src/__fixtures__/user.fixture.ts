@@ -24,8 +24,11 @@ export async function createUserFixture(params: IPartialSaveUserCase): Promise<s
   return userId;
 }
 
-export async function expectTohaveUser(id: string, expectedUser: Partial<User>) {
+export async function expectTohaveUser(id: string, expectedUser: Partial<User>): Promise<void> {
   const foundUser = await UserCaseFactory.singleton.get(id);
+  if (!foundUser) {
+    throw new Error('User not found');
+  }
   if (expectedUser.password) {
     const isValid = Encrypt.compare(foundUser.password, expectedUser.password);
     expect(isValid).toBe(true);
