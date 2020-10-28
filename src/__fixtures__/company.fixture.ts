@@ -19,7 +19,11 @@ export async function createCompanyFixture(params?: Partial<Company>): Promise<C
   const companyCase = CompanyCaseFactory();
   const company = buildCompanyFixture(params);
   const companyId = await companyCase.save(company);
-  return companyCase.get(companyId);
+  const companyCreated = await companyCase.get(companyId);
+  if (!companyCreated) {
+    throw new Error('Failed on createCompanyFixture');
+  }
+  return companyCreated;
 }
 
 export async function expectTohaveCompany(id: string, product: Partial<Company>) {
