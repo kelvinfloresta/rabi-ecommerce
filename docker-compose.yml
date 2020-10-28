@@ -2,6 +2,8 @@ version: "3"
 
 services:
   db:
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
     image: postgres:10.6-alpine
     ports:
       - 5432:5432
@@ -9,10 +11,8 @@ services:
       - .:/var/lib/postgresql/data
   app:
     build: .
-    environment:
-      NODE_PATH: .
-      NODE_ENV: ${NODE_ENV}
-      DB_HOST: ${DB_HOST}
+    env_file:
+      - .env
     command: sh -c "yarn migration:build && yarn start"
     expose:
       - 3000
