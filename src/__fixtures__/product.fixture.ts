@@ -18,7 +18,12 @@ export async function createProductFixture(params: IPartialSaveProductCase): Pro
   const productCase = ProductCaseFactory();
   const product = buildProductFixture(params);
   const productId = await productCase.save(product);
-  return productCase.get(productId);
+  const productCreated = await productCase.get(productId);
+  if (!productCreated) {
+    throw new Error('Failed on createProductFixture');
+  }
+
+  return productCreated;
 }
 
 export async function expectTohaveProduct(id: string, product: Partial<Product>) {
