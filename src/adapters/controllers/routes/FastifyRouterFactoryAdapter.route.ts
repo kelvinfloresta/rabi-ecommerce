@@ -3,7 +3,7 @@ import { getConfig } from 'src/config/Config';
 import { IBindedRoute, IBindedRouteConfig } from './IRoute';
 import RouteFactory from './RouteFactory.route';
 
-export default class FastifyRouterFactoryAdapter extends RouteFactory {
+export class FastifyRouterFactoryAdapter extends RouteFactory {
   constructor(private fastify: FastifyInstance) {
     super();
     fastify.setErrorHandler(FastifyRouterFactoryAdapter.customErrorHandler);

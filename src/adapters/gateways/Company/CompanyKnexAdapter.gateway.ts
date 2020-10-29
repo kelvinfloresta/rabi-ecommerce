@@ -3,7 +3,7 @@ import KnexRepositoryHelper from 'src/frameworks/database/knex/knex-adapter.fram
 import { ISaveCompanyCaseInput } from 'src/usecases/Company/ICompany,usecase';
 import ICompanyGateway from './ICompany.gateway';
 
-export default class CompanyGatewayKnexAdapter implements ICompanyGateway {
+export class CompanyGatewayKnexAdapter implements ICompanyGateway {
   public static readonly tableName = 'companies';
 
   constructor(private repository: KnexRepositoryHelper<Company>) {}

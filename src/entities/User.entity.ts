@@ -1,8 +1,8 @@
 /* eslint-disable max-classes-per-file */
 import { ITimeStamp, ILogicDelete } from './IEntity';
-import DocumentType from './enums/DocumentType.enum';
+import { DocumentType } from './enums/DocumentType.enum';
 
-export default class User implements ITimeStamp, ILogicDelete {
+export class User implements ITimeStamp, ILogicDelete {
   public readonly id: string;
 
   public readonly email: string;

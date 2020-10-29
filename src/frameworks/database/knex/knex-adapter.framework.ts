@@ -1,7 +1,7 @@
 import db from 'src/adapters/database/Database.adapter';
 import { IPaginationParams } from 'src/usecases/IPaginate';
 
-export default class KnexRepositoryHelper<Entity, Id extends string | number = string> {
+export class KnexRepositoryHelper<Entity, Id extends string | number = string> {
   private knex = db;
 
   constructor(private tableName: string) {}

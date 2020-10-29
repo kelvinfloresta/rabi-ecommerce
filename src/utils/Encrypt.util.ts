@@ -1,6 +1,6 @@
 import { compareSync, hashSync, genSaltSync } from 'bcryptjs';
 
-export default class Encrypt {
+export class Encrypt {
   public static compare(encodedPassword: string, value: string): boolean {
     return compareSync(value, encodedPassword);
   }

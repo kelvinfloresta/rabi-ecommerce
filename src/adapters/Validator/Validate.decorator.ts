@@ -1,7 +1,7 @@
 import { JSONSchema7 } from 'json-schema';
-import AJVValidatorAdapter from './AJVValidator.validator';
+import { AJVValidatorAdapter } from './AJVValidator.validator';
 
-export default function Validate(schema: JSONSchema7) {
+export function Validate(schema: JSONSchema7) {
   const validator = new AJVValidatorAdapter(schema);
 
   return function decorator(_target: any, _propertyKey: string, descriptor: PropertyDescriptor) {

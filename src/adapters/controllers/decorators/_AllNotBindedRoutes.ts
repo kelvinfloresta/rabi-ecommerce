@@ -1,5 +1,3 @@
 import { IAllNotBindedRoute } from '../routes/IRoute';
 
-const routesConfig: IAllNotBindedRoute = {};
-
-export default routesConfig;
+export const routesConfig: IAllNotBindedRoute = {};

@@ -2,7 +2,7 @@ import ICartGateway from 'src/adapters/gateways/Cart/ICart.gateway';
 import CartItem from 'src/entities/CartItem.entity';
 import { IGetCartCaseInput } from './ICart.usecase';
 
-export default class CartCase {
+export class CartCase {
   constructor(private CartGateway: ICartGateway) {}
 
   async add(input: CartItem): Promise<boolean> {

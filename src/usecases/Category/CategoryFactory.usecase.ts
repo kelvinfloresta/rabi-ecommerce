@@ -3,7 +3,7 @@ import KnexRepositoryHelper from 'src/frameworks/database/knex/knex-adapter.fram
 import Category from 'src/entities/Category.entity';
 import CategoryCase from './Category.usecase';
 
-export default class CategoryCaseFactory {
+export class CategoryCaseFactory {
   public static readonly singleton = CategoryCaseFactory.build();
 
   public static build() {

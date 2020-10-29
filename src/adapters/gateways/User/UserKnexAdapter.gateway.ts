@@ -3,7 +3,7 @@ import User from 'src/entities/User.entity';
 import { ISaveUserCaseInput } from 'src/usecases/User/IUser.usecase';
 import IUserGateway from './IUser.gateway';
 
-export default class UserGatewayKnexAdapter implements IUserGateway {
+export class UserGatewayKnexAdapter implements IUserGateway {
   public static readonly tableName = 'users';
 
   constructor(private repository: KnexRepositoryHelper<User>) {}

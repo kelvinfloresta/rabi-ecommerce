@@ -3,7 +3,7 @@ import User from 'src/entities/User.entity';
 import Encrypt from 'src/utils/Encrypt.util';
 import { ISaveUserCaseInput } from './IUser.usecase';
 
-export default class UserCase {
+export class UserCase {
   constructor(private userGateway: IUserGateway, private encrypt: typeof Encrypt) {}
 
   async save(input: ISaveUserCaseInput): Promise<string> {

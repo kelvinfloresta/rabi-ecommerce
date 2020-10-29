@@ -1,3 +1,3 @@
-export default class ValidatorError extends Error {
+export class ValidatorError extends Error {
   name = 'ValidatorError';
 }

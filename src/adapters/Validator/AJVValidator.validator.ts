@@ -2,9 +2,9 @@ import Ajv from 'ajv';
 import { JSONSchema7 } from 'json-schema';
 
 import { IValidator } from './IValidator.adapter';
-import ValidatorError from './ValidatorError.validator';
+import { ValidatorError } from './ValidatorError.validator';
 
-export default class AJVValidatorAdapter implements IValidator {
+export class AJVValidatorAdapter implements IValidator {
   private ajv = new Ajv();
 
   private compiledSchema: Ajv.ValidateFunction;

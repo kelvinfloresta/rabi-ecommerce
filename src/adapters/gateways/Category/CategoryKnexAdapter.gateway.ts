@@ -6,7 +6,7 @@ import {
 } from 'src/usecases/Category/ICategory.usecase';
 import ICategoryGateway from './ICategory.gateway';
 
-export default class CategoryGatewayKnexAdapter implements ICategoryGateway {
+export class CategoryGatewayKnexAdapter implements ICategoryGateway {
   public static readonly tableName = 'categories';
 
   constructor(private readonly repository: KnexRepositoryHelper<Category>) {}

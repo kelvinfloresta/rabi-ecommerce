@@ -5,7 +5,7 @@ import {
 import Category from 'src/entities/Category.entity';
 import { ISaveGateway, IGetGateway, IListGateway } from '../IGateway';
 
-export default interface ICategoryGateway
+export interface ICategoryGateway
   extends ISaveGateway<ISaveCategoryCaseInput>,
     IGetGateway<string, Category>,
     IListGateway<IListCategoryCaseInput, Category> {}

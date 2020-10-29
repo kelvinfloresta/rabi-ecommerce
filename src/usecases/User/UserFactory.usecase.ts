@@ -4,7 +4,7 @@ import User from 'src/entities/User.entity';
 import Encrypt from 'src/utils/Encrypt.util';
 import UserCase from './User.usecase';
 
-export default class UserCaseFactory {
+export class UserCaseFactory {
   public static readonly singleton = UserCaseFactory.build();
 
   public static build() {

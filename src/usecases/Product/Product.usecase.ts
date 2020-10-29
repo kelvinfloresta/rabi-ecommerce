@@ -7,7 +7,7 @@ import {
 } from './IProduct.usecase';
 import { IPagination } from '../IPaginate';
 
-export default class ProductCase {
+export class ProductCase {
   constructor(private productGateway: IProductGateway) {}
 
   async save(input: ISaveProductCaseInput): Promise<string> {

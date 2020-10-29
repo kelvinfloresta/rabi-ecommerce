@@ -4,7 +4,7 @@ import NotAuthorized from 'src/utils/errors/NotAuthorized.error';
 import Encrypt from 'src/utils/Encrypt.util';
 import UserCase from '../User/User.usecase';
 
-export default class AuthCase {
+export class AuthCase {
   private readonly jwt = jwt;
 
   constructor(

@@ -3,7 +3,7 @@ import KnexRepositoryHelper from 'src/frameworks/database/knex/knex-adapter.fram
 import Company from 'src/entities/Company.entity';
 import CompanyCase from './Company.usecase';
 
-export default function CompanyCaseFactory() {
+export function CompanyCaseFactory() {
   const respository = new KnexRepositoryHelper<Company>(CompanyGatewayKnexAdapter.tableName);
   const gateway = new CompanyGatewayKnexAdapter(respository);
   return new CompanyCase(gateway);

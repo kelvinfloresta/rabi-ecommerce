@@ -8,7 +8,7 @@ import Controller from '../decorators/Controller.decorator';
 import Post from '../decorators/Post.decorator';
 
 @Controller('/user')
-export default class UserController {
+export class UserController {
   constructor(private userCase: UserCase) {}
 
   @Post('/')

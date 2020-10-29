@@ -3,7 +3,7 @@ import KnexRepositoryHelper from 'src/frameworks/database/knex/knex-adapter.fram
 import CartItem from 'src/entities/CartItem.entity';
 import CartCase from './Cart.usecase';
 
-export default class CartCaseFactory {
+export class CartCaseFactory {
   public static readonly singleton = CartCaseFactory.build();
 
   public static build() {

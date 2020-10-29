@@ -12,7 +12,7 @@ import {
   IPaginateGateway,
 } from '../IGateway';
 
-export default interface IProductGateway
+export interface IProductGateway
   extends ILogicDeleteGateway,
     IPatchGateway<IPatchProductCaseInput>,
     ISaveGateway<ISaveProductCaseInput>,

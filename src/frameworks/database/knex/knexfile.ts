@@ -50,7 +50,7 @@ const config: IConfig = {
       password: getConfig('DB_PASSWORD'),
       database: getConfig('DB_NAME'),
       charset: 'utf8',
-      debug: true,
+      debug: false,
     },
     pool: { min: 0, max: 10 },
     migrations: {

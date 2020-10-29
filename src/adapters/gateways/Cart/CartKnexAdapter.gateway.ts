@@ -3,7 +3,7 @@ import CartItem from 'src/entities/CartItem.entity';
 import { IGetCartCaseInput } from 'src/usecases/Cart/ICart.usecase';
 import ICartGateway from './ICart.gateway';
 
-export default class CartGatewayKnexAdapter implements ICartGateway {
+export class CartGatewayKnexAdapter implements ICartGateway {
   public static readonly tableName = 'cart_items';
 
   constructor(private repository: KnexRepositoryHelper<CartItem>) {}

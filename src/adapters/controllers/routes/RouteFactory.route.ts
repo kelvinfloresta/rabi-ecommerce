@@ -1,11 +1,11 @@
-import routesConfig from '../decorators/_AllNotBindedRoutes';
+import { routesConfig } from '../decorators/_AllNotBindedRoutes';
 import { IBindedRoute, IBindedRouteConfig, INotBindedRoute } from './IRoute';
 
 interface IAnyClassInstance {
   constructor: { name: string };
 }
 
-export default abstract class RouteFactory {
+export abstract class RouteFactory {
   private readonly routesConfig = routesConfig;
 
   private static makeBindRoute(controllerInstance: IAnyClassInstance) {

@@ -1,4 +1,4 @@
-export default class Category {
+export class Category {
   public readonly id: string;
 
   public readonly name: string;
