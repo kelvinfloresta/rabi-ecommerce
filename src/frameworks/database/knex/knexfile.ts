@@ -1,4 +1,4 @@
-import { getConfig } from 'src/config/Config';
+import { config as envConfig } from 'src/config';
 
 interface IConnection {
   client: string;
@@ -24,16 +24,17 @@ interface IConfig {
   production: IConnection;
 }
 
+const { database } = envConfig;
 const config: IConfig = {
   development: {
     client: 'pg',
     connection: {
-      host: getConfig('DB_HOST'),
-      user: getConfig('DB_USER'),
-      password: getConfig('DB_PASSWORD'),
-      database: getConfig('DB_NAME'),
+      host: database.host,
+      user: database.user,
+      password: database.password,
+      database: database.name,
+      debug: database.debug,
       charset: 'utf8',
-      debug: true,
     },
     pool: { min: 0, max: 10 },
     migrations: {
@@ -45,12 +46,12 @@ const config: IConfig = {
   test: {
     client: 'pg',
     connection: {
-      host: getConfig('DB_HOST'),
-      user: getConfig('DB_USER'),
-      password: getConfig('DB_PASSWORD'),
-      database: getConfig('DB_NAME'),
+      host: database.host,
+      user: database.user,
+      password: database.password,
+      database: database.name,
+      debug: database.debug,
       charset: 'utf8',
-      debug: false,
     },
     pool: { min: 0, max: 10 },
     migrations: {
@@ -62,12 +63,12 @@ const config: IConfig = {
   staging: {
     client: 'pg',
     connection: {
-      host: getConfig('DB_HOST'),
-      user: getConfig('DB_USER'),
-      password: getConfig('DB_PASSWORD'),
-      database: getConfig('DB_NAME'),
+      host: database.host,
+      user: database.user,
+      password: database.password,
+      database: database.name,
+      debug: database.debug,
       charset: 'utf8',
-      debug: true,
     },
     pool: { min: 0, max: 10 },
     migrations: {
@@ -79,12 +80,12 @@ const config: IConfig = {
   production: {
     client: 'pg',
     connection: {
-      host: getConfig('DB_HOST'),
-      user: getConfig('DB_USER'),
-      password: getConfig('DB_PASSWORD'),
-      database: getConfig('DB_NAME'),
+      host: database.host,
+      user: database.user,
+      password: database.password,
+      database: database.name,
+      debug: database.debug,
       charset: 'utf8',
-      debug: false,
     },
     pool: { min: 0, max: 10 },
     migrations: {
