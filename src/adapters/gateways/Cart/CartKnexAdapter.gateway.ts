@@ -4,8 +4,6 @@ import { IGetCartCaseInput } from 'src/usecases/Cart/ICart.usecase';
 import { ICartGateway } from './ICart.gateway';
 
 export class CartGatewayKnexAdapter implements ICartGateway {
-  public static readonly tableName = 'cart_items';
-
   constructor(private repository: KnexRepositoryHelper<CartItem>) {}
 
   /**

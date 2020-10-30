@@ -4,8 +4,6 @@ import { ISaveUserCaseInput } from 'src/usecases/User/IUser.usecase';
 import { IUserGateway } from './IUser.gateway';
 
 export class UserGatewayKnexAdapter implements IUserGateway {
-  public static readonly tableName = 'users';
-
   constructor(private repository: KnexRepositoryHelper<User>) {}
 
   get(id: string): Promise<User> {

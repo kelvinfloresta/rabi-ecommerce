@@ -9,8 +9,6 @@ import { IPaginationParams } from 'src/usecases/IPaginate';
 import { IProductGateway } from './IProduct.gateway';
 
 export class ProductGatewayKnexAdapter implements IProductGateway {
-  public static readonly tableName = 'products';
-
   constructor(private repository: KnexRepositoryHelper<Product>) {}
 
   async logicDelete(id: string): Promise<boolean> {

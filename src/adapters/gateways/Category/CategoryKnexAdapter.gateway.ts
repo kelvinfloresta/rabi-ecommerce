@@ -7,8 +7,6 @@ import {
 import { ICategoryGateway } from './ICategory.gateway';
 
 export class CategoryGatewayKnexAdapter implements ICategoryGateway {
-  public static readonly tableName = 'categories';
-
   constructor(private readonly repository: KnexRepositoryHelper<Category>) {}
 
   public async get(id: string): Promise<Category> {

@@ -4,8 +4,6 @@ import { ISaveCompanyCaseInput } from 'src/usecases/Company/ICompany,usecase';
 import { ICompanyGateway } from './ICompany.gateway';
 
 export class CompanyGatewayKnexAdapter implements ICompanyGateway {
-  public static readonly tableName = 'companies';
-
   constructor(private repository: KnexRepositoryHelper<Company>) {}
 
   async save(input: ISaveCompanyCaseInput): Promise<string> {

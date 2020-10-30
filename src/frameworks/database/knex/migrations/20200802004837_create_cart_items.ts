@@ -1,22 +1,16 @@
 import Knex from 'knex';
-import { CartGatewayKnexAdapter } from 'src/adapters/gateways/Cart/CartKnexAdapter.gateway';
-import { UserGatewayKnexAdapter } from 'src/adapters/gateways/User/UserKnexAdapter.gateway';
-import { ProductGatewayKnexAdapter } from 'src/adapters/gateways/Product/ProductKnexAdapter.gateway';
+import { TableName } from 'src/adapters/database/Database.adapter';
 import { addTimestamp } from '../knex-migration.framework';
 
-const { tableName } = CartGatewayKnexAdapter;
-const { tableName: userTable } = UserGatewayKnexAdapter;
-const { tableName: productTable } = ProductGatewayKnexAdapter;
-
 export async function up(knex: Knex) {
-  return knex.schema.createTable(tableName, (table) => {
-    addTimestamp(table, knex, tableName);
+  return knex.schema.createTable(TableName.cart, (table) => {
+    addTimestamp(table, knex, TableName.cart);
 
     table.uuid('productId').notNullable();
-    table.foreign('productId').references('id').inTable(productTable);
+    table.foreign('productId').references('id').inTable(TableName.product);
 
     table.uuid('userId').notNullable();
-    table.foreign('userId').references('id').inTable(userTable);
+    table.foreign('userId').references('id').inTable(TableName.user);
 
     table.unique(['userId', 'productId']);
 
@@ -25,5 +19,5 @@ export async function up(knex: Knex) {
 }
 
 export async function down(knex: Knex) {
-  return knex.schema.dropTable(tableName);
+  return knex.schema.dropTable(TableName.cart);
 }

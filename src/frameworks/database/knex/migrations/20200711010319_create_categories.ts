@@ -1,23 +1,19 @@
 import Knex from 'knex';
-import { CategoryGatewayKnexAdapter } from 'src/adapters/gateways/Category/CategoryKnexAdapter.gateway';
-import { CompanyGatewayKnexAdapter } from 'src/adapters/gateways/Company/CompanyKnexAdapter.gateway';
+import { TableName } from 'src/adapters/database/Database.adapter';
 import { PostgresUUIDV4 } from '../knex-migration.framework';
 
-const { tableName } = CategoryGatewayKnexAdapter;
-const { tableName: companyTable } = CompanyGatewayKnexAdapter;
-
 export async function up(knex: Knex): Promise<any> {
-  return knex.schema.createTable(tableName, (table) => {
+  return knex.schema.createTable(TableName.category, (table) => {
     table.uuid('id').primary().defaultTo(PostgresUUIDV4(knex));
     table.string('name').notNullable();
     table.string('description').nullable();
     table.unique(['name', 'companyId']);
 
     table.uuid('companyId').notNullable();
-    table.foreign('companyId').references('id').inTable(companyTable);
+    table.foreign('companyId').references('id').inTable(TableName.company);
   });
 }
 
 export async function down(knex: Knex): Promise<any> {
-  return knex.schema.dropTable(tableName);
+  return knex.schema.dropTable(TableName.category);
 }
