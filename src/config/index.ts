@@ -1,9 +1,9 @@
 import { getConfig } from './Config';
 
-type IEnvironmentName = 'development' | 'production' | 'test';
+export type IEnvironmentName = 'development' | 'production' | 'test';
 
 export const config = {
-  secretKey: 'secret',
+  secretKey: getConfig('AUTH_SECRET'),
   envName: getConfig<IEnvironmentName>('NODE_ENV'),
 };
 
