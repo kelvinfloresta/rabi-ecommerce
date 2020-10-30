@@ -7,8 +7,6 @@ services:
     image: postgres:10.6-alpine
     ports:
       - 5432:5432
-    volumes:
-      - .:/var/lib/postgresql/data
   app:
     build: .
     env_file:
