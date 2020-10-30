@@ -1,4 +1,4 @@
-import { closeDatabase, TableName, truncateTable } from 'src/adapters/database/Database.adapter';
+import { closeDatabase, cleanDatabase } from 'src/adapters/database/Database.adapter';
 
 import { createCompanyFixture } from 'src/__fixtures__/company.fixture';
 import {
@@ -11,8 +11,7 @@ import { CategoryCaseFactory } from './CategoryFactory.usecase';
 import { ISaveCategoryCaseInput } from './ICategory.usecase';
 
 beforeEach(async () => {
-  await truncateTable(TableName.category);
-  await truncateTable(TableName.company);
+  await cleanDatabase();
 });
 
 afterAll(async () => {

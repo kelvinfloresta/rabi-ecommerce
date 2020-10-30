@@ -15,7 +15,9 @@ export enum TableName {
   cart = 'cart_items',
 }
 
-export async function truncateTable(tableName: TableName) {
+const allTables = Object.values(TableName);
+export async function cleanDatabase() {
   assertIsNotProduction();
-  await db.raw(`TRUNCATE ${tableName} CASCADE`);
+  const promises = allTables.map((tableName) => db.raw(`TRUNCATE ${tableName} CASCADE`));
+  await Promise.all(promises);
 }

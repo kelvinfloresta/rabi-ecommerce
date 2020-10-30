@@ -1,4 +1,4 @@
-import { closeDatabase, TableName, truncateTable } from 'src/adapters/database/Database.adapter';
+import { closeDatabase, cleanDatabase } from 'src/adapters/database/Database.adapter';
 import { createCompanyFixture } from 'src/__fixtures__/company.fixture';
 import {
   buildUserFixture,
@@ -8,8 +8,7 @@ import {
 import { UserCaseFactory } from './UserFactory.usecase';
 
 beforeEach(async () => {
-  await truncateTable(TableName.user);
-  await truncateTable(TableName.company);
+  await cleanDatabase();
 });
 
 afterAll(async () => {

@@ -1,14 +1,15 @@
 import { Encrypt } from 'src/utils/Encrypt.util';
 import { createUserFixture } from 'src/__fixtures__/user.fixture';
 import { createCompanyFixture } from 'src/__fixtures__/company.fixture';
-import { TableName, truncateTable } from 'src/adapters/database/Database.adapter';
+import { cleanDatabase } from 'src/adapters/database/Database.adapter';
 import { NotAuthorized } from 'src/utils/errors/NotAuthorized.error';
 import { AuthCase } from './Auth.usecase';
 import { UserCaseFactory } from '../User/UserFactory.usecase';
 
 beforeEach(async () => {
-  await truncateTable(TableName.user);
+  await cleanDatabase();
 });
+
 function makeSut() {
   return new AuthCase('secret', UserCaseFactory.singleton, Encrypt);
 }

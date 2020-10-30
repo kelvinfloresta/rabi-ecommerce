@@ -1,4 +1,4 @@
-import { closeDatabase, TableName, truncateTable } from 'src/adapters/database/Database.adapter';
+import { closeDatabase, cleanDatabase } from 'src/adapters/database/Database.adapter';
 import {
   buildProductFixture,
   createProductFixture,
@@ -9,8 +9,7 @@ import { createCompanyFixture } from 'src/__fixtures__/company.fixture';
 import { ProductCaseFactory } from './ProductFactory.usecase';
 
 beforeEach(async () => {
-  await truncateTable(TableName.product);
-  await truncateTable(TableName.company);
+  await cleanDatabase();
 });
 
 afterAll(async () => {

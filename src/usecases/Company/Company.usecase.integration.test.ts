@@ -1,4 +1,4 @@
-import { closeDatabase, TableName, truncateTable } from 'src/adapters/database/Database.adapter';
+import { closeDatabase, cleanDatabase } from 'src/adapters/database/Database.adapter';
 import { expectTohaveCompany } from 'src/__fixtures__/company.fixture';
 import { uuidv4 } from 'src/utils/uuid.utils';
 
@@ -7,7 +7,7 @@ import { CompanyCaseFactory } from './CompanyFactory.usecase';
 import { ISaveCompanyCaseInput } from './ICompany,usecase';
 
 beforeEach(async () => {
-  await truncateTable(TableName.company);
+  await cleanDatabase();
 });
 
 afterAll(async () => {

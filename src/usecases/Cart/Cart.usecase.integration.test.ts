@@ -1,13 +1,11 @@
-import { closeDatabase, TableName, truncateTable } from 'src/adapters/database/Database.adapter';
+import { closeDatabase, cleanDatabase } from 'src/adapters/database/Database.adapter';
 import { createProductFixture } from 'src/__fixtures__/product.fixture';
 import { createCompanyFixture } from 'src/__fixtures__/company.fixture';
 import { createUserFixture } from 'src/__fixtures__/user.fixture';
 import { CartCaseFactory } from './CartFactory.usecase';
 
 beforeEach(async () => {
-  await truncateTable(TableName.company);
-  await truncateTable(TableName.product);
-  await truncateTable(TableName.cart);
+  await cleanDatabase();
 });
 
 afterAll(async () => {
