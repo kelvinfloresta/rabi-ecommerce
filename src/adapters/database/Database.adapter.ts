@@ -1,4 +1,4 @@
-import { KnexFactory } from 'src/frameworks/database/knex/knex.frameworks';
+import { KnexFactory } from 'src/frameworks/database/knex/knex-factory.frameworks';
 import { assertIsNotProduction } from 'src/config';
 
 export const db = new KnexFactory().connect();
