@@ -1,4 +1,4 @@
-import { closeDatabase, truncateTable } from 'src/adapters/database/Database.adapter';
+import { closeDatabase, TableName, truncateTable } from 'src/adapters/database/Database.adapter';
 import {
   buildProductFixture,
   createProductFixture,
@@ -6,13 +6,11 @@ import {
 } from 'src/__fixtures__/product.fixture';
 import { uuidv4 } from 'src/utils/uuid.utils';
 import { createCompanyFixture } from 'src/__fixtures__/company.fixture';
-import { ProductGatewayKnexAdapter } from 'src/adapters/gateways/Product/ProductKnexAdapter.gateway';
-import { CompanyGatewayKnexAdapter } from 'src/adapters/gateways/Company/CompanyKnexAdapter.gateway';
 import { ProductCaseFactory } from './ProductFactory.usecase';
 
 beforeEach(async () => {
-  await truncateTable(ProductGatewayKnexAdapter.tableName);
-  await truncateTable(CompanyGatewayKnexAdapter.tableName);
+  await truncateTable(TableName.product);
+  await truncateTable(TableName.company);
 });
 
 afterAll(async () => {

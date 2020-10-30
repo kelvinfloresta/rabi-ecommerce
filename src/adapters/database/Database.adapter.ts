@@ -7,7 +7,15 @@ export async function closeDatabase() {
   await db.destroy();
 }
 
-export async function truncateTable(tableName: string) {
+export enum TableName {
+  user = 'users',
+  product = 'products',
+  company = 'companies',
+  category = 'categories',
+  cart = 'cart_items',
+}
+
+export async function truncateTable(tableName: TableName) {
   assertIsNotProduction();
   await db.raw(`TRUNCATE ${tableName} CASCADE`);
 }

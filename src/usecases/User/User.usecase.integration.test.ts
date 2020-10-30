@@ -1,17 +1,15 @@
-import { closeDatabase, truncateTable } from 'src/adapters/database/Database.adapter';
+import { closeDatabase, TableName, truncateTable } from 'src/adapters/database/Database.adapter';
 import { createCompanyFixture } from 'src/__fixtures__/company.fixture';
 import {
   buildUserFixture,
   expectTohaveUser,
   createUserFixture,
 } from 'src/__fixtures__/user.fixture';
-import { UserGatewayKnexAdapter } from 'src/adapters/gateways/User/UserKnexAdapter.gateway';
-import { CompanyGatewayKnexAdapter } from 'src/adapters/gateways/Company/CompanyKnexAdapter.gateway';
 import { UserCaseFactory } from './UserFactory.usecase';
 
 beforeEach(async () => {
-  await truncateTable(UserGatewayKnexAdapter.tableName);
-  await truncateTable(CompanyGatewayKnexAdapter.tableName);
+  await truncateTable(TableName.user);
+  await truncateTable(TableName.company);
 });
 
 afterAll(async () => {

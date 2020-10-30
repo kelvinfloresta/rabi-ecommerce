@@ -1,8 +1,6 @@
-import { closeDatabase, truncateTable } from 'src/adapters/database/Database.adapter';
+import { closeDatabase, TableName, truncateTable } from 'src/adapters/database/Database.adapter';
 
 import { createCompanyFixture } from 'src/__fixtures__/company.fixture';
-import { CategoryGatewayKnexAdapter } from 'src/adapters/gateways/Category/CategoryKnexAdapter.gateway';
-import { CompanyGatewayKnexAdapter } from 'src/adapters/gateways/Company/CompanyKnexAdapter.gateway';
 import {
   expectTohaveCategory,
   createCategoryFixture,
@@ -13,8 +11,8 @@ import { CategoryCaseFactory } from './CategoryFactory.usecase';
 import { ISaveCategoryCaseInput } from './ICategory.usecase';
 
 beforeEach(async () => {
-  await truncateTable(CategoryGatewayKnexAdapter.tableName);
-  await truncateTable(CompanyGatewayKnexAdapter.tableName);
+  await truncateTable(TableName.category);
+  await truncateTable(TableName.company);
 });
 
 afterAll(async () => {
