@@ -1,7 +1,7 @@
 import * as Knex from 'knex';
-import ProductGatewayKnexAdapter from 'src/adapters/gateways/Product/ProductKnexAdapter.gateway';
-import CategoryGatewayKnexAdapter from 'src/adapters/gateways/Category/CategoryKnexAdapter.gateway';
-import CompanyGatewayKnexAdapter from 'src/adapters/gateways/Company/CompanyKnexAdapter.gateway';
+import { ProductGatewayKnexAdapter } from 'src/adapters/gateways/Product/ProductKnexAdapter.gateway';
+import { CategoryGatewayKnexAdapter } from 'src/adapters/gateways/Category/CategoryKnexAdapter.gateway';
+import { CompanyGatewayKnexAdapter } from 'src/adapters/gateways/Company/CompanyKnexAdapter.gateway';
 import { PostgresUUIDV4, addSoftDelete, addTimestamp } from '../knex-migration.framework';
 
 const { tableName } = ProductGatewayKnexAdapter;

@@ -1,4 +1,4 @@
-import Product from 'src/entities/Product.entity';
+import { Product } from 'src/entities/Product.entity';
 import {
   ISaveProductCaseInput,
   IPatchProductCaseInput,

@@ -1,5 +1,5 @@
-import Product from 'src/entities/Product.entity';
-import IProductGateway from 'src/adapters/gateways/Product/IProduct.gateway';
+import { Product } from 'src/entities/Product.entity';
+import { IProductGateway } from 'src/adapters/gateways/Product/IProduct.gateway';
 import {
   ISaveProductCaseInput,
   IPatchProductCaseInput,

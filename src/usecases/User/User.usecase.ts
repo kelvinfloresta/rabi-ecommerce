@@ -1,6 +1,6 @@
-import IUserGateway from 'src/adapters/gateways/User/IUser.gateway';
-import User from 'src/entities/User.entity';
-import Encrypt from 'src/utils/Encrypt.util';
+import { IUserGateway } from 'src/adapters/gateways/User/IUser.gateway';
+import { User } from 'src/entities/User.entity';
+import { Encrypt } from 'src/utils/Encrypt.util';
 import { ISaveUserCaseInput } from './IUser.usecase';
 
 export class UserCase {

@@ -1,5 +1,5 @@
-import ICartGateway from 'src/adapters/gateways/Cart/ICart.gateway';
-import CartItem from 'src/entities/CartItem.entity';
+import { ICartGateway } from 'src/adapters/gateways/Cart/ICart.gateway';
+import { CartItem } from 'src/entities/CartItem.entity';
 import { IGetCartCaseInput } from './ICart.usecase';
 
 export class CartCase {

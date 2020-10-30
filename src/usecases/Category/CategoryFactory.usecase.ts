@@ -1,7 +1,7 @@
-import CategoryGatewayKnexAdapter from 'src/adapters/gateways/Category/CategoryKnexAdapter.gateway';
-import KnexRepositoryHelper from 'src/frameworks/database/knex/knex-adapter.framework';
-import Category from 'src/entities/Category.entity';
-import CategoryCase from './Category.usecase';
+import { CategoryGatewayKnexAdapter } from 'src/adapters/gateways/Category/CategoryKnexAdapter.gateway';
+import { KnexRepositoryHelper } from 'src/frameworks/database/knex/knex-adapter.framework';
+import { Category } from 'src/entities/Category.entity';
+import { CategoryCase } from './Category.usecase';
 
 export class CategoryCaseFactory {
   public static readonly singleton = CategoryCaseFactory.build();

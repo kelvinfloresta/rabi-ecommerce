@@ -1,6 +1,6 @@
-import Company from 'src/entities/Company.entity';
-import DocumentType from 'src/entities/enums/DocumentType.enum';
-import CompanyCaseFactory from 'src/usecases/Company/CompanyFactory.usecase';
+import { Company } from 'src/entities/Company.entity';
+import { DocumentType } from 'src/entities/enums/DocumentType.enum';
+import { CompanyCaseFactory } from 'src/usecases/Company/CompanyFactory.usecase';
 import { ISaveCompanyCaseInput } from 'src/usecases/Company/ICompany,usecase';
 
 export function buildCompanyFixture(

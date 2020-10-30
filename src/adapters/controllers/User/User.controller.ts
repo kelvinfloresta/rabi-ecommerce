@@ -1,11 +1,11 @@
-import UserCase from 'src/usecases/User/User.usecase';
+import { UserCase } from 'src/usecases/User/User.usecase';
 import { ISaveUserCaseInput } from 'src/usecases/User/IUser.usecase';
 import { StatusCode, IRequest, IResponseAsync } from 'src/adapters/controllers/IController';
 
-import Validate from 'src/adapters/Validator/Validate.decorator';
+import { Validate } from 'src/adapters/Validator/Validate.decorator';
 import { UserSaveSchema } from './UserSchema.validator';
-import Controller from '../decorators/Controller.decorator';
-import Post from '../decorators/Post.decorator';
+import { Controller } from '../decorators/Controller.decorator';
+import { Post } from '../decorators/Post.decorator';
 
 @Controller('/user')
 export class UserController {

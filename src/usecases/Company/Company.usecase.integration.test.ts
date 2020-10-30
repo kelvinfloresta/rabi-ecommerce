@@ -2,9 +2,9 @@ import { closeDatabase, truncateTable } from 'src/adapters/database/Database.ada
 import { expectTohaveCompany } from 'src/__fixtures__/company.fixture';
 import { uuidv4 } from 'src/utils/uuid.utils';
 
-import DocumentType from 'src/entities/enums/DocumentType.enum';
-import CompanyGatewayKnexAdapter from 'src/adapters/gateways/Company/CompanyKnexAdapter.gateway';
-import CompanyCaseFactory from './CompanyFactory.usecase';
+import { DocumentType } from 'src/entities/enums/DocumentType.enum';
+import { CompanyGatewayKnexAdapter } from 'src/adapters/gateways/Company/CompanyKnexAdapter.gateway';
+import { CompanyCaseFactory } from './CompanyFactory.usecase';
 import { ISaveCompanyCaseInput } from './ICompany,usecase';
 
 beforeEach(async () => {

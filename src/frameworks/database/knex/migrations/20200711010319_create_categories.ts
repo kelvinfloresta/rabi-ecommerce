@@ -1,6 +1,6 @@
 import Knex from 'knex';
-import CategoryGatewayKnexAdapter from 'src/adapters/gateways/Category/CategoryKnexAdapter.gateway';
-import CompanyGatewayKnexAdapter from 'src/adapters/gateways/Company/CompanyKnexAdapter.gateway';
+import { CategoryGatewayKnexAdapter } from 'src/adapters/gateways/Category/CategoryKnexAdapter.gateway';
+import { CompanyGatewayKnexAdapter } from 'src/adapters/gateways/Company/CompanyKnexAdapter.gateway';
 import { PostgresUUIDV4 } from '../knex-migration.framework';
 
 const { tableName } = CategoryGatewayKnexAdapter;

@@ -1,4 +1,4 @@
-import Product from 'src/entities/Product.entity';
+import { Product } from 'src/entities/Product.entity';
 import { ITimeStamp, ILogicDelete } from 'src/entities/IEntity';
 
 export interface ISaveProductCaseInput

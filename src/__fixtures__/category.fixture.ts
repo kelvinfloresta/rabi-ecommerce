@@ -1,5 +1,5 @@
-import Category from 'src/entities/Category.entity';
-import CategoryCaseFactory from 'src/usecases/Category/CategoryFactory.usecase';
+import { Category } from 'src/entities/Category.entity';
+import { CategoryCaseFactory } from 'src/usecases/Category/CategoryFactory.usecase';
 import { ISaveCategoryCaseInput } from 'src/usecases/Category/ICategory.usecase';
 
 type IPartialSaveCategoryCase = Partial<ISaveCategoryCaseInput> & { companyId: string };

@@ -1,11 +1,11 @@
 import { closeDatabase, truncateTable } from 'src/adapters/database/Database.adapter';
 import { createProductFixture } from 'src/__fixtures__/product.fixture';
 import { createCompanyFixture } from 'src/__fixtures__/company.fixture';
-import CartGatewayKnexAdapter from 'src/adapters/gateways/Cart/CartKnexAdapter.gateway';
+import { CartGatewayKnexAdapter } from 'src/adapters/gateways/Cart/CartKnexAdapter.gateway';
 import { createUserFixture } from 'src/__fixtures__/user.fixture';
-import CompanyGatewayKnexAdapter from 'src/adapters/gateways/Company/CompanyKnexAdapter.gateway';
-import ProductGatewayKnexAdapter from 'src/adapters/gateways/Product/ProductKnexAdapter.gateway';
-import CartCaseFactory from './CartFactory.usecase';
+import { CompanyGatewayKnexAdapter } from 'src/adapters/gateways/Company/CompanyKnexAdapter.gateway';
+import { ProductGatewayKnexAdapter } from 'src/adapters/gateways/Product/ProductKnexAdapter.gateway';
+import { CartCaseFactory } from './CartFactory.usecase';
 
 beforeEach(async () => {
   await truncateTable(CompanyGatewayKnexAdapter.tableName);

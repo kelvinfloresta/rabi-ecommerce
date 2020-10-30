@@ -1,4 +1,4 @@
-import DocumentType from 'src/entities/enums/DocumentType.enum';
+import { DocumentType } from 'src/entities/enums/DocumentType.enum';
 
 export interface ISaveUserCaseInput {
   readonly email: string;

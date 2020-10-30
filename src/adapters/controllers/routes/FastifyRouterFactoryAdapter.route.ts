@@ -1,7 +1,7 @@
 import { FastifyInstance, FastifyReply, FastifyRequest, FastifyError } from 'fastify';
 import { getConfig } from 'src/config/Config';
 import { IBindedRoute, IBindedRouteConfig } from './IRoute';
-import RouteFactory from './RouteFactory.route';
+import { RouteFactory } from './RouteFactory.route';
 
 export class FastifyRouterFactoryAdapter extends RouteFactory {
   constructor(private fastify: FastifyInstance) {

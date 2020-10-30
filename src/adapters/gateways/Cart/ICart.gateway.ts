@@ -1,4 +1,4 @@
-import CartItem from 'src/entities/CartItem.entity';
+import { CartItem } from 'src/entities/CartItem.entity';
 import { IGetCartCaseInput } from 'src/usecases/Cart/ICart.usecase';
 import { IGetGateway } from '../IGateway';
 

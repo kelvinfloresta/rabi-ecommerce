@@ -1,7 +1,7 @@
-import Company from 'src/entities/Company.entity';
-import KnexRepositoryHelper from 'src/frameworks/database/knex/knex-adapter.framework';
+import { Company } from 'src/entities/Company.entity';
+import { KnexRepositoryHelper } from 'src/frameworks/database/knex/knex-adapter.framework';
 import { ISaveCompanyCaseInput } from 'src/usecases/Company/ICompany,usecase';
-import ICompanyGateway from './ICompany.gateway';
+import { ICompanyGateway } from './ICompany.gateway';
 
 export class CompanyGatewayKnexAdapter implements ICompanyGateway {
   public static readonly tableName = 'companies';

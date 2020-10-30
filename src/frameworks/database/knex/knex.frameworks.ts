@@ -1,5 +1,5 @@
 import Knex from 'knex';
-import config from 'src/config';
+import { config } from 'src/config';
 import * as pg from 'pg';
 
 import { attachPaginate } from 'knex-paginate';

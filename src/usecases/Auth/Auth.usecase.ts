@@ -1,8 +1,8 @@
 import * as jwt from 'jsonwebtoken';
-import User from 'src/entities/User.entity';
-import NotAuthorized from 'src/utils/errors/NotAuthorized.error';
-import Encrypt from 'src/utils/Encrypt.util';
-import UserCase from '../User/User.usecase';
+import { User } from 'src/entities/User.entity';
+import { NotAuthorized } from 'src/utils/errors/NotAuthorized.error';
+import { Encrypt } from 'src/utils/Encrypt.util';
+import { UserCase } from '../User/User.usecase';
 
 export class AuthCase {
   private readonly jwt = jwt;

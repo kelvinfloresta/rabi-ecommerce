@@ -1,7 +1,7 @@
-import KnexRepositoryHelper from 'src/frameworks/database/knex/knex-adapter.framework';
-import CartItem from 'src/entities/CartItem.entity';
+import { KnexRepositoryHelper } from 'src/frameworks/database/knex/knex-adapter.framework';
+import { CartItem } from 'src/entities/CartItem.entity';
 import { IGetCartCaseInput } from 'src/usecases/Cart/ICart.usecase';
-import ICartGateway from './ICart.gateway';
+import { ICartGateway } from './ICart.gateway';
 
 export class CartGatewayKnexAdapter implements ICartGateway {
   public static readonly tableName = 'cart_items';

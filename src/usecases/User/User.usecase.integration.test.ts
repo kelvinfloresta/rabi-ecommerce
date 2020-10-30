@@ -5,9 +5,9 @@ import {
   expectTohaveUser,
   createUserFixture,
 } from 'src/__fixtures__/user.fixture';
-import UserGatewayKnexAdapter from 'src/adapters/gateways/User/UserKnexAdapter.gateway';
-import CompanyGatewayKnexAdapter from 'src/adapters/gateways/Company/CompanyKnexAdapter.gateway';
-import UserCaseFactory from './UserFactory.usecase';
+import { UserGatewayKnexAdapter } from 'src/adapters/gateways/User/UserKnexAdapter.gateway';
+import { CompanyGatewayKnexAdapter } from 'src/adapters/gateways/Company/CompanyKnexAdapter.gateway';
+import { UserCaseFactory } from './UserFactory.usecase';
 
 beforeEach(async () => {
   await truncateTable(UserGatewayKnexAdapter.tableName);

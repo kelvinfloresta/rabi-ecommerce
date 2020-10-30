@@ -1,8 +1,8 @@
 import { fastify } from 'fastify';
-import UserCaseFactory from './usecases/User/UserFactory.usecase';
-import UserController from './adapters/controllers/User/User.controller';
-import RouteFactory from './adapters/controllers/routes/RouteFactory.route';
-import FastifyRouterFactoryAdapter from './adapters/controllers/routes/FastifyRouterFactoryAdapter.route';
+import { UserCaseFactory } from './usecases/User/UserFactory.usecase';
+import { UserController } from './adapters/controllers/User/User.controller';
+import { RouteFactory } from './adapters/controllers/routes/RouteFactory.route';
+import { FastifyRouterFactoryAdapter } from './adapters/controllers/routes/FastifyRouterFactoryAdapter.route';
 
 const app = fastify({
   logger: true,

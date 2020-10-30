@@ -1,5 +1,5 @@
 import Knex from 'knex';
-import config from 'src/config';
+import { config } from 'src/config';
 import knexFile from './knexfile';
 
 export function PostgresUUIDV4(knex: Knex): Knex.Raw {

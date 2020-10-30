@@ -1,7 +1,7 @@
 import Knex from 'knex';
-import CartGatewayKnexAdapter from 'src/adapters/gateways/Cart/CartKnexAdapter.gateway';
-import UserGatewayKnexAdapter from 'src/adapters/gateways/User/UserKnexAdapter.gateway';
-import ProductGatewayKnexAdapter from 'src/adapters/gateways/Product/ProductKnexAdapter.gateway';
+import { CartGatewayKnexAdapter } from 'src/adapters/gateways/Cart/CartKnexAdapter.gateway';
+import { UserGatewayKnexAdapter } from 'src/adapters/gateways/User/UserKnexAdapter.gateway';
+import { ProductGatewayKnexAdapter } from 'src/adapters/gateways/Product/ProductKnexAdapter.gateway';
 import { addTimestamp } from '../knex-migration.framework';
 
 const { tableName } = CartGatewayKnexAdapter;

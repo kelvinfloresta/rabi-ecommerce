@@ -1,12 +1,12 @@
-import Product from 'src/entities/Product.entity';
+import { Product } from 'src/entities/Product.entity';
 import {
   ISaveProductCaseInput,
   IPatchProductCaseInput,
   IPaginateProductCaseInput,
 } from 'src/usecases/Product/IProduct.usecase';
-import KnexRepositoryHelper from 'src/frameworks/database/knex/knex-adapter.framework';
+import { KnexRepositoryHelper } from 'src/frameworks/database/knex/knex-adapter.framework';
 import { IPaginationParams } from 'src/usecases/IPaginate';
-import IProductGateway from './IProduct.gateway';
+import { IProductGateway } from './IProduct.gateway';
 
 export class ProductGatewayKnexAdapter implements IProductGateway {
   public static readonly tableName = 'products';

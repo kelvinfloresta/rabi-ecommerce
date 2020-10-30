@@ -1,7 +1,7 @@
-import KnexRepositoryHelper from 'src/frameworks/database/knex/knex-adapter.framework';
-import User from 'src/entities/User.entity';
+import { KnexRepositoryHelper } from 'src/frameworks/database/knex/knex-adapter.framework';
+import { User } from 'src/entities/User.entity';
 import { ISaveUserCaseInput } from 'src/usecases/User/IUser.usecase';
-import IUserGateway from './IUser.gateway';
+import { IUserGateway } from './IUser.gateway';
 
 export class UserGatewayKnexAdapter implements IUserGateway {
   public static readonly tableName = 'users';

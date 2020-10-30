@@ -1,5 +1,5 @@
-import ICategoryGateway from 'src/adapters/gateways/Category/ICategory.gateway';
-import Category from 'src/entities/Category.entity';
+import { ICategoryGateway } from 'src/adapters/gateways/Category/ICategory.gateway';
+import { Category } from 'src/entities/Category.entity';
 import { ISaveCategoryCaseInput, IListCategoryCaseInput } from './ICategory.usecase';
 
 export class CategoryCase {

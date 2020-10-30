@@ -1,15 +1,15 @@
 import { closeDatabase, truncateTable } from 'src/adapters/database/Database.adapter';
 
 import { createCompanyFixture } from 'src/__fixtures__/company.fixture';
-import CategoryGatewayKnexAdapter from 'src/adapters/gateways/Category/CategoryKnexAdapter.gateway';
-import CompanyGatewayKnexAdapter from 'src/adapters/gateways/Company/CompanyKnexAdapter.gateway';
+import { CategoryGatewayKnexAdapter } from 'src/adapters/gateways/Category/CategoryKnexAdapter.gateway';
+import { CompanyGatewayKnexAdapter } from 'src/adapters/gateways/Company/CompanyKnexAdapter.gateway';
 import {
   expectTohaveCategory,
   createCategoryFixture,
   buildCategoryFixture,
 } from 'src/__fixtures__/category.fixture';
 import { uuidv4 } from 'src/utils/uuid.utils';
-import CategoryCaseFactory from './CategoryFactory.usecase';
+import { CategoryCaseFactory } from './CategoryFactory.usecase';
 import { ISaveCategoryCaseInput } from './ICategory.usecase';
 
 beforeEach(async () => {
