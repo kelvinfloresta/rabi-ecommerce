@@ -4,7 +4,7 @@ import {
   IPatchProductCaseInput,
   IPaginateProductCaseInput,
 } from 'src/usecases/Product/IProduct.usecase';
-import { KnexRepositoryHelper } from 'src/frameworks/database/knex/knex-adapter.framework';
+import { KnexRepositoryHelper } from 'src/frameworks/database/knex/knex-repository-helper.framework';
 import { IPaginationParams } from 'src/usecases/IPaginate';
 import { IProductGateway } from './IProduct.gateway';
 

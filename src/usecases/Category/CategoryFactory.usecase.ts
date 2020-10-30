@@ -1,5 +1,5 @@
 import { CategoryGatewayKnexAdapter } from 'src/adapters/gateways/Category/CategoryKnexAdapter.gateway';
-import { KnexRepositoryHelper } from 'src/frameworks/database/knex/knex-adapter.framework';
+import { KnexRepositoryHelper } from 'src/frameworks/database/knex/knex-repository-helper.framework';
 import { Category } from 'src/entities/Category.entity';
 import { TableName } from 'src/adapters/database/Database.adapter';
 import { CategoryCase } from './Category.usecase';

@@ -1,4 +1,4 @@
-import { KnexRepositoryHelper } from 'src/frameworks/database/knex/knex-adapter.framework';
+import { KnexRepositoryHelper } from 'src/frameworks/database/knex/knex-repository-helper.framework';
 import { CartItem } from 'src/entities/CartItem.entity';
 import { IGetCartCaseInput } from 'src/usecases/Cart/ICart.usecase';
 import { ICartGateway } from './ICart.gateway';

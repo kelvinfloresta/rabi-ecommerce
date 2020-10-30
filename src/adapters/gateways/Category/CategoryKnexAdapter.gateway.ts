@@ -1,5 +1,5 @@
 import { Category } from 'src/entities/Category.entity';
-import { KnexRepositoryHelper } from 'src/frameworks/database/knex/knex-adapter.framework';
+import { KnexRepositoryHelper } from 'src/frameworks/database/knex/knex-repository-helper.framework';
 import {
   ISaveCategoryCaseInput,
   IListCategoryCaseInput,

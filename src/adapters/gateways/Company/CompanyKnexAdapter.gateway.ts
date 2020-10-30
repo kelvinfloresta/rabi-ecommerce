@@ -1,5 +1,5 @@
 import { Company } from 'src/entities/Company.entity';
-import { KnexRepositoryHelper } from 'src/frameworks/database/knex/knex-adapter.framework';
+import { KnexRepositoryHelper } from 'src/frameworks/database/knex/knex-repository-helper.framework';
 import { ISaveCompanyCaseInput } from 'src/usecases/Company/ICompany,usecase';
 import { ICompanyGateway } from './ICompany.gateway';
 
