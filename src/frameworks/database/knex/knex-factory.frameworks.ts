@@ -11,7 +11,7 @@ export class KnexFactory {
   constructor() {
     KnexFactory.fixDecimalString();
     attachPaginate();
-    this.config = KnexFactory.getConfig();
+    this.config = KnexFactory.getConnectionConfig();
   }
 
   private static fixDecimalString(): void {
@@ -19,7 +19,7 @@ export class KnexFactory {
     pg.types.setTypeParser(PG_DECIMAL_OID, parseFloat);
   }
 
-  private static getConfig() {
+  private static getConnectionConfig() {
     const databaseConfig = knexFile[config.envName];
     if (!databaseConfig) {
       throw new Error('Missing database config');
