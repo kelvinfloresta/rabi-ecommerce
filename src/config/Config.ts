@@ -12,3 +12,16 @@ export function getConfig<T extends string>(configName: string): T {
 
   return config as T;
 }
+
+export function getBooleanConfig(configName: string): boolean {
+  const config = getConfig(configName);
+  if (config === 'true') {
+    return true;
+  }
+
+  if (config === 'false') {
+    return false;
+  }
+
+  throw new Error(`Invalid config ${configName}`);
+}
