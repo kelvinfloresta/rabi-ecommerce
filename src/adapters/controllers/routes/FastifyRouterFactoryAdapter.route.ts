@@ -1,5 +1,5 @@
 import { FastifyInstance, FastifyReply, FastifyRequest, FastifyError } from 'fastify';
-import { getConfig } from 'src/config/Config';
+import { config } from 'src/config';
 import { IBindedRoute, IBindedRouteConfig } from './IRoute';
 import { RouteFactory } from './RouteFactory.route';
 
@@ -13,7 +13,7 @@ export class FastifyRouterFactoryAdapter extends RouteFactory {
     error: FastifyError,
     _request: FastifyRequest,
     reply: FastifyReply
-  ) {
+  ): void {
     if (error.name === 'ValidatorError') {
       reply.status(400).send({
         statusCode: 400,
@@ -47,8 +47,8 @@ export class FastifyRouterFactoryAdapter extends RouteFactory {
   };
 
   public async start(): Promise<void> {
-    const port = getConfig('PORT');
-    this.fastify.listen(+port, '0.0.0.0', (err, address) => {
+    const { port } = config;
+    this.fastify.listen(port, '0.0.0.0', (err, address) => {
       if (err) throw err;
       this.fastify.log.info(`server listening on ${address}`);
     });
