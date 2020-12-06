@@ -1,10 +1,12 @@
+import { IEnvironmentName } from './IConfig';
+
 export function assertIsNotProduction(): void {
   if (process.env.NODE_ENV === 'production') {
     throw new Error('Cannot execute in production mode');
   }
 }
 
-export function getConfig<T extends string>(configName: string): T {
+function getConfig<T extends string>(configName: string): T {
   const config = process.env[configName];
   if (config === undefined) {
     throw new Error(`Missing config ${configName}`);
@@ -13,7 +15,7 @@ export function getConfig<T extends string>(configName: string): T {
   return config as T;
 }
 
-export function getBooleanConfig(configName: string): boolean {
+function getBooleanConfig(configName: string): boolean {
   const config = getConfig(configName);
   if (config === 'true') {
     return true;
@@ -25,3 +27,16 @@ export function getBooleanConfig(configName: string): boolean {
 
   throw new Error(`Invalid config ${configName}`);
 }
+
+export const config = {
+  secretKey: getConfig('AUTH_SECRET'),
+  envName: getConfig<IEnvironmentName>('NODE_ENV'),
+  database: {
+    host: getConfig('DB_HOST'),
+    user: getConfig('DB_USER'),
+    password: getConfig('DB_PASSWORD'),
+    name: getConfig('DB_NAME'),
+    debug: getBooleanConfig('DB_DEBUG'),
+  },
+  port: +getConfig('PORT'),
+};
