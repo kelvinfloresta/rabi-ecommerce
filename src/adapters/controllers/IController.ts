@@ -1,6 +1,7 @@
 export const enum RequestMethod {
   POST = 'post',
   GET = 'get',
+  DELETE = 'delete',
 }
 
 export const enum StatusCode {
