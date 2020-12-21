@@ -6,6 +6,7 @@ export const enum RequestMethod {
 
 export const enum StatusCode {
   badRequest = 400,
+  notFound = 404,
   forbidden = 403,
   unauthorized = 401,
   serverError = 500,
