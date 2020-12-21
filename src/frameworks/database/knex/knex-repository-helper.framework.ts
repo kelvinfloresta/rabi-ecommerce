@@ -43,4 +43,9 @@ export class KnexRepositoryHelper<Entity, Id extends string | number = string> {
     const result = await this.instance.where({ id }).update({ deletedAt: new Date() });
     return result > 0;
   }
+
+  async hardDelete(filter: Partial<Entity>): Promise<boolean> {
+    const result = await this.instance.where(filter).del();
+    return result > 0;
+  }
 }
