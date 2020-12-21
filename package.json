@@ -49,6 +49,7 @@
     "ajv": "^6.12.4",
     "bcryptjs": "^2.4.3",
     "fastify": "^3.2.0",
+    "fastify-cors": "^5.0.0",
     "json-schema": "^0.2.5",
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.21.1",
