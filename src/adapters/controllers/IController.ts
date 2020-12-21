@@ -13,13 +13,15 @@ export const enum StatusCode {
   noContent = 204,
 }
 
-export interface IResponse<TResponse, THeader = any> {
+export interface IResponse<TResponse = undefined, THeader = any> {
   readonly statusCode: StatusCode;
-  readonly response: TResponse;
+  readonly response?: TResponse;
   readonly headers?: THeader;
 }
 
-export type IResponseAsync<TResponse, THeader = any> = Promise<IResponse<TResponse, THeader>>;
+export type IResponseAsync<TResponse = undefined, THeader = any> = Promise<
+  IResponse<TResponse, THeader>
+>;
 
 export interface IRequest<Query = any, Body = any, Params = any, Header = any> {
   readonly headers: Header;
