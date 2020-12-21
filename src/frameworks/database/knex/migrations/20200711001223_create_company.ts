@@ -8,8 +8,8 @@ export async function up(knex: Knex): Promise<any> {
     table.uuid('id').primary().defaultTo(PostgresUUIDV4(knex));
     table.string('name').notNullable();
     addTimestamp(table, knex, TableName.company);
-    table.string('documentNumber').notNullable();
-    table.enum('documentType', [DocumentType.CPF, DocumentType.CNPJ]);
+    table.string('documentNumber').nullable();
+    table.enum('documentType', [DocumentType.CPF, DocumentType.CNPJ]).nullable();
   });
 }
 
