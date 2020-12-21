@@ -6,9 +6,9 @@ export class Company implements ITimeStamp {
 
   public name: string;
 
-  public documentNumber: string;
+  public documentNumber: string | null;
 
-  public documentType: DocumentType;
+  public documentType: DocumentType | null;
 
   public createdAt: Date;
 
