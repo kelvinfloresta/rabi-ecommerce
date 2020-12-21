@@ -13,7 +13,7 @@ export interface IListGateway<Filter, T, Output extends Iterable<T> = Array<T>> 
 }
 
 export interface IDeleteGateway<Filter = string> {
-  delete(filter: Filter): Promise<boolean>;
+  hardDelete(filter: Filter): Promise<boolean>;
 }
 
 export interface ILogicDeleteGateway<Filter = string> {
