@@ -1,5 +1,6 @@
 import { FastifyInstance, FastifyReply, FastifyRequest, FastifyError } from 'fastify';
 import { config } from 'src/config';
+import cors from 'fastify-cors';
 import { IBindedRoute, IBindedRouteConfig } from './IRoute';
 import { RouteFactory } from './RouteFactory.route';
 
@@ -7,6 +8,7 @@ export class FastifyRouterFactoryAdapter extends RouteFactory {
   constructor(private fastify: FastifyInstance) {
     super();
     fastify.setErrorHandler(FastifyRouterFactoryAdapter.errorHandler());
+    fastify.register(cors);
   }
 
   private static errorHandler() {
