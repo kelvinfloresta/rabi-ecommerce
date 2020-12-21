@@ -9,6 +9,8 @@ services:
       - 5432:5432
   app:
     build: .
+    stdin_open: true
+    tty: true
     command: sh -c "yarn migration:build && yarn start:dev"
     env_file:
       - .env
