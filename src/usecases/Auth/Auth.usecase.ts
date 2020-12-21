@@ -17,8 +17,8 @@ export class AuthCase {
     return this.jwt.sign(params, this.secretKey);
   }
 
-  public authenticate(token: string) {
-    this.jwt.verify(token, this.secretKey);
+  public authenticate(token: string): { companyId: string; email: string } {
+    return this.jwt.verify(token, this.secretKey) as any;
   }
 
   public async login(credentials: Pick<User, 'email' | 'password'>) {
