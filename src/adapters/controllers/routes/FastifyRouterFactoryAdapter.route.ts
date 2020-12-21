@@ -6,10 +6,18 @@ import { RouteFactory } from './RouteFactory.route';
 export class FastifyRouterFactoryAdapter extends RouteFactory {
   constructor(private fastify: FastifyInstance) {
     super();
-    fastify.setErrorHandler(FastifyRouterFactoryAdapter.customErrorHandler);
+    fastify.setErrorHandler(FastifyRouterFactoryAdapter.errorHandler());
   }
 
-  private static customErrorHandler(
+  private static errorHandler() {
+    if (config.envName === 'production') {
+      return this.productionErrorHandler;
+    }
+
+    return this.developmentErrorHandler;
+  }
+
+  private static productionErrorHandler(
     error: FastifyError,
     _request: FastifyRequest,
     reply: FastifyReply
@@ -22,10 +30,30 @@ export class FastifyRouterFactoryAdapter extends RouteFactory {
       });
       return;
     }
-
     reply.status(500).send({
       statusCode: 500,
-      error: 'Internal Server Error',
+      message: 'Internal Server Error',
+    });
+  }
+
+  private static developmentErrorHandler(
+    error: FastifyError,
+    _request: FastifyRequest,
+    reply: FastifyReply
+  ): void {
+    console.error(error);
+    if (error.name === 'ValidatorError') {
+      reply.status(400).send({
+        statusCode: 400,
+        error: 'Validation',
+        message: error.message,
+      });
+      return;
+    }
+    reply.status(500).send({
+      statusCode: 500,
+      message: 'Internal Server Error',
+      originalError: error,
     });
   }
 
