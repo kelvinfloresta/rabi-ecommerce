@@ -3,6 +3,7 @@ import { KnexRepositoryHelper } from 'src/frameworks/database/knex/knex-reposito
 import {
   ISaveCategoryCaseInput,
   IListCategoryCaseInput,
+  IHardDeleteCategoryCaseInput,
 } from 'src/usecases/Category/ICategory.usecase';
 import { ICategoryGateway } from './ICategory.gateway';
 
@@ -19,5 +20,9 @@ export class CategoryGatewayKnexAdapter implements ICategoryGateway {
 
   public async list(filter: IListCategoryCaseInput): Promise<Category[]> {
     return this.repository.listByfilter(filter);
+  }
+
+  public async hardDelete(filter: IHardDeleteCategoryCaseInput): Promise<boolean> {
+    return this.repository.hardDelete(filter);
   }
 }

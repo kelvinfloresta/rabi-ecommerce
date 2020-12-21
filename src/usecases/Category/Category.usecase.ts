@@ -1,6 +1,10 @@
 import { ICategoryGateway } from 'src/adapters/gateways/Category/ICategory.gateway';
 import { Category } from 'src/entities/Category.entity';
-import { ISaveCategoryCaseInput, IListCategoryCaseInput } from './ICategory.usecase';
+import {
+  ISaveCategoryCaseInput,
+  IListCategoryCaseInput,
+  IHardDeleteCategoryCaseInput,
+} from './ICategory.usecase';
 
 export class CategoryCase {
   constructor(private categoryGateway: ICategoryGateway) {}
@@ -15,5 +19,9 @@ export class CategoryCase {
 
   async list(filter: IListCategoryCaseInput): Promise<Category[]> {
     return this.categoryGateway.list(filter);
+  }
+
+  async delete(filter: IHardDeleteCategoryCaseInput): Promise<boolean> {
+    return this.categoryGateway.hardDelete(filter);
   }
 }
