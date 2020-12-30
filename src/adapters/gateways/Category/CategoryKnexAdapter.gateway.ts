@@ -10,7 +10,7 @@ import { ICategoryGateway } from './ICategory.gateway';
 export class CategoryGatewayKnexAdapter implements ICategoryGateway {
   constructor(private readonly repository: KnexRepositoryHelper<Category>) {}
 
-  public async get(id: string): Promise<Category> {
+  public async get(id: string): Promise<Category | undefined> {
     return this.repository.getById(id);
   }
 
