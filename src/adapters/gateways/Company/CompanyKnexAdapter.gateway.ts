@@ -10,7 +10,7 @@ export class CompanyGatewayKnexAdapter implements ICompanyGateway {
     return this.repository.save(input);
   }
 
-  async get(id: string): Promise<Company> {
+  async get(id: string): Promise<Company | undefined> {
     return this.repository.getById(id);
   }
 }
