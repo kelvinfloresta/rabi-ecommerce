@@ -10,11 +10,11 @@ export class KnexRepositoryHelper<Entity, Id extends string | number = string> {
     return this.knex(this.tableName);
   }
 
-  async getById(id: Id): Promise<Entity> {
+  async getById(id: Id): Promise<Entity | undefined> {
     return this.instance.where({ id }).first();
   }
 
-  async getByFilter(filter: Partial<Entity>): Promise<Entity> {
+  async getByFilter(filter: Partial<Entity>): Promise<Entity | undefined> {
     return this.instance.where(filter).first();
   }
 
