@@ -31,3 +31,8 @@ export interface IGetGateway<Input, Output> {
 export interface IPaginateGateway<Filter, Output> {
   paginate(filter: Filter, paginate: IPaginationParams): Promise<IWithPagination<Output>>;
 }
+
+export interface ICommonCompanyFilter {
+  readonly companyId: string;
+  readonly id: string;
+}
