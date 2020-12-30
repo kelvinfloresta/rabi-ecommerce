@@ -39,8 +39,12 @@ export class KnexRepositoryHelper<Entity, Id extends string | number = string> {
     return this.instance.update(input).where(filter);
   }
 
-  async logicDelete(id: Id): Promise<boolean> {
-    const result = await this.instance.where({ id }).update({ deletedAt: new Date() });
+  async logicDelete(filter: Partial<Entity>): Promise<boolean> {
+    const result = await this.instance
+      .where(filter)
+      .where({ deletedAt: null })
+      .update({ deletedAt: new Date() });
+
     return result > 0;
   }
 
