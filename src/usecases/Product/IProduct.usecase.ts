@@ -15,4 +15,4 @@ export interface IPatchProductCaseInput
   id: string;
 }
 
-export type IPaginateProductCaseInput = Pick<Product, 'companyId'>;
+export type IListProductCaseInput = Pick<Product, 'companyId'>;
