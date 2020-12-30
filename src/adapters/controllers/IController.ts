@@ -18,7 +18,12 @@ export const enum StatusCode {
 
 export interface IResponse<TResponse = undefined, THeader = any> {
   readonly statusCode: StatusCode;
-  readonly response?: TResponse;
+  readonly response: TResponse;
+  readonly headers?: THeader;
+}
+
+export interface IEmptyResponse<THeader = any> {
+  readonly statusCode: StatusCode;
   readonly headers?: THeader;
 }
 
