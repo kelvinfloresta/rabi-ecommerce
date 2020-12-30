@@ -1,5 +1,9 @@
 import { IPaginationParams, IWithPagination } from 'src/usecases/IPaginate';
 
+export interface IPatchByFilterGateway<TFilter, Input, Output = boolean> {
+  patchByFilter(filter: TFilter, input: Input): Promise<Output>;
+}
+
 export interface IPatchGateway<Input, Output = boolean> {
   patch(input: Input): Promise<Output>;
 }
