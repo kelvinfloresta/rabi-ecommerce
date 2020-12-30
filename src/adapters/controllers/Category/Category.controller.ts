@@ -1,4 +1,9 @@
-import { StatusCode, IRequest, IResponseAsync } from 'src/adapters/controllers/IController';
+import {
+  StatusCode,
+  IRequest,
+  IResponseAsync,
+  IEmptyResponse,
+} from 'src/adapters/controllers/IController';
 
 import { CategoryCase } from 'src/usecases/Category/Category.usecase';
 import { AuthCase } from 'src/usecases/Auth/Auth.usecase';
@@ -27,7 +32,7 @@ export class CategoryController {
   }
 
   @Delete('/:id')
-  public async delete(request: IRequest): IResponseAsync {
+  public async delete(request: IRequest): Promise<IEmptyResponse> {
     const { companyId } = this.authCase.authenticate(request.headers.authorization);
     const response = await this.categoryCase.delete({
       companyId,
