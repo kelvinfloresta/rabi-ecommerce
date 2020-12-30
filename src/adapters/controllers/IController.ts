@@ -1,5 +1,6 @@
 export const enum RequestMethod {
   POST = 'post',
+  PATCH = 'patch',
   GET = 'get',
   DELETE = 'delete',
 }
