@@ -6,7 +6,7 @@ import { IUserGateway } from './IUser.gateway';
 export class UserGatewayKnexAdapter implements IUserGateway {
   constructor(private repository: KnexRepositoryHelper<User>) {}
 
-  get(id: string): Promise<User> {
+  get(id: string): Promise<User | undefined> {
     return this.repository.getById(id);
   }
 
