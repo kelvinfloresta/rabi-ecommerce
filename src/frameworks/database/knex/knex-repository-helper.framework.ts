@@ -35,8 +35,9 @@ export class KnexRepositoryHelper<Entity, Id extends string | number = string> {
     return this.instance.update(input).where({ id });
   }
 
-  async updateByFilter(filter: Partial<Entity>, input: Partial<Entity>): Promise<number> {
-    return this.instance.update(input).where(filter);
+  async updateByFilter(filter: Partial<Entity>, input: Partial<Entity>): Promise<boolean> {
+    const result = await this.instance.update(input).where(filter);
+    return result > 0;
   }
 
   async logicDelete(filter: Partial<Entity>): Promise<boolean> {
