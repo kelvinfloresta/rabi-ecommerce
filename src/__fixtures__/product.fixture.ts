@@ -10,7 +10,7 @@ export function buildProductFixture(params: IPartialSaveProductCase): ISaveProdu
   const product = {
     name: params.name || 'The amazing product',
     price: params.price ?? 1,
-    disabled: params.disabled || false,
+    active: params.active || true,
     companyId: params.companyId,
     categoryId: params.categoryId || null,
   };

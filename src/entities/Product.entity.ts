@@ -9,7 +9,7 @@ export class Product implements ITimeStamp {
 
   public description?: string;
 
-  public disabled: boolean;
+  public active: boolean;
 
   public categoryId: string | null;
 
