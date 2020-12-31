@@ -28,9 +28,11 @@ export class ProductGatewayKnexAdapter implements IProductGateway {
     return this.repository.hardDelete(filter);
   }
 
-  async patch(input: IPatchProductCaseInput) {
-    const result = await this.repository.updateById(input.id, input);
-    return result > 0;
+  async patchByFilter(
+    filter: ICommonCompanyFilter,
+    input: IPatchProductCaseInput
+  ): Promise<boolean> {
+    return this.repository.updateByFilter(filter, input);
   }
 
   async get(id: string): Promise<Product | undefined> {
