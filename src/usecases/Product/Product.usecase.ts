@@ -4,9 +4,8 @@ import { ICommonCompanyFilter } from 'src/adapters/gateways/IGateway';
 import {
   ISaveProductCaseInput,
   IPatchProductCaseInput,
-  IPaginateProductCaseInput,
+  IListProductCaseInput,
 } from './IProduct.usecase';
-import { IPagination } from '../IPaginate';
 
 export class ProductCase {
   constructor(private productGateway: IProductGateway) {}
@@ -15,8 +14,8 @@ export class ProductCase {
     return this.productGateway.save(input);
   }
 
-  async paginate(filter: IPaginateProductCaseInput, paginate: IPagination) {
-    return this.productGateway.paginate(filter, paginate);
+  async list(filter: IListProductCaseInput) {
+    return this.productGateway.list(filter);
   }
 
   async get(id: string): Promise<Product | undefined> {
