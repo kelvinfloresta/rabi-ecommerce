@@ -1,6 +1,6 @@
-import { ILogicDelete, ITimeStamp } from './IEntity';
+import { ITimeStamp } from './IEntity';
 
-export class Product implements ILogicDelete, ITimeStamp {
+export class Product implements ITimeStamp {
   public id: string;
 
   public name: string;
@@ -18,6 +18,4 @@ export class Product implements ILogicDelete, ITimeStamp {
   public createdAt: Date;
 
   public updatedAt: Date;
-
-  public deletedAt: Date | null;
 }
