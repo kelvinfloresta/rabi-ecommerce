@@ -7,12 +7,13 @@ import {
 import { KnexRepositoryHelper } from 'src/frameworks/database/knex/knex-repository-helper.framework';
 import { IPaginationParams } from 'src/usecases/IPaginate';
 import { IProductGateway } from './IProduct.gateway';
+import { ICommonCompanyFilter } from '../IGateway';
 
 export class ProductGatewayKnexAdapter implements IProductGateway {
   constructor(private repository: KnexRepositoryHelper<Product>) {}
 
-  async logicDelete(id: string): Promise<boolean> {
-    return this.repository.logicDelete(id);
+  async hardDelete(filter: ICommonCompanyFilter): Promise<boolean> {
+    return this.repository.hardDelete(filter);
   }
 
   async patch(input: IPatchProductCaseInput) {
