@@ -1,6 +1,6 @@
 import * as Knex from 'knex';
 import { TableName } from 'src/adapters/database/Database.adapter';
-import { addTimestamp } from '../knex-migration.framework';
+import { addTimestamp, PostgresUUIDV4 } from '../knex-migration.framework';
 
 export interface IOrderItemBusinessData {
   readonly productId: string;
@@ -18,6 +18,7 @@ export interface IOrderBusinessData {
 
 export async function up(knex: Knex): Promise<any> {
   return knex.schema.createTable(TableName.order, (table) => {
+    table.uuid('id').primary().defaultTo(PostgresUUIDV4(knex));
     addTimestamp(table, knex, TableName.order);
 
     table.uuid('companyId').notNullable();
