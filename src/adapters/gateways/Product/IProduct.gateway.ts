@@ -2,14 +2,14 @@ import { Product } from 'src/entities/Product.entity';
 import {
   ISaveProductCaseInput,
   IPatchProductCaseInput,
-  IPaginateProductCaseInput,
+  IListProductCaseInput,
 } from 'src/usecases/Product/IProduct.usecase';
 import {
   IPatchGateway,
   ISaveGateway,
   IGetGateway,
   ILogicDeleteGateway,
-  IPaginateGateway,
+  IListGateway,
 } from '../IGateway';
 
 export interface IProductGateway
@@ -17,4 +17,4 @@ export interface IProductGateway
     IPatchGateway<IPatchProductCaseInput>,
     ISaveGateway<ISaveProductCaseInput>,
     IGetGateway<string, Product>,
-    IPaginateGateway<IPaginateProductCaseInput, Product> {}
+    IListGateway<IListProductCaseInput, Product> {}
