@@ -1,5 +1,6 @@
 import { Product } from 'src/entities/Product.entity';
 import { IProductGateway } from 'src/adapters/gateways/Product/IProduct.gateway';
+import { ICommonCompanyFilter } from 'src/adapters/gateways/IGateway';
 import {
   ISaveProductCaseInput,
   IPatchProductCaseInput,
@@ -26,7 +27,7 @@ export class ProductCase {
     await this.productGateway.patch(input);
   }
 
-  async delete(id: string) {
-    return this.productGateway.logicDelete(id);
+  async delete(filter: ICommonCompanyFilter) {
+    return this.productGateway.hardDelete(filter);
   }
 }
