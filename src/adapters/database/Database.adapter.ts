@@ -12,6 +12,7 @@ export enum TableName {
   product = 'products',
   company = 'companies',
   category = 'categories',
+  order = 'orders',
   cart = 'cart_items',
 }
 
