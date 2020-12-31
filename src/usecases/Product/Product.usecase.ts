@@ -22,8 +22,8 @@ export class ProductCase {
     return this.productGateway.get(id);
   }
 
-  async patch(input: IPatchProductCaseInput) {
-    await this.productGateway.patch(input);
+  async patchByFilter(filter: ICommonCompanyFilter, input: IPatchProductCaseInput) {
+    return this.productGateway.patchByFilter(filter, input);
   }
 
   async delete(filter: ICommonCompanyFilter) {
