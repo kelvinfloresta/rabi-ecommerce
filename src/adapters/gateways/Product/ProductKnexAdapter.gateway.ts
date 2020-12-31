@@ -20,7 +20,7 @@ export class ProductGatewayKnexAdapter implements IProductGateway {
     return result > 0;
   }
 
-  async get(id: string): Promise<Product> {
+  async get(id: string): Promise<Product | undefined> {
     return this.repository.getById(id);
   }
 
