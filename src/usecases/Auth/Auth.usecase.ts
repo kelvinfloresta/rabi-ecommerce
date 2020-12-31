@@ -13,7 +13,7 @@ export class AuthCase {
     private readonly encrypt: typeof Encrypt
   ) {}
 
-  private sign(params: { email: string; companyId: string | null }) {
+  private sign(params: { email: string; userId: string; companyId: string | null }) {
     return this.jwt.sign(params, this.secretKey);
   }
 
@@ -32,7 +32,7 @@ export class AuthCase {
       throw new NotAuthorized('Wrong password');
     }
 
-    const token = this.sign({ email: user.email, companyId: user.companyId });
+    const token = this.sign({ email: user.email, userId: user.id, companyId: user.companyId });
     return token;
   }
 }
