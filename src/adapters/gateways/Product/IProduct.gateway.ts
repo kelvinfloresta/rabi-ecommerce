@@ -8,12 +8,13 @@ import {
   IPatchGateway,
   ISaveGateway,
   IGetGateway,
-  ILogicDeleteGateway,
   IListGateway,
+  IDeleteGateway,
+  ICommonCompanyFilter,
 } from '../IGateway';
 
 export interface IProductGateway
-  extends ILogicDeleteGateway,
+  extends IDeleteGateway<ICommonCompanyFilter>,
     IPatchGateway<IPatchProductCaseInput>,
     ISaveGateway<ISaveProductCaseInput>,
     IGetGateway<string, Product>,
