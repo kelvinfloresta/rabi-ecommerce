@@ -9,6 +9,8 @@ import { AuthCaseFactory } from './usecases/Auth/AuthFactory.usecase';
 import { CategoryCaseFactory } from './usecases/Category/CategoryFactory.usecase';
 import { CompanyController } from './adapters/controllers/Company/Company.controller';
 import { CompanyCaseFactory } from './usecases/Company/CompanyFactory.usecase';
+import { ProductController } from './adapters/controllers/Product/Product.controller';
+import { ProductCaseFactory } from './usecases/Product/ProductFactory.usecase';
 
 const app = fastify({
   logger: true,
@@ -22,10 +24,12 @@ const categoryController = new CategoryController(
   CategoryCaseFactory.singleton,
   AuthCaseFactory.singleton
 );
+const productController = new ProductController(ProductCaseFactory(), AuthCaseFactory.singleton);
 
 routes.addController(userController);
 routes.addController(authController);
 routes.addController(categoryController);
 routes.addController(companyController);
+routes.addController(productController);
 
 routes.start();
