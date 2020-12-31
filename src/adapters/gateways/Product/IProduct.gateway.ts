@@ -5,17 +5,17 @@ import {
   IListProductCaseInput,
 } from 'src/usecases/Product/IProduct.usecase';
 import {
-  IPatchGateway,
   ISaveGateway,
   IGetGateway,
   IListGateway,
   IDeleteGateway,
   ICommonCompanyFilter,
+  IPatchByFilterGateway,
 } from '../IGateway';
 
 export interface IProductGateway
   extends IDeleteGateway<ICommonCompanyFilter>,
-    IPatchGateway<IPatchProductCaseInput>,
+    IPatchByFilterGateway<ICommonCompanyFilter, IPatchProductCaseInput>,
     ISaveGateway<ISaveProductCaseInput>,
     IGetGateway<string, Product>,
     IListGateway<IListProductCaseInput, Product> {}
