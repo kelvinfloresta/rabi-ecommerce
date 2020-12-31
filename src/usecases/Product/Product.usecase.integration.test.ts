@@ -113,28 +113,28 @@ describe('Product Case', () => {
   });
 
   describe('delete', () => {
-    it('Should be logical delete', async () => {
+    it('Should delete', async () => {
       const sut = ProductCaseFactory();
       const { id: companyId } = await createCompanyFixture({ name: 'My great company' });
       const { id } = await createProductFixture({ name: 'cake', companyId });
-      await sut.delete(id);
+      await sut.delete({ id, companyId });
       const deletedProduct = await sut.get(id);
-      expect(deletedProduct?.deletedAt).toBeInstanceOf(Date);
+      expect(deletedProduct).toBeUndefined();
     });
 
     it('Should return false if not found', async () => {
       const sut = ProductCaseFactory();
       const NOT_EXISTENT_ID = uuidv4();
-      const deleted = await sut.delete(NOT_EXISTENT_ID);
-      expect(deleted).toBeFalsy();
+      const deleted = await sut.delete({ id: NOT_EXISTENT_ID, companyId: NOT_EXISTENT_ID });
+      expect(deleted).toBe(false);
     });
 
     it('Should return true if deleted', async () => {
       const sut = ProductCaseFactory();
       const { id: companyId } = await createCompanyFixture({ name: 'My great company' });
       const product = await createProductFixture({ name: 'cake', companyId });
-      const deleted = await sut.delete(product.id);
-      expect(deleted).toBeTruthy();
+      const deleted = await sut.delete({ companyId, id: product.id });
+      expect(deleted).toBe(true);
     });
   });
 });
