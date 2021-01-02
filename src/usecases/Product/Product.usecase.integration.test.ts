@@ -27,7 +27,7 @@ describe('Product Case', () => {
     });
   });
 
-  describe('Paginate', () => {
+  describe('List', () => {
     it('Should not return products of other companies', async () => {
       const { id: firstCompany } = await createCompanyFixture({ name: 'My great company' });
       const { id: secondCompany } = await createCompanyFixture({ name: 'Another great company' });
