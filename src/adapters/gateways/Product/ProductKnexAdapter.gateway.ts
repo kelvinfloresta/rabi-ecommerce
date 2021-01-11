@@ -49,7 +49,6 @@ export class ProductGatewayKnexAdapter implements IProductGateway {
         this.companyId,
         this.productId,
         this.categoryName,
-        this.categoryName,
         this.productName,
         this.productDescription,
         'categoryId',
