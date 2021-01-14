@@ -6,7 +6,6 @@ export interface IOrderItemBusinessData {
 }
 
 export interface IOrderBusinessData {
-  readonly total: number;
   readonly companyId: string;
   readonly userId: string;
   readonly items: readonly IOrderItemBusinessData[];
