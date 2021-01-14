@@ -12,6 +12,10 @@ export interface ISaveGateway<Input, Output = string> {
   save(input: Input): Promise<Output>;
 }
 
+export interface ICreateGateway<Input, Output = string> {
+  create(input: Input): Promise<Output>;
+}
+
 export interface IListGateway<Filter, T, Output extends Iterable<T> = Array<T>> {
   list(filter: Filter): Promise<Output>;
 }
