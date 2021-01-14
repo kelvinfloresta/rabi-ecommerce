@@ -12,8 +12,6 @@ export async function up(knex: Knex): Promise<any> {
 
     table.uuid('userId').nullable();
     table.foreign('userId').references('id').inTable(TableName.user);
-
-    table.decimal('total').notNullable();
   });
 }
 
