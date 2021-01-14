@@ -13,7 +13,7 @@ export enum TableName {
   company = 'companies',
   category = 'categories',
   order = 'orders',
-  cart = 'cart_items',
+  orderItem = 'order_items',
 }
 
 const allTables = Object.values(TableName);
