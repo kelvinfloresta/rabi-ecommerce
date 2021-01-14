@@ -6,7 +6,7 @@ export async function up(knex: Knex) {
   return knex.schema.createTable(TableName.orderItem, (table) => {
     addTimestamp(table, knex, TableName.orderItem);
 
-    table.uuid('orderId').nullable();
+    table.uuid('orderId').notNullable();
     table.foreign('orderId').references('id').inTable(TableName.order).onDelete('CASCADE');
 
     table.uuid('productId').nullable();
