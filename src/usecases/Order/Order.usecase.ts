@@ -1,5 +1,5 @@
 import { IOrderGateway } from 'src/adapters/gateways/Order/IOrder.gateway';
-import { ICreateOrderCaseInput } from './IOrder.usecase';
+import { ICreateOrderCaseInput, IListOrderCaseInput, IListOrderCaseOutput } from './IOrder.usecase';
 import { ProductCase } from '../Product/Product.usecase';
 
 export class OrderCase {
@@ -26,5 +26,9 @@ export class OrderCase {
       userId: input.userId,
       items,
     });
+  }
+
+  async list(filter: IListOrderCaseInput): Promise<IListOrderCaseOutput[]> {
+    return this.orderGateway.list(filter);
   }
 }

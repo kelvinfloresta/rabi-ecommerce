@@ -1,3 +1,6 @@
+import { IListOrderCaseInput, IListOrderCaseOutput } from 'src/usecases/Order/IOrder.usecase';
+import { IListGateway } from '../IGateway';
+
 export interface IOrderItemBusinessData {
   readonly productId: string;
   readonly productName: string;
@@ -17,6 +20,6 @@ export interface ICreateOrderGatewayInput {
   readonly items: readonly IOrderItemBusinessData[];
 }
 
-export interface IOrderGateway {
+export interface IOrderGateway extends IListGateway<IListOrderCaseInput, IListOrderCaseOutput> {
   create(input: ICreateOrderGatewayInput): Promise<string>;
 }

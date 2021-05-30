@@ -1,5 +1,8 @@
 import { KnexRepositoryHelper } from 'src/frameworks/database/knex/knex-repository-helper.framework';
 import { Transaction } from 'knex';
+import { IListOrderCaseInput, IListOrderCaseOutput } from 'src/usecases/Order/IOrder.usecase';
+import { TableName } from 'src/adapters/database/Database.adapter';
+import groupBy from 'lodash/groupBy';
 import {
   IOrderGateway,
   IOrderBusinessData,
@@ -8,6 +11,14 @@ import {
 } from './IOrder.gateway';
 
 export class OrderGatewayKnexAdapter implements IOrderGateway {
+  private companyId = `${TableName.order}.companyId`;
+
+  private userId = `${TableName.user}.id`;
+
+  private orderId = `${TableName.order}.id`;
+
+  private userName = `${TableName.user}.name as userName`;
+
   constructor(
     private readonly orderRepository: KnexRepositoryHelper<IOrderBusinessData>,
     private readonly itemsRepository: KnexRepositoryHelper<IOrderItemBusinessData>
@@ -43,6 +54,36 @@ export class OrderGatewayKnexAdapter implements IOrderGateway {
       await this.createOrderItems({ items, orderId, tx });
 
       return orderId;
+    });
+  }
+
+  public async list(filter: IListOrderCaseInput): Promise<IListOrderCaseOutput[]> {
+    const result = await this.orderRepository.instance
+      .select(
+        'orderId',
+        'userId',
+        this.userName,
+        'productId',
+        'productName',
+        'quantity',
+        'order_items.total'
+      )
+      .where(this.companyId, filter.companyId)
+      .leftJoin(TableName.user, this.userId, 'userId')
+      .innerJoin(TableName.orderItem, this.orderId, 'orderId');
+    return OrderGatewayKnexAdapter.adaptList(result);
+  }
+
+  private static adaptList(result: any[]): IListOrderCaseOutput[] {
+    const groups = groupBy(result, 'orderId');
+    return Object.entries(groups).map(([orderId, orders]) => {
+      return {
+        id: orderId,
+        companyId: orders[0].companyId,
+        userId: orders[0].userId,
+        userName: orders[0].userName,
+        items: orders,
+      };
     });
   }
 }
