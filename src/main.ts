@@ -14,9 +14,7 @@ import { App } from './adapters/app/AppFactory';
 import { FastifyAppFactoryAdapter } from './adapters/app/FastifyRouterFactoryAdapter.route';
 import { register } from './adapters/di';
 import { UserController } from './adapters/controllers/User/User.controller';
-import { CompanyCaseFactory } from './usecases/Company/CompanyFactory.usecase';
 
-const companyController = new CompanyController(CompanyCaseFactory());
 const categoryController = new CategoryController(
   CategoryCaseFactory.singleton,
   AuthCaseFactory.singleton
@@ -30,8 +28,8 @@ const app: App = container.resolve(FastifyAppFactoryAdapter);
 register();
 app.addController(container.resolve(UserController));
 app.addController(container.resolve(AuthController));
+app.addController(container.resolve(CompanyController));
 app.addController(categoryController);
-app.addController(companyController);
 app.addController(productController);
 app.addController(orderController);
 
