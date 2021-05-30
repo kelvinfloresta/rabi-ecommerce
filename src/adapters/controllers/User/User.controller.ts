@@ -3,11 +3,13 @@ import { ISaveUserCaseInput } from 'src/usecases/User/IUser.usecase';
 import { StatusCode, IRequest, IResponseAsync } from 'src/adapters/controllers/IController';
 
 import { Validate } from 'src/adapters/Validator/Validate.decorator';
+import { injectable } from 'src/adapters/di';
 import { UserSaveSchema } from './UserSchema.validator';
 import { Controller } from '../decorators/Controller.decorator';
 import { Post } from '../decorators/Post.decorator';
 
 @Controller('/user')
+@injectable()
 export class UserController {
   constructor(private userCase: UserCase) {}
 

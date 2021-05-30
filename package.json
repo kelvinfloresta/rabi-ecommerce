@@ -6,7 +6,7 @@
   "scripts": {
     "start": "ts-node src/main.ts",
     "start:dev": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/main.ts",
-    "test": "jest",
+    "test": "cross-env NODE_PATH=. jest",
     "test:integration": "npm test -- --runInBand --watch -c jest-integration.config.js ",
     "lint": "eslint .",
     "lint:fix": "npm run lint -- --ext .ts --fix",
@@ -57,6 +57,8 @@
     "knex-paginate": "^1.2.3",
     "lodash": "^4.17.20",
     "pg": "^8.2.1",
+    "reflect-metadata": "^0.1.13",
+    "tsyringe": "^4.5.0",
     "uuid": "^8.3.0"
   }
 }

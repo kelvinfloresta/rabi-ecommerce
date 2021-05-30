@@ -1,5 +1,7 @@
+import 'reflect-metadata';
+
 import { fastify } from 'fastify';
-import { UserCaseFactory } from './usecases/User/UserFactory.usecase';
+import { container } from 'tsyringe';
 import { UserController } from './adapters/controllers/User/User.controller';
 import { RouteFactory } from './adapters/controllers/routes/RouteFactory.route';
 import { FastifyRouterFactoryAdapter } from './adapters/controllers/routes/FastifyRouterFactoryAdapter.route';
@@ -13,13 +15,20 @@ import { ProductController } from './adapters/controllers/Product/Product.contro
 import { ProductCaseFactory } from './usecases/Product/ProductFactory.usecase';
 import { OrderController } from './adapters/controllers/Order/Order.controller';
 import { OrderCaseFactory } from './usecases/Order/OrderFactory.usecase';
+import { TYPES } from './adapters/di/types';
+import { UserGatewayKnexAdapter } from './adapters/gateways/User/UserKnexAdapter.gateway';
 
 const app = fastify({
   logger: true,
 });
 
 const routes: RouteFactory = new FastifyRouterFactoryAdapter(app);
-const userController = new UserController(UserCaseFactory.singleton);
+
+container.register(TYPES.UserGateway, {
+  useClass: UserGatewayKnexAdapter,
+});
+
+const userController = container.resolve(UserController);
 const authController = new AuthController(AuthCaseFactory.singleton);
 const companyController = new CompanyController(CompanyCaseFactory());
 const categoryController = new CategoryController(
