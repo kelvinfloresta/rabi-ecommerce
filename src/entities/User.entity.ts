@@ -1,4 +1,3 @@
-/* eslint-disable max-classes-per-file */
 import { ITimeStamp, ILogicDelete } from './IEntity';
 import { DocumentType } from './enums/DocumentType.enum';
 
