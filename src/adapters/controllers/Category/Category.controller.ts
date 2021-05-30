@@ -8,12 +8,14 @@ import {
 import { CategoryCase } from 'src/usecases/Category/Category.usecase';
 import { AuthCase } from 'src/usecases/Auth/Auth.usecase';
 import { Category } from 'src/entities/Category.entity';
+import { injectable } from 'src/adapters/di';
 import { Controller } from '../decorators/Controller.decorator';
 import { Post } from '../decorators/Post.decorator';
 import { Get } from '../decorators/Get.decorator';
 import { Delete } from '../decorators/Delete.decorator';
 
 @Controller('/category')
+@injectable()
 export class CategoryController {
   constructor(private categoryCase: CategoryCase, private authCase: AuthCase) {}
 

@@ -4,7 +4,6 @@ import { container } from 'tsyringe';
 import { AuthController } from './adapters/controllers/Auth/Auth.controller';
 import { CategoryController } from './adapters/controllers/Category/Category.controller';
 import { AuthCaseFactory } from './usecases/Auth/AuthFactory.usecase';
-import { CategoryCaseFactory } from './usecases/Category/CategoryFactory.usecase';
 import { CompanyController } from './adapters/controllers/Company/Company.controller';
 import { ProductController } from './adapters/controllers/Product/Product.controller';
 import { ProductCaseFactory } from './usecases/Product/ProductFactory.usecase';
@@ -15,11 +14,6 @@ import { FastifyAppFactoryAdapter } from './adapters/app/FastifyRouterFactoryAda
 import { register } from './adapters/di';
 import { UserController } from './adapters/controllers/User/User.controller';
 
-const categoryController = new CategoryController(
-  CategoryCaseFactory.singleton,
-  AuthCaseFactory.singleton
-);
-
 const productController = new ProductController(ProductCaseFactory(), AuthCaseFactory.singleton);
 const orderController = new OrderController(OrderCaseFactory.singleton, AuthCaseFactory.singleton);
 
@@ -29,7 +23,7 @@ register();
 app.addController(container.resolve(UserController));
 app.addController(container.resolve(AuthController));
 app.addController(container.resolve(CompanyController));
-app.addController(categoryController);
+app.addController(container.resolve(CategoryController));
 app.addController(productController);
 app.addController(orderController);
 

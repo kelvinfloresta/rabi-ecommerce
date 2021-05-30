@@ -1,13 +1,16 @@
 import { ICategoryGateway } from 'src/adapters/gateways/Category/ICategory.gateway';
 import { Category } from 'src/entities/Category.entity';
+import { inject, injectable } from 'src/adapters/di';
+import { TYPES } from 'src/adapters/di/types';
 import {
   ISaveCategoryCaseInput,
   IListCategoryCaseInput,
   IHardDeleteCategoryCaseInput,
 } from './ICategory.usecase';
 
+@injectable()
 export class CategoryCase {
-  constructor(private categoryGateway: ICategoryGateway) {}
+  constructor(@inject(TYPES.CategoryGateway) private categoryGateway: ICategoryGateway) {}
 
   async save(input: ISaveCategoryCaseInput): Promise<string> {
     return this.categoryGateway.save(input);

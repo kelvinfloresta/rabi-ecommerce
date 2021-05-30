@@ -1,3 +1,4 @@
+import { TableName } from 'src/adapters/database/Database.adapter';
 import { Category } from 'src/entities/Category.entity';
 import { KnexRepositoryHelper } from 'src/frameworks/database/knex/knex-repository-helper.framework';
 import {
@@ -8,7 +9,7 @@ import {
 import { ICategoryGateway } from './ICategory.gateway';
 
 export class CategoryGatewayKnexAdapter implements ICategoryGateway {
-  constructor(private readonly repository: KnexRepositoryHelper<Category>) {}
+  private repository = new KnexRepositoryHelper<Category>(TableName.category);
 
   public async get(id: string): Promise<Category | undefined> {
     return this.repository.getById(id);
