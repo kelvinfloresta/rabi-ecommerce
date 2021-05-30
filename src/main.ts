@@ -6,7 +6,6 @@ import { CategoryController } from './adapters/controllers/Category/Category.con
 import { AuthCaseFactory } from './usecases/Auth/AuthFactory.usecase';
 import { CategoryCaseFactory } from './usecases/Category/CategoryFactory.usecase';
 import { CompanyController } from './adapters/controllers/Company/Company.controller';
-import { CompanyCaseFactory } from './usecases/Company/CompanyFactory.usecase';
 import { ProductController } from './adapters/controllers/Product/Product.controller';
 import { ProductCaseFactory } from './usecases/Product/ProductFactory.usecase';
 import { OrderController } from './adapters/controllers/Order/Order.controller';
@@ -15,8 +14,8 @@ import { App } from './adapters/app/AppFactory';
 import { FastifyAppFactoryAdapter } from './adapters/app/FastifyRouterFactoryAdapter.route';
 import { register } from './adapters/di';
 import { UserController } from './adapters/controllers/User/User.controller';
+import { CompanyCaseFactory } from './usecases/Company/CompanyFactory.usecase';
 
-const authController = new AuthController(AuthCaseFactory.singleton);
 const companyController = new CompanyController(CompanyCaseFactory());
 const categoryController = new CategoryController(
   CategoryCaseFactory.singleton,
@@ -30,7 +29,7 @@ const app: App = container.resolve(FastifyAppFactoryAdapter);
 
 register();
 app.addController(container.resolve(UserController));
-app.addController(authController);
+app.addController(container.resolve(AuthController));
 app.addController(categoryController);
 app.addController(companyController);
 app.addController(productController);
