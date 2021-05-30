@@ -1,3 +1,3 @@
-import { IAllNotBindedRoute } from '../routes/IRoute';
+import { IAllNotBindedRoute } from '../../app/IApp';
 
 export const routesConfig: IAllNotBindedRoute = {};

@@ -1,14 +1,26 @@
-import { FastifyInstance, FastifyReply, FastifyRequest, FastifyError } from 'fastify';
+import fastifyContructor, {
+  FastifyInstance,
+  FastifyReply,
+  FastifyRequest,
+  FastifyError,
+} from 'fastify';
+
 import { config } from 'src/config';
 import cors from 'fastify-cors';
-import { IBindedRoute, IBindedRouteConfig } from './IRoute';
-import { RouteFactory } from './RouteFactory.route';
+import { IBindedRoute, IBindedRouteConfig } from './IApp';
+import { App } from './AppFactory';
+import { injectable } from '../di';
 
-export class FastifyRouterFactoryAdapter extends RouteFactory {
-  constructor(private fastify: FastifyInstance) {
+@injectable()
+export class FastifyAppFactoryAdapter extends App {
+  private fastify = fastifyContructor({
+    logger: true,
+  });
+
+  constructor() {
     super();
-    fastify.setErrorHandler(FastifyRouterFactoryAdapter.errorHandler());
-    fastify.register(cors);
+    this.fastify.setErrorHandler(FastifyAppFactoryAdapter.errorHandler());
+    this.fastify.register(cors);
   }
 
   private static errorHandler() {
@@ -62,7 +74,7 @@ export class FastifyRouterFactoryAdapter extends RouteFactory {
   protected adapt(params: IBindedRouteConfig) {
     this.fastify.register(
       (fastify, _opts, done) => {
-        params.routes.forEach(FastifyRouterFactoryAdapter.adaptOne(fastify));
+        params.routes.forEach(FastifyAppFactoryAdapter.adaptOne(fastify));
         done();
       },
       { prefix: params.prefix }

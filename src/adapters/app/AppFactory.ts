@@ -1,11 +1,11 @@
-import { routesConfig } from '../decorators/_AllNotBindedRoutes';
-import { IBindedRoute, IBindedRouteConfig, INotBindedRoute } from './IRoute';
+import { routesConfig } from '../controllers/decorators/_AllNotBindedRoutes';
+import { IBindedRoute, IBindedRouteConfig, INotBindedRoute } from './IApp';
 
 interface IAnyClassInstance {
   constructor: { name: string };
 }
 
-export abstract class RouteFactory {
+export abstract class App {
   private readonly routesConfig = routesConfig;
 
   private static makeBindRoute(controllerInstance: IAnyClassInstance) {
@@ -22,7 +22,7 @@ export abstract class RouteFactory {
   public addController(controllerInstance: IAnyClassInstance) {
     const controllerName = controllerInstance.constructor.name;
     const { routes, prefix } = this.routesConfig[controllerName];
-    const bindRoute = RouteFactory.makeBindRoute(controllerInstance);
+    const bindRoute = App.makeBindRoute(controllerInstance);
     const bindedRoutes = routes.map(bindRoute);
     this.adapt({ routes: bindedRoutes, prefix });
   }

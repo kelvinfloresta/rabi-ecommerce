@@ -1,4 +1,4 @@
-import { IResponseAsync, RequestMethod } from '../IController';
+import { IResponseAsync, RequestMethod } from '../controllers/IController';
 
 export interface INotBindedRoute {
   readonly url: string;
