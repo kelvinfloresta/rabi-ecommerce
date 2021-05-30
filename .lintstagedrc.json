@@ -1,5 +1,5 @@
 {
   "*.ts": [
-    "npm run lint:fix"
+    "eslint --fix", "prettier --write"
   ]
 }
