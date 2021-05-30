@@ -11,6 +11,10 @@ import {
 } from './IOrder.gateway';
 
 export class OrderGatewayKnexAdapter implements IOrderGateway {
+  private orderRepository = new KnexRepositoryHelper<IOrderBusinessData>(TableName.order);
+
+  private itemsRepository = new KnexRepositoryHelper<IOrderItemBusinessData>(TableName.orderItem);
+
   private companyId = `${TableName.order}.companyId`;
 
   private userId = `${TableName.user}.id`;
@@ -18,11 +22,6 @@ export class OrderGatewayKnexAdapter implements IOrderGateway {
   private orderId = `${TableName.order}.id`;
 
   private userName = `${TableName.user}.name as userName`;
-
-  constructor(
-    private readonly orderRepository: KnexRepositoryHelper<IOrderBusinessData>,
-    private readonly itemsRepository: KnexRepositoryHelper<IOrderItemBusinessData>
-  ) {}
 
   private async createOrderItems(params: {
     orderId: string;

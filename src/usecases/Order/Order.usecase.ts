@@ -1,9 +1,15 @@
 import { IOrderGateway } from 'src/adapters/gateways/Order/IOrder.gateway';
+import { inject, injectable } from 'src/adapters/di';
+import { TYPES } from 'src/adapters/di/types';
 import { ICreateOrderCaseInput, IListOrderCaseInput, IListOrderCaseOutput } from './IOrder.usecase';
 import { ProductCase } from '../Product/Product.usecase';
 
+@injectable()
 export class OrderCase {
-  constructor(private orderGateway: IOrderGateway, private productCase: ProductCase) {}
+  constructor(
+    @inject(TYPES.OrderGateway) private orderGateway: IOrderGateway,
+    private productCase: ProductCase
+  ) {}
 
   public async create(input: ICreateOrderCaseInput) {
     const itemsPromise = input.items.map(async (item) => {
