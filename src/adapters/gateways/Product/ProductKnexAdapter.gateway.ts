@@ -10,6 +10,8 @@ import { IProductGateway } from './IProduct.gateway';
 import { ICommonCompanyFilter } from '../IGateway';
 
 export class ProductGatewayKnexAdapter implements IProductGateway {
+  private repository = new KnexRepositoryHelper<Product>(TableName.product);
+
   private companyId = `${TableName.product}.companyId`;
 
   private productId = `${TableName.product}.id`;
@@ -21,8 +23,6 @@ export class ProductGatewayKnexAdapter implements IProductGateway {
   private productName = `${TableName.product}.name`;
 
   private productDescription = `${TableName.product}.description`;
-
-  constructor(private repository: KnexRepositoryHelper<Product>) {}
 
   async hardDelete(filter: ICommonCompanyFilter): Promise<boolean> {
     return this.repository.hardDelete(filter);

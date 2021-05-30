@@ -8,6 +8,7 @@ import {
 import { ProductCase } from 'src/usecases/Product/Product.usecase';
 import { AuthCase } from 'src/usecases/Auth/Auth.usecase';
 import { Product } from 'src/entities/Product.entity';
+import { injectable } from 'src/adapters/di';
 import { Controller } from '../decorators/Controller.decorator';
 import { Post } from '../decorators/Post.decorator';
 import { Get } from '../decorators/Get.decorator';
@@ -15,6 +16,7 @@ import { Delete } from '../decorators/Delete.decorator';
 import { Patch } from '../decorators/Patch.decorator';
 
 @Controller('/product')
+@injectable()
 export class ProductController {
   constructor(private productCase: ProductCase, private authCase: AuthCase) {}
 
