@@ -11,9 +11,9 @@ import { FastifyAppFactoryAdapter } from './adapters/app/FastifyRouterFactoryAda
 import { register } from './adapters/di';
 import { UserController } from './adapters/controllers/User/User.controller';
 
+register();
 const app: App = container.resolve(FastifyAppFactoryAdapter);
 
-register();
 app.addController(container.resolve(UserController));
 app.addController(container.resolve(AuthController));
 app.addController(container.resolve(CompanyController));
