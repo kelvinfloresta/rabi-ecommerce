@@ -6,7 +6,6 @@ import {
 } from 'src/adapters/controllers/IController';
 
 import { CategoryCase } from 'src/usecases/Category/Category.usecase';
-import { AuthCase } from 'src/usecases/Auth/Auth.usecase';
 import { Category } from 'src/entities/Category.entity';
 import { injectable } from 'src/adapters/di';
 import { Controller } from '../decorators/Controller.decorator';
@@ -17,25 +16,25 @@ import { Delete } from '../decorators/Delete.decorator';
 @Controller('/category')
 @injectable()
 export class CategoryController {
-  constructor(private categoryCase: CategoryCase, private authCase: AuthCase) {}
+  constructor(private categoryCase: CategoryCase) {}
 
   @Post('/')
   public async create(request: IRequest): IResponseAsync<string> {
-    const { companyId } = this.authCase.authenticate(request.headers.authorization);
+    const { companyId } = await request.authenticate();
     const response = await this.categoryCase.save({ ...request.body, companyId });
     return { statusCode: StatusCode.ok, response };
   }
 
   @Get('/')
   public async list(request: IRequest): IResponseAsync<Category[]> {
-    const { companyId } = this.authCase.authenticate(request.headers.authorization);
+    const { companyId } = await request.authenticate();
     const response = await this.categoryCase.list({ companyId });
     return { statusCode: StatusCode.ok, response };
   }
 
   @Delete('/:id')
   public async delete(request: IRequest): Promise<IEmptyResponse> {
-    const { companyId } = this.authCase.authenticate(request.headers.authorization);
+    const { companyId } = await request.authenticate();
     const response = await this.categoryCase.delete({
       companyId,
       id: request.params.id,

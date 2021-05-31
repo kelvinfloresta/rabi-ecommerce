@@ -5,6 +5,7 @@ import { Encrypt } from 'src/utils/Encrypt.util';
 import { inject, injectable } from 'src/adapters/di';
 import { config } from 'src/config';
 import { UserCase } from '../User/User.usecase';
+import { IAuthUser } from './IAuth.usecase';
 
 @injectable()
 export class AuthCase {
@@ -21,8 +22,19 @@ export class AuthCase {
     return this.jwt.sign(params, this.secretKey);
   }
 
-  public authenticate(token: string): { companyId: string; email: string } {
-    return this.jwt.verify(token, this.secretKey) as any;
+  public authenticate(token: string): Promise<IAuthUser> {
+    return this.verify(token);
+  }
+
+  private verify(token: string): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.jwt.verify(token, this.secretKey, (error, decoded) => {
+        if (error) {
+          return reject(error);
+        }
+        return resolve(decoded);
+      });
+    });
   }
 
   public async login(credentials: Pick<User, 'email' | 'password'>) {

@@ -7,9 +7,12 @@ import fastifyContructor, {
 
 import { config } from 'src/config';
 import cors from 'fastify-cors';
+import { AuthCase } from 'src/usecases/Auth/Auth.usecase';
+import { NotAuthorized } from 'src/utils/errors/NotAuthorized.error';
 import { IBindedRoute, IBindedRouteConfig } from './IApp';
 import { App } from './AppFactory';
 import { injectable } from '../di';
+import { IRequest } from '../controllers/IController';
 
 @injectable()
 export class FastifyAppFactoryAdapter extends App {
@@ -17,10 +20,11 @@ export class FastifyAppFactoryAdapter extends App {
     logger: true,
   });
 
-  constructor() {
+  constructor(private authCase: AuthCase) {
     super();
     this.fastify.setErrorHandler(FastifyAppFactoryAdapter.errorHandler());
     this.fastify.register(cors);
+    this.authHandler();
   }
 
   private static errorHandler() {
@@ -29,6 +33,19 @@ export class FastifyAppFactoryAdapter extends App {
     }
 
     return this.developmentErrorHandler;
+  }
+
+  private authMiddleware = (request: FastifyRequest) => async () => {
+    if (!request.headers.authorization) {
+      throw new NotAuthorized();
+    }
+    return this.authCase.authenticate(request.headers.authorization);
+  };
+
+  private authHandler() {
+    this.fastify.addHook('onRequest', async (request: FastifyRequest & IRequest) => {
+      request.authenticate = this.authMiddleware(request);
+    });
   }
 
   private static productionErrorHandler(

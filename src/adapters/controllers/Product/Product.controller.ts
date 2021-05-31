@@ -6,7 +6,6 @@ import {
 } from 'src/adapters/controllers/IController';
 
 import { ProductCase } from 'src/usecases/Product/Product.usecase';
-import { AuthCase } from 'src/usecases/Auth/Auth.usecase';
 import { Product } from 'src/entities/Product.entity';
 import { injectable } from 'src/adapters/di';
 import { Controller } from '../decorators/Controller.decorator';
@@ -18,19 +17,19 @@ import { Patch } from '../decorators/Patch.decorator';
 @Controller('/product')
 @injectable()
 export class ProductController {
-  constructor(private productCase: ProductCase, private authCase: AuthCase) {}
+  constructor(private productCase: ProductCase) {}
 
   @Post('/')
   public async create(request: IRequest): IResponseAsync<string> {
-    const { companyId } = this.authCase.authenticate(request.headers.authorization);
+    const { companyId } = await request.authenticate();
     const response = await this.productCase.save({ companyId, ...request.body });
     return { statusCode: StatusCode.ok, response };
   }
 
   @Patch('/:id')
   public async toggleActive(request: IRequest): Promise<IEmptyResponse> {
-    const { body, headers, params } = request;
-    const { companyId } = this.authCase.authenticate(headers.authorization);
+    const { body, params } = request;
+    const { companyId } = await request.authenticate();
     const hasPatched = await this.productCase.patchByFilter(
       {
         companyId,
@@ -48,14 +47,14 @@ export class ProductController {
 
   @Get('/')
   public async list(request: IRequest): IResponseAsync<Product[]> {
-    const { companyId } = this.authCase.authenticate(request.headers.authorization);
+    const { companyId } = await request.authenticate();
     const response = await this.productCase.list({ companyId });
     return { statusCode: StatusCode.ok, response };
   }
 
   @Delete('/:id')
   public async delete(request: IRequest): Promise<IEmptyResponse> {
-    const { companyId } = this.authCase.authenticate(request.headers.authorization);
+    const { companyId } = await request.authenticate();
     const response = await this.productCase.delete({
       companyId,
       id: request.params.id,

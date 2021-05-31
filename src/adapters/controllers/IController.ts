@@ -1,3 +1,5 @@
+import { IAuthUser } from 'src/usecases/Auth/IAuth.usecase';
+
 export const enum RequestMethod {
   POST = 'post',
   PATCH = 'patch',
@@ -36,4 +38,5 @@ export interface IRequest<Query = any, Body = any, Params = any, Header = any> {
   readonly params: Params;
   readonly query: Query;
   readonly body: Body;
+  authenticate(): Promise<IAuthUser>;
 }
