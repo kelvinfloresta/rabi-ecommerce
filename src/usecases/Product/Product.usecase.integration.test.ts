@@ -6,7 +6,8 @@ import {
 } from 'src/__fixtures__/product.fixture';
 import { uuidv4 } from 'src/utils/uuid.utils';
 import { createCompanyFixture } from 'src/__fixtures__/company.fixture';
-import { ProductCaseFactory } from './ProductFactory.usecase';
+import { container } from 'src/adapters/di';
+import { ProductCase } from './Product.usecase';
 
 beforeEach(async () => {
   await cleanDatabase();
@@ -16,12 +17,16 @@ afterAll(async () => {
   await closeDatabase();
 });
 
+function makeSut() {
+  return container.resolve(ProductCase);
+}
+
 describe('Product Case', () => {
   describe('Save', () => {
     it('Should return the saved product', async () => {
       const { id: companyId } = await createCompanyFixture({ name: 'My great company' });
       const product = buildProductFixture({ name: 'cake', companyId });
-      const sut = ProductCaseFactory();
+      const sut = makeSut();
       const productId = await sut.save(product);
       return expectTohaveProduct(productId, product);
     });
@@ -35,7 +40,7 @@ describe('Product Case', () => {
       await createProductFixture(expectedProduct);
       await createProductFixture({ name: 'banana', companyId: secondCompany });
 
-      const sut = ProductCaseFactory();
+      const sut = makeSut();
       const result = await sut.list({ companyId: firstCompany });
 
       expect(result.length).toBe(1);
@@ -45,7 +50,7 @@ describe('Product Case', () => {
 
   describe('patch', () => {
     it('Should patch name', async () => {
-      const sut = ProductCaseFactory();
+      const sut = makeSut();
       const { id: companyId } = await createCompanyFixture({ name: 'My great company' });
       const product = await createProductFixture({ name: 'cake', companyId });
       const newName = 'cupcake';
@@ -55,7 +60,7 @@ describe('Product Case', () => {
     });
 
     it('Should patch description', async () => {
-      const sut = ProductCaseFactory();
+      const sut = makeSut();
       const { id: companyId } = await createCompanyFixture({ name: 'My great company' });
       const product = await createProductFixture({ price: 10, companyId });
       const newDescription = 'A lovely product';
@@ -65,7 +70,7 @@ describe('Product Case', () => {
     });
 
     it('Should patch price', async () => {
-      const sut = ProductCaseFactory();
+      const sut = makeSut();
       const { id: companyId } = await createCompanyFixture({ name: 'My great company' });
       const product = await createProductFixture({ price: 10, companyId });
       const newPrice = 10.99;
@@ -75,7 +80,7 @@ describe('Product Case', () => {
     });
 
     it('Should patch active', async () => {
-      const sut = ProductCaseFactory();
+      const sut = makeSut();
       const { id: companyId } = await createCompanyFixture({ name: 'My great company' });
       const product = await createProductFixture({ active: true, companyId });
       await sut.patchByFilter({ id: product.id, companyId }, { active: false });
@@ -84,7 +89,7 @@ describe('Product Case', () => {
     });
 
     it('Should not patch the other product values', async () => {
-      const sut = ProductCaseFactory();
+      const sut = makeSut();
       const { id: companyId } = await createCompanyFixture({ name: 'My great company' });
       const product = await createProductFixture({ name: 'banana', price: 1, companyId });
       await sut.patchByFilter({ id: product.id, companyId }, { name: 'A rare banana', price: 999 });
@@ -97,7 +102,7 @@ describe('Product Case', () => {
 
   describe('get', () => {
     it('Should return all fields', async () => {
-      const sut = ProductCaseFactory();
+      const sut = makeSut();
       const { id: companyId } = await createCompanyFixture({ name: 'My great company' });
       const product = await createProductFixture({ name: 'cake', companyId });
       const productFound = await sut.get(product.id);
@@ -105,7 +110,7 @@ describe('Product Case', () => {
     });
 
     it('Should return undefined if not found', async () => {
-      const sut = ProductCaseFactory();
+      const sut = makeSut();
       const NOT_EXISTENT_ID = uuidv4();
       const productFound = await sut.get(NOT_EXISTENT_ID);
       expect(productFound).toBeUndefined();
@@ -114,7 +119,7 @@ describe('Product Case', () => {
 
   describe('delete', () => {
     it('Should delete', async () => {
-      const sut = ProductCaseFactory();
+      const sut = makeSut();
       const { id: companyId } = await createCompanyFixture({ name: 'My great company' });
       const { id } = await createProductFixture({ name: 'cake', companyId });
       await sut.delete({ id, companyId });
@@ -123,14 +128,14 @@ describe('Product Case', () => {
     });
 
     it('Should return false if not found', async () => {
-      const sut = ProductCaseFactory();
+      const sut = makeSut();
       const NOT_EXISTENT_ID = uuidv4();
       const deleted = await sut.delete({ id: NOT_EXISTENT_ID, companyId: NOT_EXISTENT_ID });
       expect(deleted).toBe(false);
     });
 
     it('Should return true if deleted', async () => {
-      const sut = ProductCaseFactory();
+      const sut = makeSut();
       const { id: companyId } = await createCompanyFixture({ name: 'My great company' });
       const product = await createProductFixture({ name: 'cake', companyId });
       const deleted = await sut.delete({ companyId, id: product.id });

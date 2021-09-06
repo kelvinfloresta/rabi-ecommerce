@@ -1,11 +1,12 @@
 import { closeDatabase, cleanDatabase } from 'src/adapters/database/Database.adapter';
+import { container } from 'src/adapters/di';
 import { createCompanyFixture } from 'src/__fixtures__/company.fixture';
 import {
   buildUserFixture,
   expectTohaveUser,
   createUserFixture,
 } from 'src/__fixtures__/user.fixture';
-import { UserCaseFactory } from './UserFactory.usecase';
+import { UserCase } from './User.usecase';
 
 beforeEach(async () => {
   await cleanDatabase();
@@ -24,7 +25,7 @@ describe('User Case', () => {
         email: 'mail@mail.com',
         companyId,
       });
-      const userId = await UserCaseFactory.singleton.save(user);
+      const userId = await container.resolve(UserCase).save(user);
 
       return expectTohaveUser(userId, user);
     });

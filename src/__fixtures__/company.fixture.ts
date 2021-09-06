@@ -1,6 +1,7 @@
+import { container } from 'src/adapters/di';
 import { Company } from 'src/entities/Company.entity';
 import { DocumentType } from 'src/entities/enums/DocumentType.enum';
-import { CompanyCaseFactory } from 'src/usecases/Company/CompanyFactory.usecase';
+import { CompanyCase } from 'src/usecases/Company/Company.usecase';
 import { ISaveCompanyCaseInput } from 'src/usecases/Company/ICompany,usecase';
 
 export function buildCompanyFixture(
@@ -16,8 +17,8 @@ export function buildCompanyFixture(
 }
 
 export async function createCompanyFixture(params?: Partial<Company>): Promise<Company> {
-  const companyCase = CompanyCaseFactory();
   const company = buildCompanyFixture(params);
+  const companyCase = container.resolve(CompanyCase);
   const companyId = await companyCase.save(company);
   const companyCreated = await companyCase.get(companyId);
   if (!companyCreated) {
@@ -27,7 +28,7 @@ export async function createCompanyFixture(params?: Partial<Company>): Promise<C
 }
 
 export async function expectTohaveCompany(id: string, product: Partial<Company>) {
-  const companyCase = CompanyCaseFactory();
+  const companyCase = container.resolve(CompanyCase);
   const result = await companyCase.get(id);
   return expect(result).toMatchObject(product);
 }

@@ -7,8 +7,9 @@ import {
   buildCategoryFixture,
 } from 'src/__fixtures__/category.fixture';
 import { uuidv4 } from 'src/utils/uuid.utils';
-import { CategoryCaseFactory } from './CategoryFactory.usecase';
+import { container } from 'src/adapters/di';
 import { ISaveCategoryCaseInput } from './ICategory.usecase';
+import { CategoryCase } from './Category.usecase';
 
 beforeEach(async () => {
   await cleanDatabase();
@@ -17,6 +18,10 @@ beforeEach(async () => {
 afterAll(async () => {
   await closeDatabase();
 });
+
+function makeSut() {
+  return container.resolve(CategoryCase);
+}
 
 describe('Category Case', () => {
   describe('Save', () => {
@@ -27,7 +32,7 @@ describe('Category Case', () => {
         name: 'Minor Prophets',
         description: 'The Twelve Old Testament prophetic Books are known as Minor Prophets.',
       };
-      const categoryId = await CategoryCaseFactory.singleton.save(category);
+      const categoryId = await makeSut().save(category);
       return expectTohaveCategory(categoryId, category);
     });
 
@@ -56,13 +61,13 @@ describe('Category Case', () => {
       await createCategoryFixture({ name: 'Category 1', companyId });
       await createCategoryFixture({ name: 'Category 2', companyId });
 
-      const result = await CategoryCaseFactory.singleton.list({ companyId });
+      const result = await makeSut().list({ companyId });
       expect(result).toHaveLength(2);
     });
 
     it('Should return an empty array if not found', async () => {
       const companyIdNotExists = uuidv4();
-      const result = await CategoryCaseFactory.singleton.list({
+      const result = await makeSut().list({
         companyId: companyIdNotExists,
       });
       expect(result).toHaveLength(0);
@@ -73,7 +78,7 @@ describe('Category Case', () => {
       const { id: anotherCompanyId } = await createCompanyFixture();
       await createCategoryFixture({ companyId });
 
-      const result = await CategoryCaseFactory.singleton.list({ companyId: anotherCompanyId });
+      const result = await makeSut().list({ companyId: anotherCompanyId });
       expect(result).toHaveLength(0);
     });
   });

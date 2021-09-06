@@ -3,8 +3,9 @@ import { expectTohaveCompany } from 'src/__fixtures__/company.fixture';
 import { uuidv4 } from 'src/utils/uuid.utils';
 
 import { DocumentType } from 'src/entities/enums/DocumentType.enum';
-import { CompanyCaseFactory } from './CompanyFactory.usecase';
+import { container } from 'src/adapters/di';
 import { ISaveCompanyCaseInput } from './ICompany,usecase';
+import { CompanyCase } from './Company.usecase';
 
 beforeEach(async () => {
   await cleanDatabase();
@@ -14,10 +15,14 @@ afterAll(async () => {
   await closeDatabase();
 });
 
+function makeSut() {
+  return container.resolve(CompanyCase);
+}
+
 describe('company Case', () => {
   describe('Save', () => {
     it('Should return the saved company', async () => {
-      const sut = CompanyCaseFactory();
+      const sut = makeSut();
       const myCompany: ISaveCompanyCaseInput = {
         name: 'My super ecommerce',
         documentNumber: '30 Eggs for 10$',
@@ -32,7 +37,7 @@ describe('company Case', () => {
     it.todo('Should return all fields');
 
     it('Should return undefined if not found', async () => {
-      const sut = CompanyCaseFactory();
+      const sut = makeSut();
       const NOT_EXISTENT_ID = uuidv4();
       const companyFound = await sut.get(NOT_EXISTENT_ID);
       expect(companyFound).toBeUndefined();
