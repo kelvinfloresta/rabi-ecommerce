@@ -1,9 +1,10 @@
 import * as jwt from 'jsonwebtoken';
 import { User } from 'src/entities/User.entity';
 import { NotAuthorized } from 'src/utils/errors/NotAuthorized.error';
-import { Encrypt } from 'src/utils/Encrypt.util';
 import { inject, injectable } from 'src/adapters/di';
 import { config } from 'src/config';
+import { IEncrypt } from 'src/adapters/encrypt/IEncrypt';
+import { TYPES } from 'src/adapters/di/types';
 import { UserCase } from '../User/User.usecase';
 import { IAuthUser } from './IAuth.usecase';
 
@@ -15,7 +16,7 @@ export class AuthCase {
 
   constructor(
     private readonly userCase: UserCase,
-    @inject(Encrypt) private readonly encrypt: typeof Encrypt
+    @inject(TYPES.Encrypt) private readonly encrypt: IEncrypt
   ) {}
 
   private sign(params: { email: string; userId: string; companyId: string | null }) {
