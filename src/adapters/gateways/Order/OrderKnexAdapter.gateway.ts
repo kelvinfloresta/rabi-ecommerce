@@ -10,9 +10,8 @@ import {
   IOrderItemBusinessData,
 } from './IOrder.gateway';
 
-export class OrderGatewayKnexAdapter implements IOrderGateway {
-  private orderRepository = new KnexRepositoryHelper<IOrderBusinessData>(TableName.order);
-
+export class OrderGatewayKnexAdapter extends KnexRepositoryHelper<IOrderBusinessData>
+  implements IOrderGateway {
   private itemsRepository = new KnexRepositoryHelper<IOrderItemBusinessData>(TableName.orderItem);
 
   private companyId = `${TableName.order}.companyId`;
@@ -22,6 +21,10 @@ export class OrderGatewayKnexAdapter implements IOrderGateway {
   private orderId = `${TableName.order}.id`;
 
   private userName = `${TableName.user}.name as userName`;
+
+  constructor() {
+    super(TableName.order);
+  }
 
   private async createOrderItems(params: {
     orderId: string;
@@ -40,9 +43,22 @@ export class OrderGatewayKnexAdapter implements IOrderGateway {
     await this.itemsRepository.instance.insert(items).transacting(params.tx);
   }
 
+  private static adaptList(result: any[]): IListOrderCaseOutput[] {
+    const groups = groupBy(result, 'orderId');
+    return Object.entries(groups).map(([orderId, orders]) => {
+      return {
+        id: orderId,
+        companyId: orders[0].companyId,
+        userId: orders[0].userId,
+        userName: orders[0].userName,
+        items: orders,
+      };
+    });
+  }
+
   public async create({ companyId, userId, items }: ICreateOrderGatewayInput): Promise<string> {
-    return this.orderRepository.knex.transaction(async (tx) => {
-      const [orderId] = await this.orderRepository.instance
+    return super.knex.transaction(async (tx) => {
+      const [orderId] = await super.instance
         .insert({
           companyId,
           userId,
@@ -57,7 +73,7 @@ export class OrderGatewayKnexAdapter implements IOrderGateway {
   }
 
   public async listByFilter(filter: IListOrderCaseInput): Promise<IListOrderCaseOutput[]> {
-    const result = await this.orderRepository.instance
+    const result = await super.instance
       .select(
         'orderId',
         'userId',
@@ -71,18 +87,5 @@ export class OrderGatewayKnexAdapter implements IOrderGateway {
       .leftJoin(TableName.user, this.userId, 'userId')
       .innerJoin(TableName.orderItem, this.orderId, 'orderId');
     return OrderGatewayKnexAdapter.adaptList(result);
-  }
-
-  private static adaptList(result: any[]): IListOrderCaseOutput[] {
-    const groups = groupBy(result, 'orderId');
-    return Object.entries(groups).map(([orderId, orders]) => {
-      return {
-        id: orderId,
-        companyId: orders[0].companyId,
-        userId: orders[0].userId,
-        userName: orders[0].userName,
-        items: orders,
-      };
-    });
   }
 }

@@ -1,17 +1,15 @@
 import { Product } from 'src/entities/Product.entity';
 import {
-  ISaveProductCaseInput,
   IPatchProductCaseInput,
   IListProductCaseInput,
 } from 'src/usecases/Product/IProduct.usecase';
 import { KnexRepositoryHelper } from 'src/frameworks/database/knex/knex-repository-helper.framework';
 import { TableName } from 'src/adapters/database/Database.adapter';
 import { IProductGateway } from './IProduct.gateway';
-import { ICommonCompanyFilter, Id } from '../IGateway';
+import { ICommonCompanyFilter } from '../IGateway';
 
-export class ProductGatewayKnexAdapter implements IProductGateway {
-  private repository = new KnexRepositoryHelper<Product>(TableName.product);
-
+export class ProductGatewayKnexAdapter extends KnexRepositoryHelper<Product>
+  implements IProductGateway {
   private companyId = `${TableName.product}.companyId`;
 
   private productId = `${TableName.product}.id`;
@@ -24,27 +22,19 @@ export class ProductGatewayKnexAdapter implements IProductGateway {
 
   private productDescription = `${TableName.product}.description`;
 
-  async hardDelete(filter: ICommonCompanyFilter): Promise<boolean> {
-    return this.repository.hardDelete(filter);
+  constructor() {
+    super(TableName.product);
   }
 
   async patchByFilter(
     filter: ICommonCompanyFilter,
     input: IPatchProductCaseInput
   ): Promise<boolean> {
-    return this.repository.updateByFilter(filter, input);
-  }
-
-  async getById(id: Id): Promise<Product | undefined> {
-    return this.repository.getById(id);
-  }
-
-  async save(input: ISaveProductCaseInput) {
-    return this.repository.save(input);
+    return super.updateByFilter(filter, input);
   }
 
   async listByFilter(filter: IListProductCaseInput): Promise<Product[]> {
-    return this.repository.instance
+    return super.instance
       .select(
         this.companyId,
         this.productId,
