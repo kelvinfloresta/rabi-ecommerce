@@ -1,0 +1,46 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "attach",
+      "name": "Debug",
+      "port": 9229
+    },
+    {
+      "name": "Unit Test",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceRoot}/functions",
+      "runtimeArgs": [
+        "--inspect-brk",
+        "./node_modules/jest/bin/jest.js",
+        "--runInBand",
+        "--config=jest-unit.config.js",
+        "--watchAll"
+      ],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "port": 9229
+    },
+    {
+      "name": "Integration Test",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceRoot}/functions",
+      "runtimeArgs": [
+        "--inspect-brk",
+        "./node_modules/jest/bin/jest.js",
+        "--runInBand",
+        "--config=jest-integration.config.js",
+        "--watchAll"
+      ],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "port": 9229
+    }
+  ]
+}
