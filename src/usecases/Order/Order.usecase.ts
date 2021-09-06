@@ -13,7 +13,7 @@ export class OrderCase {
 
   public async create(input: ICreateOrderCaseInput) {
     const itemsPromise = input.items.map(async (item) => {
-      const product = await this.productCase.get(item.productId);
+      const product = await this.productCase.getById({ id: item.productId });
       if (!product) {
         throw new Error('Produto não encontrado');
       }
