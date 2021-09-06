@@ -66,8 +66,8 @@ describe('File: Auth.usecase.ts', () => {
       const sut = makeSut();
       const invalidToken =
         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.e30.9EmJDfAi6fqc_FoO3yD77spdi7QZX-s9VzN89vOaOp0';
-      const lazyAuthenticate = () => sut.authenticate(invalidToken);
-      expect(lazyAuthenticate).toThrow();
+
+      await expect(sut.authenticate(invalidToken)).rejects.toThrow();
     });
   });
 });
