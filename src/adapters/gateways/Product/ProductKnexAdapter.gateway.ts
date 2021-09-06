@@ -7,7 +7,7 @@ import {
 import { KnexRepositoryHelper } from 'src/frameworks/database/knex/knex-repository-helper.framework';
 import { TableName } from 'src/adapters/database/Database.adapter';
 import { IProductGateway } from './IProduct.gateway';
-import { ICommonCompanyFilter } from '../IGateway';
+import { ICommonCompanyFilter, Id } from '../IGateway';
 
 export class ProductGatewayKnexAdapter implements IProductGateway {
   private repository = new KnexRepositoryHelper<Product>(TableName.product);
@@ -35,7 +35,7 @@ export class ProductGatewayKnexAdapter implements IProductGateway {
     return this.repository.updateByFilter(filter, input);
   }
 
-  async get(id: string): Promise<Product | undefined> {
+  async getById(id: Id): Promise<Product | undefined> {
     return this.repository.getById(id);
   }
 

@@ -28,8 +28,12 @@ export interface ILogicDeleteGateway<Filter = string> {
   logicDelete(filter: Filter): Promise<boolean>;
 }
 
-export interface IGetGateway<Input, Output> {
-  get(input: Input): Promise<Output | undefined>;
+export interface Id {
+  readonly id: string;
+}
+
+export interface IGetByIdGateway<Output, Input = Id> {
+  getById(input: Input): Promise<Output | undefined>;
 }
 
 export interface IPaginateGateway<Filter, Output> {

@@ -20,7 +20,7 @@ export async function createCompanyFixture(params?: Partial<Company>): Promise<C
   const company = buildCompanyFixture(params);
   const companyCase = container.resolve(CompanyCase);
   const companyId = await companyCase.save(company);
-  const companyCreated = await companyCase.get(companyId);
+  const companyCreated = await companyCase.getById({ id: companyId });
   if (!companyCreated) {
     throw new Error('Failed on createCompanyFixture');
   }
@@ -29,6 +29,6 @@ export async function createCompanyFixture(params?: Partial<Company>): Promise<C
 
 export async function expectTohaveCompany(id: string, product: Partial<Company>) {
   const companyCase = container.resolve(CompanyCase);
-  const result = await companyCase.get(id);
+  const result = await companyCase.getById({ id });
   return expect(result).toMatchObject(product);
 }

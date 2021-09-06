@@ -27,7 +27,7 @@ describe('User Case', () => {
       });
       const userId = await container.resolve(UserCase).save(user);
 
-      return expectTohaveUser(userId, user);
+      return expectTohaveUser({ id: userId }, user);
     });
 
     it('Should reject if email already exists', async () => {

@@ -1,7 +1,7 @@
 import { ISaveUserCaseInput } from 'src/usecases/User/IUser.usecase';
 import { User } from 'src/entities/User.entity';
-import { ISaveGateway, IGetGateway } from '../IGateway';
+import { ISaveGateway, IGetByIdGateway } from '../IGateway';
 
-export interface IUserGateway extends ISaveGateway<ISaveUserCaseInput>, IGetGateway<string, User> {
+export interface IUserGateway extends ISaveGateway<ISaveUserCaseInput>, IGetByIdGateway<User> {
   getByFilter(filter: Partial<User>): Promise<User | undefined>;
 }

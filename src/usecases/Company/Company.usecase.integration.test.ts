@@ -38,8 +38,8 @@ describe('company Case', () => {
 
     it('Should return undefined if not found', async () => {
       const sut = makeSut();
-      const NOT_EXISTENT_ID = uuidv4();
-      const companyFound = await sut.get(NOT_EXISTENT_ID);
+      const NOT_EXISTENT_ID = { id: uuidv4() };
+      const companyFound = await sut.getById(NOT_EXISTENT_ID);
       expect(companyFound).toBeUndefined();
     });
   });

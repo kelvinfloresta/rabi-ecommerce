@@ -3,11 +3,12 @@ import { User } from 'src/entities/User.entity';
 import { ISaveUserCaseInput } from 'src/usecases/User/IUser.usecase';
 import { TableName } from 'src/adapters/database/Database.adapter';
 import { IUserGateway } from './IUser.gateway';
+import { Id } from '../IGateway';
 
 export class UserGatewayKnexAdapter implements IUserGateway {
   private repository = new KnexRepositoryHelper<User>(TableName.user);
 
-  get(id: string): Promise<User | undefined> {
+  getById(id: Id): Promise<User | undefined> {
     return this.repository.getById(id);
   }
 

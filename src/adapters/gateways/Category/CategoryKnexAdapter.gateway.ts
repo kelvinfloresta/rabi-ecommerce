@@ -6,13 +6,14 @@ import {
   IListCategoryCaseInput,
   IHardDeleteCategoryCaseInput,
 } from 'src/usecases/Category/ICategory.usecase';
+import { Id } from '../IGateway';
 import { ICategoryGateway } from './ICategory.gateway';
 
 export class CategoryGatewayKnexAdapter implements ICategoryGateway {
   private repository = new KnexRepositoryHelper<Category>(TableName.category);
 
-  public async get(id: string): Promise<Category | undefined> {
-    return this.repository.getById(id);
+  public async getById(input: Id): Promise<Category | undefined> {
+    return this.repository.getById(input);
   }
 
   public async save(input: ISaveCategoryCaseInput): Promise<string> {

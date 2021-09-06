@@ -2,6 +2,7 @@ import { ICategoryGateway } from 'src/adapters/gateways/Category/ICategory.gatew
 import { Category } from 'src/entities/Category.entity';
 import { inject, injectable } from 'src/adapters/di';
 import { TYPES } from 'src/adapters/di/types';
+import { Id } from 'src/adapters/gateways/IGateway';
 import {
   ISaveCategoryCaseInput,
   IListCategoryCaseInput,
@@ -16,8 +17,8 @@ export class CategoryCase {
     return this.categoryGateway.save(input);
   }
 
-  async getById(id: string): Promise<Category | undefined> {
-    return this.categoryGateway.get(id);
+  async getById(id: Id): Promise<Category | undefined> {
+    return this.categoryGateway.getById(id);
   }
 
   async list(filter: IListCategoryCaseInput): Promise<Category[]> {

@@ -33,7 +33,7 @@ describe('Category Case', () => {
         description: 'The Twelve Old Testament prophetic Books are known as Minor Prophets.',
       };
       const categoryId = await makeSut().save(category);
-      return expectTohaveCategory(categoryId, category);
+      return expectTohaveCategory({ id: categoryId }, category);
     });
 
     it('Should reject if name already exists in company', async () => {

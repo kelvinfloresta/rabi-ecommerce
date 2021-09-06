@@ -6,7 +6,7 @@ import {
 } from 'src/usecases/Product/IProduct.usecase';
 import {
   ISaveGateway,
-  IGetGateway,
+  IGetByIdGateway,
   IListByFilterGateway,
   IDeleteGateway,
   ICommonCompanyFilter,
@@ -17,5 +17,5 @@ export interface IProductGateway
   extends IDeleteGateway<ICommonCompanyFilter>,
     IPatchByFilterGateway<ICommonCompanyFilter, IPatchProductCaseInput>,
     ISaveGateway<ISaveProductCaseInput>,
-    IGetGateway<string, Product>,
+    IGetByIdGateway<Product>,
     IListByFilterGateway<IListProductCaseInput, Product> {}

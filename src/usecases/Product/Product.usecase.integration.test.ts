@@ -55,7 +55,7 @@ describe('Product Case', () => {
       const product = await createProductFixture({ name: 'cake', companyId });
       const newName = 'cupcake';
       await sut.patchByFilter({ id: product.id, companyId }, { name: newName });
-      const result = await sut.get(product.id);
+      const result = await sut.getById({ id: product.id });
       expect(result?.name).toBe(newName);
     });
 
@@ -65,7 +65,7 @@ describe('Product Case', () => {
       const product = await createProductFixture({ price: 10, companyId });
       const newDescription = 'A lovely product';
       await sut.patchByFilter({ id: product.id, companyId }, { description: newDescription });
-      const result = await sut.get(product.id);
+      const result = await sut.getById({ id: product.id });
       expect(result?.description).toBe(newDescription);
     });
 
@@ -75,7 +75,7 @@ describe('Product Case', () => {
       const product = await createProductFixture({ price: 10, companyId });
       const newPrice = 10.99;
       await sut.patchByFilter({ id: product.id, companyId }, { price: newPrice });
-      const result = await sut.get(product.id);
+      const result = await sut.getById({ id: product.id });
       expect(result?.price).toBe(newPrice);
     });
 
@@ -84,7 +84,7 @@ describe('Product Case', () => {
       const { id: companyId } = await createCompanyFixture({ name: 'My great company' });
       const product = await createProductFixture({ active: true, companyId });
       await sut.patchByFilter({ id: product.id, companyId }, { active: false });
-      const result = await sut.get(product.id);
+      const result = await sut.getById({ id: product.id });
       expect(result?.active).toBeFalsy();
     });
 
@@ -93,7 +93,7 @@ describe('Product Case', () => {
       const { id: companyId } = await createCompanyFixture({ name: 'My great company' });
       const product = await createProductFixture({ name: 'banana', price: 1, companyId });
       await sut.patchByFilter({ id: product.id, companyId }, { name: 'A rare banana', price: 999 });
-      const result = await sut.get(product.id);
+      const result = await sut.getById({ id: product.id });
       const fieldsNotChanged = { description: product.description, active: product.active };
       const fieldsNotpatchd = { description: result?.description, active: result?.active };
       expect(fieldsNotChanged).toMatchObject(fieldsNotpatchd);
@@ -105,14 +105,14 @@ describe('Product Case', () => {
       const sut = makeSut();
       const { id: companyId } = await createCompanyFixture({ name: 'My great company' });
       const product = await createProductFixture({ name: 'cake', companyId });
-      const productFound = await sut.get(product.id);
+      const productFound = await sut.getById({ id: product.id });
       expect(productFound).toMatchObject(product);
     });
 
     it('Should return undefined if not found', async () => {
       const sut = makeSut();
       const NOT_EXISTENT_ID = uuidv4();
-      const productFound = await sut.get(NOT_EXISTENT_ID);
+      const productFound = await sut.getById({ id: NOT_EXISTENT_ID });
       expect(productFound).toBeUndefined();
     });
   });
@@ -123,7 +123,7 @@ describe('Product Case', () => {
       const { id: companyId } = await createCompanyFixture({ name: 'My great company' });
       const { id } = await createProductFixture({ name: 'cake', companyId });
       await sut.delete({ id, companyId });
-      const deletedProduct = await sut.get(id);
+      const deletedProduct = await sut.getById({ id });
       expect(deletedProduct).toBeUndefined();
     });
 

@@ -1,7 +1,8 @@
 import { db } from 'src/adapters/database/Database.adapter';
+import { Id } from 'src/adapters/gateways/IGateway';
 import { IPaginationParams } from 'src/usecases/IPaginate';
 
-export class KnexRepositoryHelper<Entity, Id extends string | number = string> {
+export class KnexRepositoryHelper<Entity, TId = Id> {
   public knex = db;
 
   constructor(private tableName: string) {}
@@ -10,8 +11,8 @@ export class KnexRepositoryHelper<Entity, Id extends string | number = string> {
     return this.knex(this.tableName);
   }
 
-  async getById(id: Id): Promise<Entity | undefined> {
-    return this.instance.where({ id }).first();
+  async getById(id: TId): Promise<Entity | undefined> {
+    return this.instance.where(id).first();
   }
 
   async getByFilter(filter: Partial<Entity>): Promise<Entity | undefined> {
@@ -26,13 +27,13 @@ export class KnexRepositoryHelper<Entity, Id extends string | number = string> {
     return this.instance.where(input);
   }
 
-  async save<Input extends Partial<Entity>>(input: Input): Promise<Id> {
+  async save<Input extends Partial<Entity>>(input: Input): Promise<string> {
     const [result] = await this.instance.insert(input).returning('id');
     return result;
   }
 
-  async updateById(id: Id, input: Partial<Entity>): Promise<number> {
-    return this.instance.update(input).where({ id });
+  async updateById(id: TId, input: Partial<Entity>): Promise<number> {
+    return this.instance.update(input).where(id);
   }
 
   async updateByFilter(filter: Partial<Entity>, input: Partial<Entity>): Promise<boolean> {
