@@ -22,8 +22,9 @@ export class KnexFactory {
   private static getConnectionConfig() {
     const databaseConfig = knexFile[config.envName];
     if (!databaseConfig) {
-      throw new Error('Missing database config');
+      throw new Error(`Cannot find config with name "${config.envName}"`);
     }
+
     return databaseConfig;
   }
 
