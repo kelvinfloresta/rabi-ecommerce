@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import { container } from 'tsyringe';
 import { CategoryGatewayKnexAdapter } from '../gateways/Category/CategoryKnexAdapter.gateway';
 import { CompanyGatewayKnexAdapter } from '../gateways/Company/CompanyKnexAdapter.gateway';

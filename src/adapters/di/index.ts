@@ -1,3 +1,3 @@
 export { register } from './di';
 
-export { inject, injectable } from 'tsyringe';
+export { inject, injectable, container } from 'tsyringe';

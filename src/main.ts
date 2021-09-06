@@ -1,6 +1,4 @@
-import 'reflect-metadata';
-
-import { container } from 'tsyringe';
+import { container } from 'src/adapters/di';
 import { AuthController } from './adapters/controllers/Auth/Auth.controller';
 import { CategoryController } from './adapters/controllers/Category/Category.controller';
 import { CompanyController } from './adapters/controllers/Company/Company.controller';
