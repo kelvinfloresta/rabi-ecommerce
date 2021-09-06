@@ -14,7 +14,7 @@ export class ProductCase {
   constructor(@inject(TYPES.ProductGateway) private productGateway: IProductGateway) {}
 
   async save(input: ISaveProductCaseInput): Promise<string> {
-    return this.productGateway.save(input);
+    return this.productGateway.create(input);
   }
 
   async list(filter: IListProductCaseInput) {

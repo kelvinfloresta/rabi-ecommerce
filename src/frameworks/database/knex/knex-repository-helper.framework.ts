@@ -2,7 +2,7 @@ import { db } from 'src/adapters/database/Database.adapter';
 import { Id } from 'src/adapters/gateways/IGateway';
 import { IPaginationParams } from 'src/usecases/IPaginate';
 
-export class KnexRepositoryHelper<Entity, TId = Id> {
+export class KnexRepositoryHelper<Entity, TCreateInput = Partial<Entity>, TId = Id> {
   public knex = db;
 
   constructor(private tableName: string) {}
@@ -27,7 +27,7 @@ export class KnexRepositoryHelper<Entity, TId = Id> {
     return this.instance.where(input);
   }
 
-  async save<Input extends Partial<Entity>>(input: Input): Promise<string> {
+  async create(input: TCreateInput): Promise<string> {
     const [result] = await this.instance.insert(input).returning('id');
     return result;
   }

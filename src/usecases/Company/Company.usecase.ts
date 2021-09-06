@@ -10,7 +10,7 @@ export class CompanyCase {
   constructor(@inject(TYPES.CompanyGateway) private companyGateway: ICompanyGateway) {}
 
   async save(input: ISaveCompanyCaseInput): Promise<string> {
-    return this.companyGateway.save(input);
+    return this.companyGateway.create(input);
   }
 
   async getById(id: Id): Promise<Company | undefined> {

@@ -8,10 +8,6 @@ export interface IPatchGateway<Input, Output = boolean> {
   patch(input: Input): Promise<Output>;
 }
 
-export interface ISaveGateway<Input, Output = string> {
-  save(input: Input): Promise<Output>;
-}
-
 export interface ICreateGateway<Input, Output = string> {
   create(input: Input): Promise<Output>;
 }

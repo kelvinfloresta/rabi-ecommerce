@@ -14,7 +14,7 @@ export class CategoryCase {
   constructor(@inject(TYPES.CategoryGateway) private categoryGateway: ICategoryGateway) {}
 
   async save(input: ISaveCategoryCaseInput): Promise<string> {
-    return this.categoryGateway.save(input);
+    return this.categoryGateway.create(input);
   }
 
   async getById(id: Id): Promise<Category | undefined> {

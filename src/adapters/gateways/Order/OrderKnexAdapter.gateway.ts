@@ -4,15 +4,16 @@ import { IListOrderCaseInput, IListOrderCaseOutput } from 'src/usecases/Order/IO
 import { TableName } from 'src/adapters/database/Database.adapter';
 import groupBy from 'lodash/groupBy';
 import {
-  IOrderGateway,
-  IOrderBusinessData,
   ICreateOrderGatewayInput,
+  IOrderBusinessData,
+  IOrderGateway,
   IOrderItemBusinessData,
 } from './IOrder.gateway';
 
-export class OrderGatewayKnexAdapter extends KnexRepositoryHelper<IOrderBusinessData>
+export class OrderGatewayKnexAdapter
+  extends KnexRepositoryHelper<IOrderBusinessData, ICreateOrderGatewayInput>
   implements IOrderGateway {
-  private itemsRepository = new KnexRepositoryHelper<IOrderItemBusinessData>(TableName.orderItem);
+  private itemsRepository = new KnexRepositoryHelper<IOrderBusinessData>(TableName.orderItem);
 
   private companyId = `${TableName.order}.companyId`;
 
@@ -24,6 +25,22 @@ export class OrderGatewayKnexAdapter extends KnexRepositoryHelper<IOrderBusiness
 
   constructor() {
     super(TableName.order);
+  }
+
+  public async create({ companyId, userId, items }: ICreateOrderGatewayInput): Promise<string> {
+    return super.knex.transaction(async (tx) => {
+      const [orderId] = await super.instance
+        .insert({
+          companyId,
+          userId,
+        })
+        .transacting(tx)
+        .returning('id');
+
+      await this.createOrderItems({ items, orderId, tx });
+
+      return orderId;
+    });
   }
 
   private async createOrderItems(params: {
@@ -53,22 +70,6 @@ export class OrderGatewayKnexAdapter extends KnexRepositoryHelper<IOrderBusiness
         userName: orders[0].userName,
         items: orders,
       };
-    });
-  }
-
-  public async create({ companyId, userId, items }: ICreateOrderGatewayInput): Promise<string> {
-    return super.knex.transaction(async (tx) => {
-      const [orderId] = await super.instance
-        .insert({
-          companyId,
-          userId,
-        })
-        .transacting(tx)
-        .returning('id');
-
-      await this.createOrderItems({ items, orderId, tx });
-
-      return orderId;
     });
   }
 
