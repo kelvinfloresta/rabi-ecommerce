@@ -7,7 +7,7 @@
     "start": "ts-node src/main.ts",
     "start:dev": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/main.ts",
     "test": "cross-env NODE_PATH=. jest",
-    "test:integration": "npm test -- --runInBand --watch -c jest-integration.config.js ",
+    "test:integration": "npm test -- --runInBand -c jest-integration.config.js",
     "lint": "eslint .",
     "lint:fix": "npm run lint -- --ext .ts --fix",
     "migration": "cross-env NODE_PATH=../../../.. knex --knexfile src/frameworks/database/knex/knexfile.ts",
