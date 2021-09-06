@@ -18,7 +18,7 @@ export class ProductCase {
   }
 
   async list(filter: IListProductCaseInput) {
-    return this.productGateway.list(filter);
+    return this.productGateway.listByFilter(filter);
   }
 
   async get(id: string): Promise<Product | undefined> {

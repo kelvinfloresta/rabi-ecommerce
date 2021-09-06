@@ -16,8 +16,8 @@ export interface ICreateGateway<Input, Output = string> {
   create(input: Input): Promise<Output>;
 }
 
-export interface IListGateway<Filter, T, Output extends Iterable<T> = Array<T>> {
-  list(filter: Filter): Promise<Output>;
+export interface IListByFilterGateway<Filter, T, Output extends Iterable<T> = Array<T>> {
+  listByFilter(filter: Filter): Promise<Output>;
 }
 
 export interface IDeleteGateway<Filter = string> {

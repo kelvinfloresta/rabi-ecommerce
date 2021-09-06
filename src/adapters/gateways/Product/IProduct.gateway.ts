@@ -7,7 +7,7 @@ import {
 import {
   ISaveGateway,
   IGetGateway,
-  IListGateway,
+  IListByFilterGateway,
   IDeleteGateway,
   ICommonCompanyFilter,
   IPatchByFilterGateway,
@@ -18,4 +18,4 @@ export interface IProductGateway
     IPatchByFilterGateway<ICommonCompanyFilter, IPatchProductCaseInput>,
     ISaveGateway<ISaveProductCaseInput>,
     IGetGateway<string, Product>,
-    IListGateway<IListProductCaseInput, Product> {}
+    IListByFilterGateway<IListProductCaseInput, Product> {}

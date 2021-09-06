@@ -4,10 +4,10 @@ import {
   IHardDeleteCategoryCaseInput,
 } from 'src/usecases/Category/ICategory.usecase';
 import { Category } from 'src/entities/Category.entity';
-import { ISaveGateway, IGetGateway, IListGateway, IDeleteGateway } from '../IGateway';
+import { ISaveGateway, IGetGateway, IListByFilterGateway, IDeleteGateway } from '../IGateway';
 
 export interface ICategoryGateway
   extends ISaveGateway<ISaveCategoryCaseInput>,
     IGetGateway<string, Category>,
-    IListGateway<IListCategoryCaseInput, Category>,
+    IListByFilterGateway<IListCategoryCaseInput, Category>,
     IDeleteGateway<IHardDeleteCategoryCaseInput> {}

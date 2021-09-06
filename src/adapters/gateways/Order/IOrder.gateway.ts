@@ -1,5 +1,5 @@
 import { IListOrderCaseInput, IListOrderCaseOutput } from 'src/usecases/Order/IOrder.usecase';
-import { IListGateway } from '../IGateway';
+import { IListByFilterGateway } from '../IGateway';
 
 export interface IOrderItemBusinessData {
   readonly productId: string;
@@ -20,6 +20,7 @@ export interface ICreateOrderGatewayInput {
   readonly items: readonly IOrderItemBusinessData[];
 }
 
-export interface IOrderGateway extends IListGateway<IListOrderCaseInput, IListOrderCaseOutput> {
+export interface IOrderGateway
+  extends IListByFilterGateway<IListOrderCaseInput, IListOrderCaseOutput> {
   create(input: ICreateOrderGatewayInput): Promise<string>;
 }

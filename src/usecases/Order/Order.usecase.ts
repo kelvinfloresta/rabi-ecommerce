@@ -35,6 +35,6 @@ export class OrderCase {
   }
 
   async list(filter: IListOrderCaseInput): Promise<IListOrderCaseOutput[]> {
-    return this.orderGateway.list(filter);
+    return this.orderGateway.listByFilter(filter);
   }
 }

@@ -21,7 +21,7 @@ export class CategoryCase {
   }
 
   async list(filter: IListCategoryCaseInput): Promise<Category[]> {
-    return this.categoryGateway.list(filter);
+    return this.categoryGateway.listByFilter(filter);
   }
 
   async delete(filter: IHardDeleteCategoryCaseInput): Promise<boolean> {

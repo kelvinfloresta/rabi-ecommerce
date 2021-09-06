@@ -43,7 +43,7 @@ export class ProductGatewayKnexAdapter implements IProductGateway {
     return this.repository.save(input);
   }
 
-  async list(filter: IListProductCaseInput): Promise<Product[]> {
+  async listByFilter(filter: IListProductCaseInput): Promise<Product[]> {
     return this.repository.instance
       .select(
         this.companyId,

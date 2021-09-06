@@ -56,7 +56,7 @@ export class OrderGatewayKnexAdapter implements IOrderGateway {
     });
   }
 
-  public async list(filter: IListOrderCaseInput): Promise<IListOrderCaseOutput[]> {
+  public async listByFilter(filter: IListOrderCaseInput): Promise<IListOrderCaseOutput[]> {
     const result = await this.orderRepository.instance
       .select(
         'orderId',

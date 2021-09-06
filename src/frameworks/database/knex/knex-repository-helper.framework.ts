@@ -22,7 +22,7 @@ export class KnexRepositoryHelper<Entity, Id extends string | number = string> {
     return this.instance.where(filter).paginate<Entity[]>(paginate);
   }
 
-  async listByfilter(input: Partial<Entity>): Promise<Entity[]> {
+  async listByFilter(input: Partial<Entity>): Promise<Entity[]> {
     return this.instance.where(input);
   }
 

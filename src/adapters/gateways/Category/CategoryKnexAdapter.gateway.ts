@@ -19,8 +19,8 @@ export class CategoryGatewayKnexAdapter implements ICategoryGateway {
     return this.repository.save(input);
   }
 
-  public async list(filter: IListCategoryCaseInput): Promise<Category[]> {
-    return this.repository.listByfilter(filter);
+  public async listByFilter(filter: IListCategoryCaseInput): Promise<Category[]> {
+    return this.repository.listByFilter(filter);
   }
 
   public async hardDelete(filter: IHardDeleteCategoryCaseInput): Promise<boolean> {
