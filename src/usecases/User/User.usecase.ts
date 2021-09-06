@@ -1,15 +1,15 @@
 import { IUserGateway } from 'src/adapters/gateways/User/IUser.gateway';
 import { User } from 'src/entities/User.entity';
 import { TYPES } from 'src/adapters/di/types';
-import { Encrypt } from 'src/utils/Encrypt.util';
 import { inject, injectable } from 'src/adapters/di';
+import { IEncrypt } from 'src/adapters/encrypt/IEncrypt';
 import { ISaveUserCaseInput } from './IUser.usecase';
 
 @injectable()
 export class UserCase {
   constructor(
     @inject(TYPES.UserGateway) private userGateway: IUserGateway,
-    @inject(Encrypt) private encrypt: typeof Encrypt
+    @inject(TYPES.Encrypt) private encrypt: IEncrypt
   ) {}
 
   async save(input: ISaveUserCaseInput): Promise<string> {

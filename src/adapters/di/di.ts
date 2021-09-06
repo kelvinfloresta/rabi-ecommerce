@@ -1,5 +1,6 @@
 import 'reflect-metadata';
 import { container } from 'tsyringe';
+import { Encrypt } from '../encrypt/Bcrypt.encrypt';
 import { CategoryGatewayKnexAdapter } from '../gateways/Category/CategoryKnexAdapter.gateway';
 import { CompanyGatewayKnexAdapter } from '../gateways/Company/CompanyKnexAdapter.gateway';
 import { OrderGatewayKnexAdapter } from '../gateways/Order/OrderKnexAdapter.gateway';
@@ -8,6 +9,10 @@ import { UserGatewayKnexAdapter } from '../gateways/User/UserKnexAdapter.gateway
 import { TYPES } from './types';
 
 export function register() {
+  container.register(TYPES.Encrypt, {
+    useClass: Encrypt,
+  });
+
   container.register(TYPES.UserGateway, {
     useClass: UserGatewayKnexAdapter,
   });
