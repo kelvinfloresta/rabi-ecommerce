@@ -1,10 +1,10 @@
-import { User } from 'src/entities/User.entity';
 import { ISaveUserCaseInput } from 'src/usecases/User/IUser.usecase';
 import { DocumentType } from 'src/entities/enums/DocumentType.enum';
 import { Encrypt } from 'src/adapters/encrypt/Bcrypt.encrypt';
 import { container } from 'src/adapters/di';
 import { UserCase } from 'src/usecases/User/User.usecase';
 import { Id } from 'src/adapters/gateways/IGateway';
+import { UserBusinessData } from 'src/adapters/gateways/User/IUser.gateway';
 
 type IPartialSaveUserCase = Partial<ISaveUserCaseInput> & { companyId: string };
 
@@ -26,7 +26,10 @@ export async function createUserFixture(params: IPartialSaveUserCase): Promise<s
   return userId;
 }
 
-export async function expectTohaveUser(id: Id, expectedUser: Partial<User>): Promise<void> {
+export async function expectTohaveUser(
+  id: Id,
+  expectedUser: Partial<UserBusinessData>
+): Promise<void> {
   const foundUser = await container.resolve(UserCase).getById(id);
   if (!foundUser) {
     throw new Error('User not found');

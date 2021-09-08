@@ -40,3 +40,12 @@ export interface ICommonCompanyFilter {
   readonly companyId: string;
   readonly id: string;
 }
+
+export interface ILogicDelete {
+  readonly deletedAt: Date | null;
+}
+
+export interface ITimeStamp {
+  readonly createdAt: Date;
+  readonly updatedAt: Date;
+}

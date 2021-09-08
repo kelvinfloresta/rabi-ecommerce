@@ -1,10 +1,10 @@
 import * as jwt from 'jsonwebtoken';
-import { User } from 'src/entities/User.entity';
 import { NotAuthorized } from 'src/utils/errors/NotAuthorized.error';
 import { inject, injectable } from 'src/adapters/di';
 import { config } from 'src/config';
 import { IEncrypt } from 'src/adapters/encrypt/IEncrypt';
 import { TYPES } from 'src/adapters/di/types';
+import { UserBusinessData } from 'src/adapters/gateways/User/IUser.gateway';
 import { UserCase } from '../User/User.usecase';
 import { IAuthUser } from './IAuth.usecase';
 
@@ -38,7 +38,7 @@ export class AuthCase {
     });
   }
 
-  public async login(credentials: Pick<User, 'email' | 'password'>) {
+  public async login(credentials: Pick<UserBusinessData, 'email' | 'password'>) {
     const user = await this.userCase.findByEmail(credentials.email);
     if (!user) {
       throw new NotAuthorized('Email not found');
