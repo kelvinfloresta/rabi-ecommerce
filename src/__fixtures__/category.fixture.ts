@@ -1,6 +1,6 @@
 import { container } from 'src/adapters/di';
 import { Id } from 'src/adapters/gateways/IGateway';
-import { Category } from 'src/entities/Category.entity';
+import { CategoryBusinessData } from 'src/adapters/gateways/Category/ICategory.gateway';
 import { CategoryCase } from 'src/usecases/Category/Category.usecase';
 import { ISaveCategoryCaseInput } from 'src/usecases/Category/ICategory.usecase';
 
@@ -21,7 +21,7 @@ export async function createCategoryFixture(params: IPartialSaveCategoryCase): P
   return categoryId;
 }
 
-export async function expectTohaveCategory(id: Id, category: Partial<Category>) {
+export async function expectTohaveCategory(id: Id, category: Partial<CategoryBusinessData>) {
   const result = await container.resolve(CategoryCase).getById(id);
   return expect(result).toMatchObject(category);
 }
