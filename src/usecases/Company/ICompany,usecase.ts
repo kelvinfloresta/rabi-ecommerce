@@ -1,4 +1,4 @@
+import { CompanyBusinessData } from 'src/adapters/gateways/Company/ICompany.gateway';
 import { ITimeStamp } from 'src/entities/IEntity';
-import { Company } from 'src/entities/Company.entity';
 
-export interface ISaveCompanyCaseInput extends Omit<Company, 'id' | keyof ITimeStamp> {}
+export interface ISaveCompanyCaseInput extends Omit<CompanyBusinessData, 'id' | keyof ITimeStamp> {}

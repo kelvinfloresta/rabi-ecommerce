@@ -1,5 +1,7 @@
-import { Company } from 'src/entities/Company.entity';
-import { ICompanyGateway } from 'src/adapters/gateways/Company/ICompany.gateway';
+import {
+  CompanyBusinessData,
+  ICompanyGateway,
+} from 'src/adapters/gateways/Company/ICompany.gateway';
 import { inject, injectable } from 'src/adapters/di';
 import { TYPES } from 'src/adapters/di/types';
 import { Id } from 'src/adapters/gateways/IGateway';
@@ -13,7 +15,7 @@ export class CompanyCase {
     return this.companyGateway.create(input);
   }
 
-  async getById(id: Id): Promise<Company | undefined> {
+  async getById(id: Id): Promise<CompanyBusinessData | undefined> {
     return this.companyGateway.getById(id);
   }
 }
