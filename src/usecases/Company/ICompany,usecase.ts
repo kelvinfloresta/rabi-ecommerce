@@ -1,4 +1,7 @@
-import { CompanyBusinessData } from 'src/adapters/gateways/Company/ICompany.gateway';
-import { ITimeStamp } from 'src/entities/IEntity';
+import { DocumentType } from 'src/entities/enums/DocumentType.enum';
 
-export interface ISaveCompanyCaseInput extends Omit<CompanyBusinessData, 'id' | keyof ITimeStamp> {}
+export interface ISaveCompanyCaseInput {
+  readonly name: string;
+  readonly documentNumber: string | null;
+  readonly documentType: DocumentType | null;
+}
