@@ -6,8 +6,8 @@ import {
 } from 'src/adapters/controllers/IController';
 
 import { ProductCase } from 'src/usecases/Product/Product.usecase';
-import { Product } from 'src/entities/Product.entity';
 import { injectable } from 'src/adapters/di';
+import { ProductBusinessData } from 'src/adapters/gateways/Product/IProduct.gateway';
 import { Controller } from '../decorators/Controller.decorator';
 import { Post } from '../decorators/Post.decorator';
 import { Get } from '../decorators/Get.decorator';
@@ -46,7 +46,7 @@ export class ProductController {
   }
 
   @Get('/')
-  public async list(request: IRequest): IResponseAsync<Product[]> {
+  public async list(request: IRequest): IResponseAsync<ProductBusinessData[]> {
     const { companyId } = await request.authenticate();
     const response = await this.productCase.list({ companyId });
     return { statusCode: StatusCode.ok, response };

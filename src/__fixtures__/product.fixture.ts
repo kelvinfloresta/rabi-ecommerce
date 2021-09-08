@@ -1,5 +1,5 @@
 import { container } from 'src/adapters/di';
-import { Product } from 'src/entities/Product.entity';
+import { ProductBusinessData } from 'src/adapters/gateways/Product/IProduct.gateway';
 import { ISaveProductCaseInput } from 'src/usecases/Product/IProduct.usecase';
 import { ProductCase } from 'src/usecases/Product/Product.usecase';
 
@@ -18,7 +18,9 @@ export function buildProductFixture(params: IPartialSaveProductCase): ISaveProdu
   return product;
 }
 
-export async function createProductFixture(params: IPartialSaveProductCase): Promise<Product> {
+export async function createProductFixture(
+  params: IPartialSaveProductCase
+): Promise<ProductBusinessData> {
   const productCase = container.resolve(ProductCase);
   const product = buildProductFixture(params);
   const productId = await productCase.save(product);
@@ -30,7 +32,7 @@ export async function createProductFixture(params: IPartialSaveProductCase): Pro
   return productCreated;
 }
 
-export async function expectTohaveProduct(id: string, product: Partial<Product>) {
+export async function expectTohaveProduct(id: string, product: Partial<ProductBusinessData>) {
   const productCase = container.resolve(ProductCase);
   const result = await productCase.getById({ id });
   return expect(result).toMatchObject(product);

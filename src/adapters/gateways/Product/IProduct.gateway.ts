@@ -1,4 +1,3 @@
-import { Product } from 'src/entities/Product.entity';
 import {
   ISaveProductCaseInput,
   IPatchProductCaseInput,
@@ -11,11 +10,22 @@ import {
   IDeleteGateway,
   ICommonCompanyFilter,
   IPatchByFilterGateway,
+  ITimeStamp,
 } from '../IGateway';
 
 export interface IProductGateway
   extends IDeleteGateway<ICommonCompanyFilter>,
     IPatchByFilterGateway<ICommonCompanyFilter, IPatchProductCaseInput>,
     ICreateGateway<ISaveProductCaseInput>,
-    IGetByIdGateway<Product>,
-    IListByFilterGateway<IListProductCaseInput, Product> {}
+    IGetByIdGateway<ProductBusinessData>,
+    IListByFilterGateway<IListProductCaseInput, ProductBusinessData> {}
+
+export interface ProductBusinessData extends ITimeStamp {
+  readonly id: string;
+  readonly name: string;
+  readonly price: number;
+  readonly description?: string;
+  readonly active: boolean;
+  readonly categoryId: string | null;
+  readonly companyId: string;
+}

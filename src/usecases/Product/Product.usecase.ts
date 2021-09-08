@@ -1,5 +1,7 @@
-import { Product } from 'src/entities/Product.entity';
-import { IProductGateway } from 'src/adapters/gateways/Product/IProduct.gateway';
+import {
+  IProductGateway,
+  ProductBusinessData,
+} from 'src/adapters/gateways/Product/IProduct.gateway';
 import { ICommonCompanyFilter, Id } from 'src/adapters/gateways/IGateway';
 import { inject, injectable } from 'src/adapters/di';
 import { TYPES } from 'src/adapters/di/types';
@@ -21,7 +23,7 @@ export class ProductCase {
     return this.productGateway.listByFilter(filter);
   }
 
-  async getById(id: Id): Promise<Product | undefined> {
+  async getById(id: Id): Promise<ProductBusinessData | undefined> {
     return this.productGateway.getById(id);
   }
 

@@ -1,4 +1,4 @@
-import { Product } from 'src/entities/Product.entity';
+import { ProductBusinessData } from 'src/adapters/gateways/Product/IProduct.gateway';
 
 export interface ISaveProductCaseInput {
   readonly name: string;
@@ -17,4 +17,4 @@ export interface IPatchProductCaseInput {
   readonly categoryId?: string | null;
 }
 
-export type IListProductCaseInput = Pick<Product, 'companyId'>;
+export type IListProductCaseInput = Pick<ProductBusinessData, 'companyId'>;

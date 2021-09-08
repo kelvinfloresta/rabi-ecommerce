@@ -1,14 +1,13 @@
-import { Product } from 'src/entities/Product.entity';
 import {
   IPatchProductCaseInput,
   IListProductCaseInput,
 } from 'src/usecases/Product/IProduct.usecase';
 import { KnexRepositoryHelper } from 'src/frameworks/database/knex/knex-repository-helper.framework';
 import { TableName } from 'src/adapters/database/Database.adapter';
-import { IProductGateway } from './IProduct.gateway';
+import { IProductGateway, ProductBusinessData } from './IProduct.gateway';
 import { ICommonCompanyFilter } from '../IGateway';
 
-export class ProductGatewayKnexAdapter extends KnexRepositoryHelper<Product>
+export class ProductGatewayKnexAdapter extends KnexRepositoryHelper<ProductBusinessData>
   implements IProductGateway {
   private companyId = `${TableName.product}.companyId`;
 
@@ -33,7 +32,7 @@ export class ProductGatewayKnexAdapter extends KnexRepositoryHelper<Product>
     return super.updateByFilter(filter, input);
   }
 
-  async listByFilter(filter: IListProductCaseInput): Promise<Product[]> {
+  async listByFilter(filter: IListProductCaseInput): Promise<ProductBusinessData[]> {
     return super.instance
       .select(
         this.companyId,
