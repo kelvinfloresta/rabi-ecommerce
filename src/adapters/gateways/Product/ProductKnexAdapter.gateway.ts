@@ -33,7 +33,7 @@ export class ProductGatewayKnexAdapter extends KnexRepositoryHelper<ProductBusin
   }
 
   async listByFilter(filter: IListProductCaseInput): Promise<ProductBusinessData[]> {
-    return super.instance
+    const query = super.instance
       .select(
         this.companyId,
         this.productId,
@@ -44,7 +44,16 @@ export class ProductGatewayKnexAdapter extends KnexRepositoryHelper<ProductBusin
         'active',
         'price'
       )
-      .leftJoin(TableName.category, this.categoryId, 'categoryId')
-      .where(this.companyId, filter.companyId);
+      .leftJoin(TableName.category, this.categoryId, 'categoryId');
+
+    if (filter.companyId) {
+      query.where(this.companyId, filter.companyId);
+    }
+
+    if (filter.ids !== undefined && filter.ids.length !== 0) {
+      query.where('id', filter.ids);
+    }
+
+    return query;
   }
 }

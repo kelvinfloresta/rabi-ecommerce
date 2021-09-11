@@ -1,5 +1,3 @@
-import { ProductBusinessData } from 'src/adapters/gateways/Product/IProduct.gateway';
-
 export interface ISaveProductCaseInput {
   readonly name: string;
   readonly price: number;
@@ -17,4 +15,7 @@ export interface IPatchProductCaseInput {
   readonly categoryId?: string | null;
 }
 
-export type IListProductCaseInput = Pick<ProductBusinessData, 'companyId'>;
+export interface IListProductCaseInput {
+  readonly ids?: string[];
+  readonly companyId?: string;
+}
