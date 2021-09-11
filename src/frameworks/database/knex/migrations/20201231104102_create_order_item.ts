@@ -15,7 +15,7 @@ export async function up(knex: Knex) {
 
     table.decimal('quantity').notNullable();
 
-    table.decimal('total').notNullable();
+    table.decimal('price').notNullable();
   });
 }
 

@@ -1,7 +1,15 @@
 import { IOrderGateway } from 'src/adapters/gateways/Order/IOrder.gateway';
 import { inject, injectable } from 'src/adapters/di';
 import { TYPES } from 'src/adapters/di/types';
-import { ICreateOrderCaseInput, IListOrderCaseInput, IListOrderCaseOutput } from './IOrder.usecase';
+import { NotFound } from 'src/errors/NotFound.error';
+import { Order } from 'src/entities/Order.entity';
+import { ProductBusinessData } from 'src/adapters/gateways/Product/IProduct.gateway';
+import {
+  ICreateOrderCaseInput,
+  IListOrderCaseInput,
+  IListOrderCaseOutput,
+  INewOrderItem,
+} from './IOrder.usecase';
 import { ProductCase } from '../Product/Product.usecase';
 
 @injectable()
@@ -12,26 +20,33 @@ export class OrderCase {
   ) {}
 
   public async create(input: ICreateOrderCaseInput) {
-    const itemsPromise = input.items.map(async (item) => {
-      const product = await this.productCase.getById({ id: item.productId });
-      if (!product) {
-        throw new Error('Produto não encontrado');
-      }
-      return {
-        productId: product.id,
-        quantity: item.quantity,
-        productName: product.name,
-        total: product.price * item.quantity,
-      };
-    });
+    const productIds = input.items.map((el) => el.productId);
+    const products = await this.productCase.list({ ids: productIds });
 
-    const items = await Promise.all(itemsPromise);
+    const order = new Order();
+    input.items.forEach(OrderCase.addItem(order, products));
 
     return this.orderGateway.create({
       companyId: input.companyId,
       userId: input.userId,
-      items,
+      items: order.orderItems,
     });
+  }
+
+  private static addItem(order: Order, products: ProductBusinessData[]) {
+    return (item: INewOrderItem) => {
+      const productFound = products.find((product) => product.id === item.productId);
+      if (productFound === undefined) {
+        throw new NotFound({ id: item.productId, resource: 'Product' });
+      }
+
+      order.addItem({
+        price: item.price,
+        productId: item.productId,
+        quantity: item.quantity,
+        productName: productFound.name,
+      });
+    };
   }
 
   async list(filter: IListOrderCaseInput): Promise<IListOrderCaseOutput[]> {

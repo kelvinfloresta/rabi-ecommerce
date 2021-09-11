@@ -5,7 +5,7 @@ export interface IOrderItemBusinessData {
   readonly productId: string;
   readonly productName: string;
   readonly quantity: number;
-  readonly total: number;
+  readonly price: number;
 }
 
 export interface IOrderBusinessData {

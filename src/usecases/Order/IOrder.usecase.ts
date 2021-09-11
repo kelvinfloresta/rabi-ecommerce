@@ -1,14 +1,20 @@
-export interface IOrderItem {
+export interface IListOrderItem {
   readonly productId: string;
   readonly productName: string;
   readonly quantity: number;
-  readonly total: number;
+  readonly price: number;
+}
+
+export interface INewOrderItem {
+  readonly productId: string;
+  readonly quantity: number;
+  readonly price: number;
 }
 
 export interface ICreateOrderCaseInput {
   readonly companyId: string;
   readonly userId: string;
-  readonly items: readonly IOrderItem[];
+  readonly items: readonly INewOrderItem[];
 }
 
 export interface IListOrderCaseInput {
@@ -19,5 +25,5 @@ export interface IListOrderCaseOutput {
   readonly id: string;
   readonly companyId: string;
   readonly userId: string;
-  readonly items: readonly IOrderItem[];
+  readonly items: readonly IListOrderItem[];
 }

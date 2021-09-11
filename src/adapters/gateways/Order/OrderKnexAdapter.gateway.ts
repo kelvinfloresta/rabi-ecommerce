@@ -54,7 +54,7 @@ export class OrderGatewayKnexAdapter
         productId: el.productId,
         productName: el.productName,
         quantity: el.quantity,
-        total: el.total,
+        price: el.price,
       };
     });
     await this.itemsRepository.instance.insert(items).transacting(params.tx);
@@ -82,7 +82,7 @@ export class OrderGatewayKnexAdapter
         'productId',
         'productName',
         'quantity',
-        'order_items.total'
+        'order_items.price'
       )
       .where(this.companyId, filter.companyId)
       .leftJoin(TableName.user, this.userId, 'userId')
