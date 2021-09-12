@@ -41,9 +41,9 @@ export class OrderCase {
       }
 
       order.addItem({
-        price: item.price,
         productId: item.productId,
         quantity: item.quantity,
+        price: productFound.price,
         productName: productFound.name,
       });
     };
