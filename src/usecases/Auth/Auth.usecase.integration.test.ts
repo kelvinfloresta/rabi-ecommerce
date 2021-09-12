@@ -1,12 +1,16 @@
 import { createUserFixture } from 'src/__fixtures__/user.fixture';
 import { createCompanyFixture } from 'src/__fixtures__/company.fixture';
-import { cleanDatabase } from 'src/adapters/database/Database.adapter';
+import { cleanDatabase, closeDatabase } from 'src/adapters/database/Database.adapter';
 import { NotAuthorized } from 'src/utils/errors/NotAuthorized.error';
 import { container } from 'src/adapters/di';
 import { AuthCase } from './Auth.usecase';
 
 beforeEach(async () => {
   await cleanDatabase();
+});
+
+afterAll(async () => {
+  await closeDatabase();
 });
 
 function makeSut() {
