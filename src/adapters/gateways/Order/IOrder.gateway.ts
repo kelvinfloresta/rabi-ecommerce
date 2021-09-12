@@ -1,3 +1,4 @@
+import { OrderStatus } from 'src/entities/enums/OrderStatus.enumt';
 import { IListOrderCaseInput, IListOrderCaseOutput } from 'src/usecases/Order/IOrder.usecase';
 import { ICreateGateway, IListByFilterGateway } from '../IGateway';
 
@@ -18,6 +19,7 @@ export interface ICreateOrderGatewayInput {
   readonly companyId: string;
   readonly userId: string | null;
   readonly items: readonly IOrderItemBusinessData[];
+  readonly status: OrderStatus;
 }
 
 export interface IOrderGateway

@@ -27,12 +27,18 @@ export class OrderGatewayKnexAdapter
     super(TableName.order);
   }
 
-  public async create({ companyId, userId, items }: ICreateOrderGatewayInput): Promise<string> {
+  public async create({
+    companyId,
+    userId,
+    items,
+    status,
+  }: ICreateOrderGatewayInput): Promise<string> {
     return this.knex.transaction(async (tx) => {
       const [orderId] = await super.instance
         .insert({
           companyId,
           userId,
+          status,
         })
         .transacting(tx)
         .returning('id');
@@ -69,6 +75,7 @@ export class OrderGatewayKnexAdapter
         userId: orders[0].userId,
         userName: orders[0].userName,
         items: orders,
+        status: orders[0].status,
       };
     });
   }
@@ -78,6 +85,7 @@ export class OrderGatewayKnexAdapter
       .select(
         'orderId',
         'userId',
+        'status',
         this.userName,
         'productId',
         'productName',

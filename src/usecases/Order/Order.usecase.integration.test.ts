@@ -1,5 +1,6 @@
 import { cleanDatabase, closeDatabase } from 'src/adapters/database/Database.adapter';
 import { container } from 'src/adapters/di';
+import { OrderStatus } from 'src/entities/enums/OrderStatus.enumt';
 import { NotFound } from 'src/errors/NotFound.error';
 import { OrderCase } from 'src/usecases/Order/Order.usecase';
 import { uuidv4 } from 'src/utils/uuid.utils';
@@ -37,6 +38,23 @@ describe('File: Order.usecase.ts', () => {
       };
 
       expect(items[0]).toMatchObject(expectedItems);
+    });
+
+    it(`Should create with status "${OrderStatus.open}""`, async () => {
+      const { id: companyId } = await createCompanyFixture();
+      const userId = await createUserFixture({ companyId });
+      const { id: productId } = await createProductFixture({ companyId });
+
+      const sut = container.resolve(OrderCase);
+      await sut.create({
+        companyId,
+        userId,
+        items: [{ productId, quantity: 1 }],
+      });
+
+      const [order] = await sut.list({ companyId });
+
+      expect(order.status).toBe(OrderStatus.open);
     });
 
     it('Should reject if product not found', async () => {

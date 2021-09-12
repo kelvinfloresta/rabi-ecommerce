@@ -1,5 +1,6 @@
 import * as Knex from 'knex';
 import { TableName } from 'src/adapters/database/Database.adapter';
+import { OrderStatus } from 'src/entities/enums/OrderStatus.enumt';
 import { addTimestamp, PostgresUUIDV4 } from '../knex-migration.framework';
 
 export async function up(knex: Knex): Promise<any> {
@@ -12,6 +13,8 @@ export async function up(knex: Knex): Promise<any> {
 
     table.uuid('userId').nullable();
     table.foreign('userId').references('id').inTable(TableName.user);
+
+    table.enum('status', Object.values(OrderStatus)).nullable();
   });
 }
 

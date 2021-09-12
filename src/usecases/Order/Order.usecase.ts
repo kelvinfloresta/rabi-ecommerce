@@ -4,6 +4,7 @@ import { TYPES } from 'src/adapters/di/types';
 import { NotFound } from 'src/errors/NotFound.error';
 import { Order } from 'src/entities/Order.entity';
 import { ProductBusinessData } from 'src/adapters/gateways/Product/IProduct.gateway';
+import { OrderStatus } from 'src/entities/enums/OrderStatus.enumt';
 import {
   ICreateOrderCaseInput,
   IListOrderCaseInput,
@@ -30,6 +31,7 @@ export class OrderCase {
       companyId: input.companyId,
       userId: input.userId,
       items: order.orderItems,
+      status: OrderStatus.open,
     });
   }
 
