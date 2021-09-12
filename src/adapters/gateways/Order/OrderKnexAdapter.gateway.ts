@@ -28,7 +28,7 @@ export class OrderGatewayKnexAdapter
   }
 
   public async create({ companyId, userId, items }: ICreateOrderGatewayInput): Promise<string> {
-    return super.knex.transaction(async (tx) => {
+    return this.knex.transaction(async (tx) => {
       const [orderId] = await super.instance
         .insert({
           companyId,
