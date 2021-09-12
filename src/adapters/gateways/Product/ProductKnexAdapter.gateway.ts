@@ -51,7 +51,7 @@ export class ProductGatewayKnexAdapter extends KnexRepositoryHelper<ProductBusin
     }
 
     if (filter.ids !== undefined && filter.ids.length !== 0) {
-      query.where('id', filter.ids);
+      query.whereIn(this.productId, filter.ids);
     }
 
     return query;
