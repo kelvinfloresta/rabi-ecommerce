@@ -6,7 +6,7 @@ export interface IOrderItem {
 }
 
 export class Order {
-  private items: IOrderItem[];
+  private items: IOrderItem[] = [];
 
   private cachedTotal = 0;
 
