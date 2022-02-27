@@ -13,7 +13,7 @@ export class UserCase {
   ) {}
 
   async save(input: ISaveUserCaseInput): Promise<string> {
-    const encryptedPassword = this.encrypt.encrypt(input.password);
+    const encryptedPassword = await this.encrypt.encrypt(input.password);
     return this.userGateway.create({ ...input, password: encryptedPassword });
   }
 

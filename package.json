@@ -21,7 +21,7 @@
   "author": "Kelvin Floresta de Andrade",
   "license": "ISC",
   "devDependencies": {
-    "@types/bcryptjs": "^2.4.2",
+    "@types/bcrypt": "^5.0.0",
     "@types/jest": "^26.0.4",
     "@types/jsonwebtoken": "^8.5.0",
     "@types/knex": "^0.16.1",
@@ -49,7 +49,7 @@
   },
   "dependencies": {
     "ajv": "^6.12.4",
-    "bcryptjs": "^2.4.3",
+    "bcrypt": "^5.0.1",
     "fastify": "^3.2.0",
     "fastify-cors": "^5.0.0",
     "json-schema": "^0.2.5",

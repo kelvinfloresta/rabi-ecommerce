@@ -1,4 +1,4 @@
-import bcrypt from 'bcryptjs';
+import bcrypt from 'bcrypt';
 import { IEncrypt } from './IEncrypt';
 
 export class Encrypt implements IEncrypt {
@@ -8,8 +8,8 @@ export class Encrypt implements IEncrypt {
     return this.bcrypt.compareSync(value, encodedPassword);
   }
 
-  public encrypt(value: string): string {
+  public encrypt(value: string): Promise<string> {
     const salt = this.bcrypt.genSaltSync();
-    return this.bcrypt.hashSync(value, salt);
+    return this.bcrypt.hash(value, salt);
   }
 }
