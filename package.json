@@ -10,6 +10,7 @@
     "test:integration": "npm test -- --runInBand -c jest-integration.config.js",
     "lint": "eslint .",
     "lint:fix": "npm run lint -- --ext .ts --fix",
+    "create-database": "cross-env NODE_PATH=. ts-node src/frameworks/database/knex/create-database.ts",
     "migration": "cross-env NODE_PATH=../../../.. knex --knexfile src/frameworks/database/knex/knexfile.ts",
     "migration:make": "npm run migration migrate:make --",
     "migration:latest": "npm run migration migrate:latest --",
