@@ -14,7 +14,9 @@
       "name": "Unit Test",
       "type": "node",
       "request": "launch",
-      "cwd": "${workspaceRoot}/functions",
+      "env": {
+        "NODE_PATH": "."
+      },
       "runtimeArgs": [
         "--inspect-brk",
         "./node_modules/jest/bin/jest.js",
@@ -24,13 +26,14 @@
       ],
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",
-      "port": 9229
     },
     {
       "name": "Integration Test",
       "type": "node",
       "request": "launch",
-      "cwd": "${workspaceRoot}/functions",
+      "env": {
+        "NODE_PATH": "."
+      },
       "runtimeArgs": [
         "--inspect-brk",
         "./node_modules/jest/bin/jest.js",
@@ -40,7 +43,6 @@
       ],
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",
-      "port": 9229
     }
   ]
 }
