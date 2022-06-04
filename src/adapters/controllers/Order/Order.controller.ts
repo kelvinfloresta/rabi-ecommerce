@@ -13,8 +13,8 @@ export class OrderController {
 
   @Post('/')
   public async create(request: IRequest): IResponseAsync<string> {
-    const { companyId } = await request.authenticate();
-    const response = await this.orderCase.create({ ...request.body, companyId });
+    const { companyId, userId } = await request.authenticate();
+    const response = await this.orderCase.create({ ...request.body, companyId, userId });
     return { statusCode: StatusCode.ok, response };
   }
 
