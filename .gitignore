@@ -1,0 +1,13 @@
+# Node
+/node_modules
+
+# Build
+/dist
+
+#Logs
+*.log
+
+#test
+coverage
+
+.env

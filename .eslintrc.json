@@ -1,0 +1,25 @@
+{
+    "env": {
+        "browser": true,
+        "es2020": true
+    },
+    "extends": [
+      "airbnb-typescript/base",
+      "plugin:prettier/recommended"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaVersion": 11,
+        "sourceType": "module",
+        "project": "./tsconfig.json"
+    },
+    "plugins": [
+        "@typescript-eslint"
+    ],
+    "rules": {
+      "import/no-default-export": "error",
+      "import/prefer-default-export": "off",
+      "@typescript-eslint/space-before-function-paren": "off",
+      "@typescript-eslint/indent" : "off"
+    }
+}
